@@ -5,7 +5,10 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "docs": "docsify serve ./docs/ --port 3999",
+    "mock": "nodemon mock/index.js",
+    "swagger":"http-server ./swagger-ui/dist"
   },
   "dependencies": {
     "core-js": "^2.6.5",
@@ -16,8 +19,11 @@
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-service": "^3.8.0",
     "babel-eslint": "^10.0.1",
+    "docsify-cli": "^4.3.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "express": "^4.17.1",
+    "mockjs": "^1.0.1-beta3",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
