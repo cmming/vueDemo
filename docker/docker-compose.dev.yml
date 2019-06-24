@@ -1,0 +1,14 @@
+version: "3.5"
+
+services:
+  vue-demo:
+    ports:
+      - 980:80
+    build:
+      context: ../
+      dockerfile: Dockerfile.dev
+    container_name: "vue-demo"
+    volumes:
+      - ../src:/usr/src/app/src
+      - ../config:/usr/src/app/config
+      - ../mock:/usr/src/app/mock

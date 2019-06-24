@@ -1,0 +1,207 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "vueDemo 项目接口文档",
+        "version": "1.0.0",
+        "title": "vueDemo 项目接口文档"
+    },
+    "host": "localhost:3777",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "tableIndex",
+            "description": "基础表格模型的所有数据"
+        }
+    ],
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "paths": {
+        "/table/demo": {
+            "get": {
+                "tags": [
+                    "tableIndex"
+                ],
+                "summary": "获取列表数据",
+                "description": "基础表格模型的所有数据",
+                "operationId": "tableIndexList",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Pet object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/tableIndexSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/tableIndexPagination"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "petstore_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://petstore.swagger.io/oauth/authorize",
+            "flow": "implicit",
+            "scopes": {
+                "write:pets": "modify pets in your account",
+                "read:pets": "read your pets"
+            }
+        },
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "pagination": {
+            "type": "object",
+            "properties": {
+                "total": {
+                    "type": "integer",
+                    "description": "总页数"
+                },
+                "per_page": {
+                    "type": "integer",
+                    "description": "页面大小"
+                },
+                "current_page": {
+                    "type": "integer",
+                    "description": "当前页"
+                },
+                "last_page": {
+                    "type": "integer",
+                    "description": "最后一页"
+                },
+                "first_page_url": {
+                    "type": "string",
+                    "description": "第一页的url"
+                },
+                "last_page_url": {
+                    "type": "string",
+                    "description": "最后一页url"
+                },
+                "next_page_url": {
+                    "type": "string",
+                    "description": "下一页url"
+                },
+                "prev_page_url": {
+                    "type": "string",
+                    "description": "上一页url"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "url基础路径"
+                },
+                "from": {
+                    "type": "integer",
+                    "description": "开始的标签"
+                },
+                "to": {
+                    "type": "integer",
+                    "description": "结束的标签"
+                }
+            }
+        },
+        "tableIndex": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "integer",
+                    "description": "id"
+                },
+                "date": {
+                    "type": "date",
+                    "description": "日期"
+                },
+                "type": {
+                    "type": "integer",
+                    "description": "类型"
+                },
+                "note": {
+                    "type": "string",
+                    "description": "笔记"
+                }
+            }
+        },
+        "tableIndexPagination": {
+            "type": "object",
+            "properties": {
+                "total": {
+                    "type": "integer",
+                    "description": "总页数"
+                },
+                "per_page": {
+                    "type": "integer",
+                    "description": "页面大小"
+                },
+                "current_page": {
+                    "type": "integer",
+                    "description": "当前页"
+                },
+                "last_page": {
+                    "type": "integer",
+                    "description": "最后一页"
+                },
+                "first_page_url": {
+                    "type": "string",
+                    "description": "第一页的url"
+                },
+                "last_page_url": {
+                    "type": "string",
+                    "description": "最后一页url"
+                },
+                "next_page_url": {
+                    "type": "string",
+                    "description": "下一页url"
+                },
+                "prev_page_url": {
+                    "type": "string",
+                    "description": "上一页url"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "url基础路径"
+                },
+                "from": {
+                    "type": "integer",
+                    "description": "开始的标签"
+                },
+                "to": {
+                    "type": "integer",
+                    "description": "结束的标签"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/tableIndex"
+                    }
+                }
+            }
+        },
+        "tableIndexSearch": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer",
+                    "description": "当前页"
+                },
+                "page_size": {
+                    "type": "integer",
+                    "description": "页面大小"
+                }
+            }
+        }
+    }
+}
