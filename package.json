@@ -8,11 +8,19 @@
     "lint": "vue-cli-service lint",
     "docs": "docsify serve ./docs/ --port 3999",
     "mock": "nodemon mock/index.js",
-    "swagger":"http-server ./swagger-ui/dist"
+    "swagger": "http-server ./swagger-ui/dist",
+    "docer pro": "docker-compose -f ./docker/docker-compose.yml up --build"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "echarts": "^4.2.1",
+    "element-ui": "^2.9.2",
+    "store": "^2.0.12",
+    "vue": "^2.6.10",
+    "vue-i18n": "^8.11.2",
+    "vue-router": "^3.0.6",
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
@@ -24,6 +32,9 @@
     "eslint-plugin-vue": "^5.0.0",
     "express": "^4.17.1",
     "mockjs": "^1.0.1-beta3",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "svg-sprite-loader": "^4.1.6",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {

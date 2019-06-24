@@ -37,3 +37,30 @@ Open http://localhost:3200/?url=http://localhost:3777/api.json
 
 
 ### 2、1  修改配置
+
+## 3 vue-cli 自定义配置
+
+
+### 3、1 webpack 相关配置
+
+> 创建vue.config.js 最终通过 webpack-merge 合并
+
+
+### 3、2 环境变量设置 
+
+> 创建 env 文件 通过 doEnv 插件合并 还可以安装插件让其支持 高级语法 参照react
+
+
+## 4 项目开发
+
+### 4、1基础插件安装
+
+```
+cnpm i axios element-ui vue-i18n store vuex vue-router echarts -S
+
+cnpm i sass-loader node-sass svg-sprite-loader -D
+```
+
+### 4、2 路由封装
+
+    https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
