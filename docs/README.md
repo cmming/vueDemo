@@ -31,7 +31,8 @@ npm install
 
 npm run dev
 
-Open http://localhost:3200/
+//项目会自动获取参数
+Open http://localhost:3200/?url=http://localhost:3777/api.json
 ```
 
 
