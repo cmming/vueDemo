@@ -56,7 +56,7 @@ Open http://localhost:3200/?url=http://localhost:3777/api.json
 ### 4、1基础插件安装
 
 ```
-cnpm i axios element-ui vue-i18n store vuex vue-router echarts -S
+cnpm i axios element-ui vue-i18n store vuex vue-router echarts normalize.css -S
 
 cnpm i sass-loader node-sass svg-sprite-loader -D
 ```
@@ -64,3 +64,15 @@ cnpm i sass-loader node-sass svg-sprite-loader -D
 ### 4、2 路由封装
 
     https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+
+
+#### 4.2.1 路由懒加载
+
+
+## eslint
+
+```
+// 0或’off’：关闭规则。 
+// 1或’warn’：打开规则，并且作为一个警告（并不会导致检查不通过）。 
+// 2或’error’：打开规则，并且作为一个错误 (退出码为1，检查不通过)。
+```

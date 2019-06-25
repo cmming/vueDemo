@@ -3,9 +3,13 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+
+/* Router Modules */
+import constRouter from './map/constRouterMap'  
+
 const createRouter = () => new Router({
   mode: 'history',
-  routes: []
+  routes: [constRouter]
 })
 
 const router = createRouter()
