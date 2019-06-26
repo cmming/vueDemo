@@ -5,11 +5,10 @@ Vue.use(Router)
 
 
 /* Router Modules */
-import constRouter from './map/constRouterMap'  
-
+import routers from './map/index'
 const createRouter = () => new Router({
   mode: 'history',
-  routes: [constRouter]
+  routes: routers
 })
 
 const router = createRouter()
