@@ -8,12 +8,13 @@ import router from './router'
 import store from './store'
 import './icons' // icon
 //全局组件自动注册
-// import './components/index'
+import './components/index'
+import './filter/index';
 Vue.config.productionTip = false
 
 Vue.use(Element, {
-  // size: Cookies.get('size') || 'medium' // set element-ui default size
-  size: 'medium'
+    // size: Cookies.get('size') || 'medium' // set element-ui default size
+    size: 'medium'
 })
 
 // new Vue({
@@ -25,9 +26,9 @@ Vue.use(Element, {
 
 
 new Vue({
-  el: '#app',
-  i18n,
-  router,
-  store,
-  render: h => h(App)
+    el: '#app',
+    i18n,
+    router,
+    store,
+    render: h => h(App)
 })
