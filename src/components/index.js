@@ -10,8 +10,9 @@ componentsContext.keys().forEach(component => {
          * 兼容 import export 和 require module.export 两种规范
          */
     const ctrl = componentConfig.default || componentConfig
-        // eslint-disable-next-line
     for (var k in ctrl) {
+        // eslint-disable-next-line
+        console.log(ctrl[k].name, ctrl[k])
         Vue.component(ctrl[k].name, ctrl[k])
     }
     // Vue.component(ctrl.name, ctrl)

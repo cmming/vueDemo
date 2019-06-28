@@ -16,6 +16,10 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
     return modules
 }, {})
 
+
+// eslint-disable-next-line
+console.log(modules)
+
 const store = new Vuex.Store({
     modules
 })

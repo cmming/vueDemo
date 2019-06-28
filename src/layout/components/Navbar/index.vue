@@ -1,17 +1,28 @@
 <template>
   <div style="float:right">
     <el-dropdown>
-      <i
-        class="el-icon-setting"
-        style="margin-right: 15px"
-      ></i>
+      <svg-icon
+        icon-class="setting"
+        class-name="language-icon"
+      ></svg-icon>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>查看</el-dropdown-item>
         <el-dropdown-item>新增</el-dropdown-item>
         <el-dropdown-item>删除</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
-    <span>王小虎</span>
+
+    <el-dropdown>
+      <svg-icon
+        icon-class="language"
+        class-name="language-icon"
+      ></svg-icon>
+
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item>中文</el-dropdown-item>
+        <el-dropdown-item>English</el-dropdown-item>
+      </el-dropdown-menu>
+    </el-dropdown>
   </div>
 </template>
 <script>
