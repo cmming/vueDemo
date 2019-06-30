@@ -1,14 +1,15 @@
 <template>
   <div>
-    <c-table :model="base">
-      <template
-        slot="customAction"
-        slot-scope="scope"
-      >
-
-        <el-button @click="customEvent(scope.dataScope.row)">自定义</el-button>
-      </template>
-    </c-table>
+    <el-card class="m-bottom-sm search-area">
+      <search-area :model="base"></search-area>
+    </el-card>
+    <el-card>
+      <c-table :model="base">
+        <template slot="customAction" slot-scope="scope">
+          <el-button @click="customEvent(scope.dataScope.row)">自定义</el-button>
+        </template>
+      </c-table>
+    </el-card>
   </div>
 </template>
 <script>

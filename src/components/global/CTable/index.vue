@@ -9,8 +9,7 @@
       :border="true"
     >
       <!-- 多选框 -->
-      <el-table-column type="selection">
-      </el-table-column>
+      <el-table-column type="selection"></el-table-column>
 
       <!-- 生成列 -->
 
@@ -22,22 +21,15 @@
           :prop="column.prop"
           show-overflow-tooltip
         >
-
           <template slot-scope="scope">
-
             <!-- 判断是否有filter -->
-            <template v-if="column.filter&&column.filter.has">
-              {{ scope.row[column.prop]|changeTableColumns(scope.row,model.model_index,column.prop,column.filter.name) }}
-            </template>
+            <template
+              v-if="column.filter&&column.filter.has"
+            >{{ scope.row[column.prop]|changeTableColumns(scope.row,model.model_index,column.prop,column.filter.name) }}</template>
 
-            <template v-else>
-              {{ scope.row[column.prop] }}
-            </template>
-
+            <template v-else>{{ scope.row[column.prop] }}</template>
           </template>
-
         </el-table-column>
-
       </template>
 
       <!-- 操作按钮 -->
@@ -49,7 +41,6 @@
         :width="model.table.commonAction.width?model.table.commonAction.width:'100px'"
       >
         <template slot-scope="scope">
-
           <!-- 删除 -->
           <el-button
             v-if="model.table.commonAction.delete&&model.table.commonAction.delete.show"
@@ -57,7 +48,7 @@
             @click="deleteItem(scope.row)"
           >
             <i class="el-icon-delete"></i>
-            {{$t('tableAction.'+model.table.commonAction.delete.title_key)}}
+            {{$t('tableAction.delete.'+model.table.commonAction.delete.title_key)}}
           </el-button>
 
           <!-- 修改 -->
@@ -71,15 +62,9 @@
           </el-button>
 
           <!-- 自定义按钮 -->
-          <slot
-            name="customAction"
-            :dataScope="scope"
-          ></slot>
-
+          <slot name="customAction" :dataScope="scope"></slot>
         </template>
-
       </el-table-column>
-
     </el-table>
 
     <!-- 分页 -->
@@ -113,11 +98,40 @@ export default {
   methods: {
     list() {
       this.$store.dispatch(
-        this.model.table.commonAction.delete.action_url,
+        this.model.table.commonAction.list.action_url,
         this.model.searchArea.model
       );
     },
+    deleteItem(row) {
+      this.$confirm(
+        this.$t("tableAction.delete.confirm.title"),
+        this.$t("el.messagebox.title"),
+        {
+          confirmButtonText: this.$t("el.messagebox.confirm"),
+          cancelButtonText: this.$t("el.messagebox.cancel"),
+          type: "warning"
+        }
+      )
+        .then(() => {
+          const DELETE_KEY =
+            row[this.model.table.commonAction.delete.delete_key];
+          this.$store
+            .dispatch(this.model.table.commonAction.delete.action_url, {
+              resource_id: DELETE_KEY
+            })
+            .then(res => {
+              //
+              if (res && res.status === 204) {
+                this.list()
+              }
+            });
+        })
+        .catch(() => {
+        });
+    },
     handleSelectionChange(val) {
+      this.$emit('handleSelectionChange',val)
+      // console.log(val)
       this.multipleSelection = val;
     },
     handleCurrentChange(page) {

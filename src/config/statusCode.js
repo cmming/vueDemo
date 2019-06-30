@@ -1,9 +1,12 @@
 
 class httpStatus {
 
+    //restful api
     static HTTP_OK = 200
     static HTTP_CREATED = 201
+    // delete 更新
     static HTTP_NO_CONTENT = 204
+    //接口、资源不存在
     static HTTP_NO_FOUND = 404
 
     static codeEnums() {

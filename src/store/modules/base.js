@@ -32,6 +32,31 @@ const actions = {
             })
         })
     },
+    // DELETE_BASE
+    // eslint-disable-next-line
+    deleteBase({ }, params) {
+        return new Promise((resolve, reject) => {
+            requestMap('DELETE_BASE', params).then(response => {
+                // commit('DELETE_BASE', response.data);
+                resolve(response)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
+
+    //STORE_BASE
+    // eslint-disable-next-line
+    storeBase({ }, params) {
+        return new Promise((resolve, reject) => {
+            requestMap('STORE_BASE', params).then(response => {
+                // commit('DELETE_BASE', response.data);
+                resolve(response)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
 }
 
 

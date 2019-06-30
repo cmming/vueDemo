@@ -7,7 +7,7 @@ const table = {
     list: (req, res) => {
         let statusCode = 200
         if (req.method === 'DELETE') {
-            statusCode = 201
+            statusCode = 204
         }
         console.log(req.method)
         var result = {
@@ -24,9 +24,9 @@ const table = {
             "to": 15,
             "data": []
         }
-        for (let i = 0; i < 10; i++) {
+        for (let i = 1; i <= 10; i++) {
             const tmp = {
-                'id': i,
+                'id|+1': i,
                 email: "11294225707@qq.com1",
                 radio: "a",
                 checkbox: ['A'],

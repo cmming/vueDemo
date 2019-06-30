@@ -50,6 +50,10 @@ Open http://localhost:3200/?url=http://localhost:3777/api.json
 
 > 创建 env 文件 通过 doEnv 插件合并 还可以安装插件让其支持 高级语法 参照react
 
+```
+果然，环境变量有自己的命名规范和 create-react-app 一样（REACT_APP），使用 (VUE_APP)；
+```
+
 
 ## 4 项目开发
 
@@ -88,3 +92,23 @@ cnpm i sass-loader node-sass svg-sprite-loader -D
 - [x]  2.支持 自定义事件
 - [x]  3.分页 但是小屏幕显示有问题
 - [ ]  4.搜索区域
+
+
+
+## 6 配置统一化
+
+### 6.1 接口配置
+
+
+```
+200：OK，标准的响应成功状态码
+201：Object created，用于 store 操作
+204：No content，操作执行成功，但是没有返回任何内容
+206：Partial content，返回部分资源时使用
+400：Bad request，请求验证失败
+401：Unauthorized，用户需要认证
+403：Forbidden，用户认证通过但是没有权限执行该操作
+404：Not found，请求资源不存在
+500：Internal server error，通常我们并不会显示返回这个状态码，除非程序异常中断
+503：Service unavailable，一般也不会显示返回，通常用于排查问题用
+```

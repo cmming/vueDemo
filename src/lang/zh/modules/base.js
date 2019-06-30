@@ -1,18 +1,31 @@
 export default {
-    table:{
-        columns:{
-            id:"id",
-            email:"email",
-            radio:"radio",
-            checkbox:"checkbox",
-            select:"select",
-            datePicker:"datePicker",
-            transfer:"transfer",
-
-            data:"日期",
-            name:"名称",
-            address:"地址",
-            state:"状态",
+    table: {
+        columns: {
+            id: "id",
+            email: "邮箱",
+            radio: "单选框",
+            checkbox: "多选框",
+            select: "下拉框",
+            datePicker: "时间筛选",
+            transfer: "transfer",
         }
+    },
+    form: {
+        email: {
+            label: '邮箱'
+        },
+        radio: {
+            label: '单选框'
+        },
+        checkbox: {
+            label: '多选框'
+        },
+        select: {
+            label: '下拉框'
+        },
+        datePicker: {
+            label: '时间筛选'
+        },
+
     }
 }

@@ -1,41 +1,9 @@
+import { validateEmail } from "@/utils/validate";
+
 export default {
     model_index: "base",
     table: {
-        data: [{
-                date: "2016-05-03",
-                name: "王小虎",
-                address: "上海市普陀区金沙江路 1518 弄"
-            },
-            {
-                date: "2016-05-02",
-                name: "王小虎",
-                address: "上海市普陀区金沙江路 1518 弄"
-            },
-            {
-                date: "2016-05-04",
-                name: "王小虎",
-                address: "上海市普陀区金沙江路 1518 弄"
-            },
-            {
-                date: "2016-05-01",
-                name: "王小虎",
-                address: "上海市普陀区金沙江路 1518 弄"
-            },
-            {
-                date: "2016-05-08",
-                name: "王小虎",
-                address: "上海市普陀区金沙江路 1518 弄"
-            },
-            {
-                date: "2016-05-06",
-                name: "王小虎",
-                address: "上海市普陀区金沙江路 1518 弄"
-            },
-            {
-                date: "2016-05-07",
-                name: "王小虎",
-                address: "上海市普陀区金沙江路 1518 弄"
-            }
+        data: [
         ],
         columns: [
             { label_key: "id", prop: "id" },
@@ -49,8 +17,9 @@ export default {
         commonAction: {
             show: true,
             label_key: 'action',
-            delete: { show: true, title_key: 'delete', action_url: 'getBaseList', icon_name: '' },
-            edit: { show: true, title_key: 'edit', action_url: '', icon_name: '' },
+            list: { action_url: 'getBaseList', },
+            delete: { show: true, title_key: 'delete_btn', action_url: 'deleteBase', icon_name: '', delete_key: 'id' },
+            edit: { show: true, title_key: 'edit', action_url: 'deleteBase', icon_name: '', delete_key: 'id' },
             width: '350px',
             columns: [
                 { title_key: 'delete', action_url: '', icon_name: '' },
@@ -60,6 +29,9 @@ export default {
     },
 
     searchArea: {
+        config: {
+            api_url: "getBaseList"
+        },
         model: {
             page: 1,
             page_size: 10,
@@ -70,28 +42,58 @@ export default {
             datePicker: "",
         },
         items: [
-            { label_key: "email", props: "email", type: "Input", placeholder: true },
+            { label_key: "email", prop: "email", type: "input", placeholder: true },
             {
                 label_key: "radio",
-                props: "radio",
-                type: "Radio",
+                prop: "radio",
+                type: "radio",
+                options: [{ value: "a", label: "item 1" }, { value: "b", label: "item 2" }, { value: "c", label: "item 3" }]
+            },
+            // { label_key: "DatePicker", prop: "datePicker", type: "DatePicker", showTime: true, format: "YYYY-MM-DD HH:mm:ss" },
+            { label_key: "datePicker", prop: "datePicker", type: "datePicker" },
+        ],
+        rules: {},
+    },
+
+    form: {
+        config: {
+            api_url: "storeBase"
+        },
+        model: {
+            email: "",
+            radio: "",
+            checkbox: [],
+            select: "",
+            datePicker: "",
+        },
+        items: [
+            { label_key: "email", prop: "email", type: "input", placeholder: true },
+            {
+                label_key: "radio",
+                prop: "radio",
+                type: "radio",
                 options: [{ value: "a", label: "item 1" }, { value: "b", label: "item 2" }, { value: "c", label: "item 3" }]
             },
             {
                 label_key: "checkbox",
-                props: "checkbox",
-                type: "Checkbox",
+                prop: "checkbox",
+                type: "checkbox",
                 options: [{ value: "A", label: "A" }, { value: "B", label: "B" }, { value: "C", label: "C" }]
             },
             {
                 label_key: "select",
-                props: "select",
-                type: "Select",
+                prop: "select",
+                type: "select",
                 options: [{ value: "A1", label: "A1" }, { value: "B1", label: "B1" }, { value: "C1", label: "C1" }]
             },
-            // { label_key: "DatePicker", props: "datePicker", type: "DatePicker", showTime: true, format: "YYYY-MM-DD HH:mm:ss" },
-            { label_key: "datePicker", props: "datePicker", type: "DatePicker" },
+            // { label_key: "DatePicker", prop: "datePicker", type: "DatePicker", showTime: true, format: "YYYY-MM-DD HH:mm:ss" },
+            { label_key: "datePicker", prop: "datePicker", type: "datePicker" },
         ],
-        rules: {},
+        rules: {
+            email: [
+                { required: true, trigger: 'blur',message_key:"required" },
+                { validator: validateEmail, trigger: 'blur',message_key:"validateEmail" }
+            ],
+        },
     }
 }

@@ -1,4 +1,7 @@
 export default{
+    'Created':{
+        'post':'post'
+    },
     'title':'提示',
     'Created.post':'数据创建成功',
     'No Content.put':'数据跟新成功',
