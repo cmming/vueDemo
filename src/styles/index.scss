@@ -4,7 +4,7 @@
 @import './base.scss';
 #app {
     .app-side {
-        // height: 100vh;
+        height: 100vh;
         min-height: $main-min-height +$header-height;
         background-color: $default-bg-color;
         transition: width 0.28s;
