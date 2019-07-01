@@ -94,6 +94,17 @@ cnpm i sass-loader node-sass svg-sprite-loader -D
 - [ ]  4.搜索区域
 
 
+### 5、2 表单
+
+
+### 5、3 上传组件
+
+> 文档 https://lian-yue.github.io/vue-upload-component/#/zh-cn/documents#%E5%85%A5%E9%97%A8%E5%BC%80%E5%A7%8B-npm
+
+```
+    cnpm install vue-upload-component -S
+```
+
 
 ## 6 配置统一化
 

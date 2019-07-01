@@ -4,15 +4,12 @@
 @import './base.scss';
 #app {
     .app-side {
-        height: 100vh;
+        height: auto;
         min-height: $main-min-height +$header-height;
         background-color: $default-bg-color;
         transition: width 0.28s;
         .app-menu {
             border-color: $default-bg-color;
-            .svg-icon{
-                margin-right: 16px;
-            }
             .el-submenu {
                 .el-menu-item{
                     background-color: $default-bg-color-80 !important

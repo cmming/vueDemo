@@ -42,6 +42,11 @@
           ></el-option>
         </el-select>
       </template>
+
+      <!-- 文件上传 -->
+      <template v-if="item.type ==='file'">
+      </template>
+
     </el-form-item>
 
     <el-form-item>

@@ -18,8 +18,8 @@
       </div>
 
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="zh">中文</el-dropdown-item>
-        <el-dropdown-item command="en">English</el-dropdown-item>
+        <el-dropdown-item :disabled="language==='zh'" command="zh">中文</el-dropdown-item>
+        <el-dropdown-item :disabled="language==='en'" command="en">English</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
@@ -27,11 +27,23 @@
 <script>
 export default {
   name: "Navbar",
+  props:{
+    language:{
+      type:String,
+      required:true,
+      default:'zh'
+    }
+  },
   methods: {
     handleLanguageCommand(lang) {
       // console.log(lang,this)
       this.$i18n.locale = lang;
       this.$store.dispatch("setLanguage", lang);
+
+      this.$message({
+        message: lang == "en" ? "switch language success" : "切换语言成功",
+        type: "success"
+      });
 
       // this.$router.go(0)
     }

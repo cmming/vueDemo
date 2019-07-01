@@ -15,7 +15,7 @@
           :is-active="menu.collapse"
           @toggleClick="toggleMenu"
         />
-        <navbar></navbar>
+        <navbar :language="language"></navbar>
       </el-header>
 
       <el-main class="app-main">
@@ -30,7 +30,7 @@ import { Sidebar, Navbar, Hamburger } from "./components/index";
 export default {
   name: "LayoutAdmin",
   computed: {
-    ...mapGetters(["menu"]),
+    ...mapGetters(["menu","language"]),
   },
   components: {
     Sidebar,

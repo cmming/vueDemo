@@ -19,7 +19,7 @@
         :key="key"
       >
         <template slot="title">
-          <svg-icon :icon-class="menu.meta.icon"/>
+          <svg-icon :icon-class="menu.meta.icon" class-name="m-rigth-sm"/>
           <span>{{$t('menu.'+menu.title+'.title')}}</span>
         </template>
 
@@ -29,7 +29,7 @@
           :index="'/'+menu.path+'/'+menuItem.path"
           :data-d="menu.path+'/'+menuItem.path"
         >
-          <svg-icon :icon-class="menu.meta.icon"/>
+          <svg-icon :icon-class="menu.meta.icon" class-name="m-rigth-sm"/>
           <span>{{$t('menu.'+menu.title+'.'+menuItem.title)}}</span>
         </el-menu-item>
       </el-submenu>
@@ -41,7 +41,7 @@
         :data-d="menu.path"
         :key="key"
       >
-        <svg-icon :icon-class="menu.meta.icon"/>
+        <svg-icon :icon-class="menu.meta.icon" class-name="m-rigth-sm"/>
         <span slot="title">{{$t('menu.'+menu.title)}}</span>
       </el-menu-item>
     </template>
