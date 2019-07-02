@@ -6,7 +6,7 @@
     >
       <sidebar></sidebar>
     </el-aside>
-    <el-container>
+    <el-container class="app-right">
       <el-header
         class="app-header"
         height="60px"
