@@ -6,6 +6,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import _ from 'lodash'
+Vue.prototype._ = _
 import './icons' // icon
 //全局组件自动注册
 import './components/index'
@@ -17,18 +19,18 @@ Vue.use(Element, {
     size: 'medium'
 })
 
-// new Vue({
-//   render: h => h(App),
-//   i18n,
-//   store,
-//   router,
-// }).$mount('#app')
-
-
 new Vue({
-    el: '#app',
-    i18n,
-    router,
-    store,
-    render: h => h(App)
-})
+  render: h => h(App),
+  i18n,
+  store,
+  router,
+}).$mount('#app')
+
+
+// new Vue({
+//     el: '#app',
+//     i18n,
+//     router,
+//     store,
+//     render: h => h(App)
+// })

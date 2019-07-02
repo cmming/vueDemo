@@ -1,16 +1,23 @@
 let express = require('express'); //引入express模块.
 var bodyParser = require('body-parser')
-let Mock = require('mockjs'); //引入mock模块
-let Random = Mock.Random;
+const path = require('path')
+let multer  = require('multer');
+
+
 
 let apiData = require('./json/api.json')
 let table = require('./model/table')
+let file = require('./model/file')
 
-console.log(table)
+// console.log(table)
 
 let app = express(); //实例化express
+// app.use(bodyParser.text());//运用中间件，对请求体的文本进行解析
+app.use(express.static(path.join(__dirname, 'public')))
+
+// app.use(multer({ dest: '/tmp/'}).array('file'));
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.text());//运用中间件，对请求体的文本进行解析
+
 
 app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -34,6 +41,14 @@ app.delete('/table/demo/[0-9]', table.list);
 app.put('/table/demo/[0-9]', table.update);
 //保存数据
 app.post('/table/demo', table.store);
+
+
+app.post('/file/upload',multer({ dest: '/tmp/'}).array('file'), file.upload);
+
+
+//request payload
+// app.use(bodyParser.json())
+app.post('/file/chunk',multer({ dest: '/tmp/'}).array('chunk'), file.chunk);
 
 
 

@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 
 // eslint-disable-next-line
-function add1(state, row,tableIndex, columnIndex, filterKey){
+function add1(state, row, tableIndex, columnIndex, filterKey) {
     // console.log(state, row,tableIndex, columnIndex, filterKey,2)
     return 1
 }
@@ -15,12 +15,26 @@ function add1(state, row,tableIndex, columnIndex, filterKey){
  * filterKey   转换函数 用于寻找 转换函数 
  */
 Vue.filter('changeTableColumns',
-    function(state,row,tableIndex, columnIndex, filterKey) {
+    function(state, row, tableIndex, columnIndex, filterKey) {
         // eslint-disable-next-line
         // console.log(state, row,tableIndex, columnIndex, filterKey)
-        if(filterKey == 'add1'){
-            return add1(state, row,tableIndex, columnIndex)
+        if (filterKey == 'add1') {
+            return add1(state, row, tableIndex, columnIndex)
         }
         // return eval(filterKey+'()')
         // return state, tableIndex, columnIndex, filterKey
     });
+
+
+Vue.filter('formatSize', function(size) {
+    if (size > 1024 * 1024 * 1024 * 1024) {
+        return (size / 1024 / 1024 / 1024 / 1024).toFixed(2) + ' TB'
+    } else if (size > 1024 * 1024 * 1024) {
+        return (size / 1024 / 1024 / 1024).toFixed(2) + ' GB'
+    } else if (size > 1024 * 1024) {
+        return (size / 1024 / 1024).toFixed(2) + ' MB'
+    } else if (size > 1024) {
+        return (size / 1024).toFixed(2) + ' KB'
+    }
+    return size.toString() + ' B'
+})

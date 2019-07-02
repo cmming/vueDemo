@@ -105,6 +105,8 @@ cnpm i sass-loader node-sass svg-sprite-loader -D
     cnpm install vue-upload-component -S
 ```
 
+所有文件上传都走一个独立的业务接口，方便控制。
+
 
 ## 6 配置统一化
 
