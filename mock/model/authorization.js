@@ -12,7 +12,7 @@ const authorization = {
                     },
                     children: [{
                         path: '',
-                        component: 'views/dashborad/index',
+                        component: 'views/dashborad/index1',
                         name: 'dashboradIndex',
                         meta: { title: 'dashborad',icon: 'dashboard' }
                     }]
