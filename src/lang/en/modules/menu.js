@@ -4,6 +4,7 @@ const menuList = {
         'title': 'ui',
         'table': 'table',
         'form': 'form',
+        'file': 'file upload',
     }
 }
 

@@ -1,7 +1,6 @@
 <template>
   <el-card>
     <c-form :model="base"></c-form>
-    <c-upload></c-upload>
   </el-card>
 </template>
 <script>

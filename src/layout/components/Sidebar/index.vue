@@ -62,7 +62,7 @@ export default {
   props: {
     menuList: {
       type: Array,
-      default: []
+      default: ()=>[]
     }
   },
   computed: {

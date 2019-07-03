@@ -4,6 +4,7 @@ const menuList = {
         'title': 'ui',
         'table': '表格',
         'form': '表单',
+        'file': '文件上传',
     }
 }
 

@@ -46,7 +46,7 @@ function fnAddDynamicRoutes(dynamicRoutes) {
                 val['component'] = () => {
                     return import(`@/${component}`)
                         .then((component) => { return component })
-                        .catch(error => import('@/views/errorPage/404'))
+                        .catch(() => import('@/views/errorPage/404'))
 
                 }
                 if (val.children && val.children.length >= 1) {
@@ -55,7 +55,6 @@ function fnAddDynamicRoutes(dynamicRoutes) {
                     val['children'] = []
                 }
             } catch (e) {
-                console.log(1)
                 throw e;
             }
         }))

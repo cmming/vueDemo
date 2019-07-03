@@ -116,6 +116,8 @@ cnpm i sass-loader node-sass svg-sprite-loader -D
 
 所有文件上传都走一个独立的业务接口，方便控制。
 
+### 5、3、1 完成队列的组件
+
 
 ## 6 配置统一化
 
