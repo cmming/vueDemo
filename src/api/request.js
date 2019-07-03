@@ -14,7 +14,7 @@ const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API, // api的base_url
     // baseURL: '/api', // api的base_url
     timeout: 15000, // request timeout
-    withCredentials: true // 选项表明了是否是跨域请求
+    // withCredentials: true // 选项表明了是否是跨域请求
 })
 
 

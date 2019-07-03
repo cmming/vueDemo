@@ -4,7 +4,7 @@
       :width="menu.collapse?'65px':'220px'"
       :class="{'close':menu.collapse,'app-side':true}"
     >
-      <sidebar></sidebar>
+      <sidebar :menuList="dynamicMenu"></sidebar>
     </el-aside>
     <el-container class="app-right">
       <el-header
@@ -30,7 +30,7 @@ import { Sidebar, Navbar, Hamburger } from "./components/index";
 export default {
   name: "LayoutAdmin",
   computed: {
-    ...mapGetters(["menu","language"]),
+    ...mapGetters(["menu","language","dynamicMenu"]),
   },
   components: {
     Sidebar,

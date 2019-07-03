@@ -2,16 +2,22 @@ let express = require('express'); //引入express模块.
 var bodyParser = require('body-parser')
 const path = require('path')
 let multer  = require('multer');
+var cors = require('cors')
+
 
 
 
 let apiData = require('./json/api.json')
 let table = require('./model/table')
 let file = require('./model/file')
+let authorization = require('./model/authorization')
 
 // console.log(table)
 
 let app = express(); //实例化express
+
+app.use(cors())
+
 // app.use(bodyParser.text());//运用中间件，对请求体的文本进行解析
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -19,14 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({ extended: false }))
 
 
-app.all('*', function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By",' 3.2.1')
-    if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
-    else  next();
-})
 app.get('/api.json', (req, res) => {
 
     res.json(apiData)
@@ -49,6 +47,11 @@ app.post('/file/upload',multer({ dest: '/tmp/'}).array('file'), file.upload);
 //request payload
 // app.use(bodyParser.json())
 app.post('/file/chunk',multer({ dest: '/tmp/'}).array('chunk'), file.chunk);
+
+
+///获取用户信息
+app.post('/authorization/user/info', authorization.info);
+
 
 
 

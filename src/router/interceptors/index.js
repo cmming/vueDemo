@@ -1,4 +1,5 @@
 import dynamicAddRoute from './dynamicAddRoute.js'
+import mathNotFound from './mathNotFound'
 
 
-export {dynamicAddRoute}
+export {dynamicAddRoute,mathNotFound}

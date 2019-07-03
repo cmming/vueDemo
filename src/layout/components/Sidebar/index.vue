@@ -13,36 +13,44 @@
     <template v-for="(menu,key) in menuList">
       <!-- 二级菜单 -->
       <el-submenu
-        v-if="menu.children&&menu.children.length"
-        :index="'/'+menu.path"
+        v-if="menu.children&&menu.children.length>1"
+        :index="menu.path"
         :data-d="menu.path"
         :key="key"
       >
         <template slot="title">
-          <svg-icon :icon-class="menu.meta.icon" class-name="m-rigth-sm"/>
-          <span>{{$t('menu.'+menu.title+'.title')}}</span>
+          <svg-icon
+            :icon-class="menu.meta.icon"
+            class-name="m-rigth-sm"
+          />
+          <span>{{$t('menu.'+menu.meta.title+'.title')}}</span>
         </template>
 
         <el-menu-item
           v-for="(menuItem,k) in menu.children"
           :key="+key+'-'+k"
-          :index="'/'+menu.path+'/'+menuItem.path"
+          :index="menu.path+'/'+menuItem.path"
           :data-d="menu.path+'/'+menuItem.path"
         >
-          <svg-icon :icon-class="menu.meta.icon" class-name="m-rigth-sm"/>
-          <span>{{$t('menu.'+menu.title+'.'+menuItem.title)}}</span>
+          <svg-icon
+            :icon-class="menuItem.meta.icon"
+            class-name="m-rigth-sm"
+          />
+          <span>{{$t('menu.'+menu.meta.title+'.'+menuItem.meta.title)}}</span>
         </el-menu-item>
       </el-submenu>
 
       <!-- 一级菜单 -->
       <el-menu-item
-        v-if="!menu.children||!menu.children.length"
-        :index="'/'+menu.path"
-        :data-d="menu.path"
+        v-if="!menu.children||menu.children.length==1"
+        :index="menu.path+'/'+menu.children[0].path"
         :key="key"
       >
-        <svg-icon :icon-class="menu.meta.icon" class-name="m-rigth-sm"/>
-        <span slot="title">{{$t('menu.'+menu.title)}}</span>
+        <svg-icon
+          :icon-class="menu.children[0].meta.icon"
+          class-name="m-rigth-sm"
+        />
+        <span slot="title">{{$t('menu.'+menu.children[0].meta.title)}}</span>
       </el-menu-item>
     </template>
   </el-menu>
@@ -51,33 +59,11 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Sidebar",
-  data() {
-    return {
-      menuList: [
-        {
-          title: "dashborad",
-          path: "dashborad",
-          meta: { icon: "dashboard" }
-        },
-        {
-          title: "ui",
-          path: "ui",
-          meta: { icon: "dashboard" },
-          children: [
-            {
-              title: "table",
-              path: "table",
-              meta: { icon: "dashboard" }
-            },
-            {
-              title: "form",
-              path: "form",
-              meta: { icon: "dashboard" }
-            }
-          ]
-        }
-      ]
-    };
+  props: {
+    menuList: {
+      type: Array,
+      default: []
+    }
   },
   computed: {
     activeMenu() {

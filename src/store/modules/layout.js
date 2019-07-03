@@ -6,50 +6,6 @@ const state = {
         collapse: storage.get('menuCollapse') !== undefined ? Boolean(storage.get('menuCollapse')) : true
     },
     language: storage.get('app-language') || getLanguage(),
-    routerList:[
-        {
-        path: '/dashborad',
-        component: '@/layout/index',
-        redirect: 'noRedirect',
-        name: 'dashborad',
-        meta: {
-            title: 'dashborad',
-            icon: 'table'
-        },
-        children: [
-            {
-                path: '/dashborad',
-                component: '@/views/dashborad/index',
-                name: 'dashboradIndex',
-                meta: { title: 'dashborad' }
-            }
-        ]
-    },
-    {
-        path: '/ui',
-        component: '@/layout/index',
-        redirect: 'noRedirect',
-        name: 'ui',
-        meta: {
-            title: 'ui',
-            icon: 'table'
-        },
-        children: [
-            {
-                path: 'form',
-                component: '@/views/ui/form',
-                name: 'form',
-                meta: { title: 'form' }
-            },
-            {
-                path: 'table',
-                component: '@/views/ui/table',
-                name: 'table',
-                meta: { title: 'table' }
-            }
-        ]
-    }
-]
 }
 
 const getters = {
@@ -58,9 +14,6 @@ const getters = {
     },
     language: state => {
         return state.language
-    },
-    routerList:state => {
-        return state.routerList
     },
 }
 
