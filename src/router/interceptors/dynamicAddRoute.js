@@ -7,20 +7,18 @@ export default function dynamicAddRoute(to, from, next, router, addRoutesAfter) 
     if (_.indexOf(whiteList, to.path) === -1) {
         if (!router.options.isLoad) {
             store.dispatch('getUserInfo').then((res) => {
-                console.log(res)
                 let routes = fnAddDynamicRoutes(store.getters.routerList)
                 
                 router.addRoutes(routes)
                 let menus = fnAddDynamicMenu(res.routerList)
                 store.dispatch('setUserMenu',menus)
-                console.log(menus)
                     //动态路由加载完成后
                 addRoutesAfter(router)
                 router.options.isLoad = true
                     //确保加载完成
                 next({...to, replace: true })
-            }).catch(error => {
-                console.log(error)
+                // eslint-disable-next-line
+            }).catch(() => {
                     //加载动态路由失败
                 addRoutesAfter(router)
                 router.options.isLoad = true
