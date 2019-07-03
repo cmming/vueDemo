@@ -1,0 +1,21 @@
+export default {
+    langKey:"CUpload",
+    lang:{
+        fileList:{
+            column:{
+                size:"size",
+                name:"name",
+                progress:"progress",
+                speed:"speed",
+                status:"status",
+                action:"action"
+            },
+            action:{
+                stop:"stop",
+                reload:"reload",
+                start:"start",
+                delete:"delete"
+            }
+        }
+    }
+} 
