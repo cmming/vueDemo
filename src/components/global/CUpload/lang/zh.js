@@ -15,6 +15,13 @@ export default {
                 reload:"重试",
                 start:"开始",
                 delete:"删除"
+            },
+            globalAction:{
+                choseFile:"选中文件",
+                stop:"暂停",
+                start:"开始",
+                addFolder:"添加文件夹",
+                addFiles:"添加文件"
             }
         }
     }

@@ -1,31 +1,55 @@
 <template>
   <div class="upload">
-    <file-list :files="files" :fileUploadObj="$refs.upload"></file-list>
+    <file-list
+      :files="files"
+      :fileUploadObj="$refs.upload"
+    ></file-list>
 
-    <file-upload
-      class="table-upload m-rigth-sm"
-      post-action="/api/file/upload"
-      :extensions="extensions"
-      :accept="accept"
-      :multiple="true"
-      :size="size"
-      :thread="thread < 1 ? 1 : (thread > 5 ? 5 : thread)"
-      v-model="files"
-      @input-filter="inputFilter"
-      @input-file="inputFile"
-      :chunk-enabled="chunkEnabled"
-      :chunk="{
+    <div class="upload-container">
+
+      <file-upload
+        class="table-upload m-rigth-sm"
+        post-action="/api/file/upload"
+        :extensions="extensions"
+        :accept="accept"
+        :multiple="true"
+        :size="size"
+        :thread="thread < 1 ? 1 : (thread > 5 ? 5 : thread)"
+        v-model="files"
+        @input-filter="inputFilter"
+        @input-file="inputFile"
+        :chunk-enabled="chunkEnabled"
+        :chunk="{
             action: '/api/file/chunk',
             minSize: chunkMinSize * 1048576,
             maxActive: chunkMaxActive,
             maxRetries: chunkMaxRetries
           }"
-      ref="upload"
-    >
-      <el-button type="primary">
-        <svg-icon icon-class="add" />选择文件
-      </el-button>
-    </file-upload>
+        ref="upload"
+      >
+        <el-button
+          split-button
+          type="primary"
+        >
+          <svg-icon icon-class="add" />
+          {{$t('CUpload.fileList.globalAction.choseFile')}}
+        </el-button>
+
+      </file-upload>
+
+      <div class="dropdown-menu">
+        <label
+          class="dropdown-item"
+          for="file"
+        >{{$t('CUpload.fileList.globalAction.addFiles')}}</label>
+        <a
+          class="dropdown-item"
+          href="#"
+          @click="onAddFolader"
+        >{{$t('CUpload.fileList.globalAction.addFolder')}}</a>
+      </div>
+
+    </div>
 
     <el-button
       class="vertical-middle"
@@ -33,16 +57,20 @@
       v-if="!$refs.upload || !$refs.upload.active"
       @click.prevent="$refs.upload.active = true"
     >
-      <svg-icon icon-class="start" />开始
+      <svg-icon icon-class="start" />{{$t('CUpload.fileList.globalAction.start')}}
     </el-button>
-    <el-button type="danger" v-else @click.prevent="$refs.upload.active = false">
-      <svg-icon icon-class="stop" />暂停
+    <el-button
+      type="danger"
+      v-else
+      @click.prevent="$refs.upload.active = false"
+    >
+      <svg-icon icon-class="stop" />{{$t('CUpload.fileList.globalAction.stop')}}
     </el-button>
   </div>
 </template>
 <script>
 import FileUpload from "vue-upload-component";
-import FileList from "./components/uploadList"
+import FileList from "./components/uploadList";
 export default {
   name: "CUpload",
   components: {
@@ -98,6 +126,23 @@ export default {
     };
   },
   methods: {
+    onAddFolader() {
+      if (!this.$refs.upload.features.directory) {
+        this.alert("Your browser does not support");
+        return;
+      }
+      let input = this.$refs.upload.$el.querySelector("input");
+      input.directory = true;
+      input.webkitdirectory = true;
+      this.directory = true;
+      input.onclick = null;
+      input.click();
+      input.onclick = () => {
+        this.directory = false;
+        input.directory = false;
+        input.webkitdirectory = false;
+      };
+    },
     inputFilter(newFile, oldFile, prevent) {
       if (newFile && !oldFile) {
         // Before adding a file
@@ -137,6 +182,42 @@ export default {
 }
 .vertical-middle {
   vertical-align: middle;
+}
+
+.upload-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 74px;
+  &:hover {
+    .dropdown-menu {
+      visibility: visible;
+    }
+  }
+  .dropdown-menu {
+    position: absolute;
+    padding: 0.5rem 0;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    display: block;
+    visibility: hidden;
+    transition: all 0.2s;
+    a {
+      text-decoration: none;
+    }
+    .dropdown-item {
+      cursor: pointer;
+      display: block;
+      padding: 0.25rem 1.5rem;
+      clear: both;
+      font-weight: 400;
+      color: #212529;
+      text-align: inherit;
+      white-space: nowrap;
+      background: 0 0;
+      border: 0;
+    }
+  }
 }
 </style>
 
