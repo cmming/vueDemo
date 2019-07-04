@@ -51,7 +51,33 @@ const authorization = {
                             meta: { title: 'imgCropper',icon: 'dashboard' }
                         }
                     ]
-                }
+                },
+                {
+                    path: '/admin',
+                    component: 'layout/index',
+                    redirect: 'noRedirect',
+                    name: 'user',
+                    meta: {
+                        title: 'user',
+                        icon: 'dashboard'
+                    },
+                    children: [{
+                        path: 'user',
+                        component: 'moudles/views/list',
+                        name: 'userList',
+                        meta: { title: 'userList',icon: 'dashboard' }
+                    },{
+                        path: 'user/store',
+                        component: 'moudles/views/list',
+                        name: 'userStore',
+                        meta: { title: 'userList',icon: 'dashboard' }
+                    },{
+                        path: 'user/update',
+                        component: 'moudles/views/list',
+                        name: 'userUpdate',
+                        meta: { title: 'userList',icon: 'dashboard' }
+                    }]
+                },
             ]
         }
         res.status(200).json(result);

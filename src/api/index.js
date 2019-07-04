@@ -1,3 +1,5 @@
+import allApi from  './loadApi'
+
 const modulesFiles = require.context('./modules', true, /\.js$/)
 
 // you do not need `import app from './modules/app'`
@@ -13,4 +15,4 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
     return Object.assign(modules,value.default)
 }, {})
 
-export default modules
+export default Object.assign(modules,allApi)

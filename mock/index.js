@@ -12,6 +12,8 @@ let table = require('./model/table')
 let file = require('./model/file')
 let authorization = require('./model/authorization')
 
+let user = require('./model/user')
+
 // console.log(table)
 
 let app = express(); //实例化express
@@ -51,6 +53,17 @@ app.post('/file/chunk',multer({ dest: '/tmp/'}).array('chunk'), file.chunk);
 
 ///获取用户信息
 app.post('/authorization/user/info', authorization.info);
+
+
+// 用户管理模块
+
+app.get('/users', user.list);
+//删除数据
+app.delete('/user/[0-9]', user.list);
+//更新数据
+app.put('/user/[0-9]', user.update);
+//保存数据
+app.post('/user', user.store);
 
 
 

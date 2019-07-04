@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import allStore from './loadStore'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,7 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
     return modules
 }, {})
 
-
+Object.assign(modules,allStore)
 // eslint-disable-next-line
 console.log(modules)
 
