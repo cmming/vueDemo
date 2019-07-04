@@ -8,7 +8,8 @@ export default {
                 progress:"progress",
                 speed:"speed",
                 status:"status",
-                action:"action"
+                action:"action",
+                thumb:"thumb"
             },
             action:{
                 stop:"stop",

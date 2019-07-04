@@ -5,6 +5,7 @@ const menuList = {
         'table': '表格',
         'form': '表单',
         'file': '文件上传',
+        'imgCropper':"图片裁切"
     }
 }
 

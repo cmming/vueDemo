@@ -8,7 +8,8 @@ export default {
                 progress:"进度",
                 speed:"速度",
                 status:"状态",
-                action:"操作"
+                action:"操作",
+                thumb:"缩略图"
             },
             action:{
                 stop:"暂停",

@@ -1,7 +1,6 @@
 <template>
   <el-table
     :data="files"
-    style="width: 100%"
   >
     <el-table-column
       prop="size"
@@ -14,6 +13,16 @@
       prop="name"
       :label="$t('CUpload.fileList.column.name')"
     ></el-table-column>
+
+    <el-table-column
+      prop="thumb"
+      :label="$t('CUpload.fileList.column.thumb')"
+    >
+     <template slot-scope="scope">
+       <img v-if="scope.row.thumb" :src="scope.row.thumb" width="40" height="auto" />
+     </template>
+    </el-table-column>
+
 
     <el-table-column
       prop="progress"
@@ -55,7 +64,7 @@
       </template>
     </el-table-column>
 
-    <el-table-column :label="$t('CUpload.fileList.column.action')">
+    <el-table-column :label="$t('CUpload.fileList.column.action')" width="200px">
       <template slot-scope="scope">
         <el-button
           v-if="scope.row.active"

@@ -1,12 +1,8 @@
 <template>
   <div class="upload">
-    <file-list
-      :files="files"
-      :fileUploadObj="$refs.upload"
-    ></file-list>
+    <file-list :files="files" :fileUploadObj="$refs.upload"></file-list>
 
     <div class="upload-container">
-
       <file-upload
         class="table-upload m-rigth-sm"
         post-action="/api/file/upload"
@@ -27,28 +23,20 @@
           }"
         ref="upload"
       >
-        <el-button
-          split-button
-          type="primary"
-        >
+        <el-button split-button type="primary">
           <svg-icon icon-class="add" />
           {{$t('CUpload.fileList.globalAction.choseFile')}}
         </el-button>
-
       </file-upload>
 
       <div class="dropdown-menu">
-        <label
-          class="dropdown-item"
-          for="file"
-        >{{$t('CUpload.fileList.globalAction.addFiles')}}</label>
+        <label class="dropdown-item" for="file">{{$t('CUpload.fileList.globalAction.addFiles')}}</label>
         <a
           class="dropdown-item"
           href="#"
           @click="onAddFolader"
         >{{$t('CUpload.fileList.globalAction.addFolder')}}</a>
       </div>
-
     </div>
 
     <el-button
@@ -57,14 +45,12 @@
       v-if="!$refs.upload || !$refs.upload.active"
       @click.prevent="$refs.upload.active = true"
     >
-      <svg-icon icon-class="start" />{{$t('CUpload.fileList.globalAction.start')}}
+      <svg-icon icon-class="start" />
+      {{$t('CUpload.fileList.globalAction.start')}}
     </el-button>
-    <el-button
-      type="danger"
-      v-else
-      @click.prevent="$refs.upload.active = false"
-    >
-      <svg-icon icon-class="stop" />{{$t('CUpload.fileList.globalAction.stop')}}
+    <el-button type="danger" v-else @click.prevent="$refs.upload.active = false">
+      <svg-icon icon-class="stop" />
+      {{$t('CUpload.fileList.globalAction.stop')}}
     </el-button>
   </div>
 </template>
@@ -156,6 +142,22 @@ export default {
         // 过滤 php html js 文件
         if (/\.(php5?|html?|jsx?)$/i.test(newFile.name)) {
           return prevent();
+        }
+      }
+
+      if (newFile && (!oldFile || newFile.file !== oldFile.file)) {
+        // Create a blob field
+        // 创建 blob 字段
+        newFile.blob = "";
+        let URL = window.URL || window.webkitURL;
+        if (URL && URL.createObjectURL) {
+          newFile.blob = URL.createObjectURL(newFile.file);
+        }
+        // Thumbnails
+        // 缩略图
+        newFile.thumb = "";
+        if (newFile.blob && newFile.type.substr(0, 6) === "image/") {
+          newFile.thumb = newFile.blob;
         }
       }
     },

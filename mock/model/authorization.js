@@ -43,6 +43,12 @@ const authorization = {
                             component: 'views/ui/file',
                             name: 'file',
                             meta: { title: 'file',icon: 'dashboard' }
+                        },
+                        {
+                            path: 'imgCropper',
+                            component: 'views/ui/imgCropper',
+                            name: 'imgCropper',
+                            meta: { title: 'imgCropper',icon: 'dashboard' }
                         }
                     ]
                 }

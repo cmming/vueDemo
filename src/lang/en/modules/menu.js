@@ -5,6 +5,7 @@ const menuList = {
         'table': 'table',
         'form': 'form',
         'file': 'file upload',
+        'imgCropper':"img cropper"
     }
 }
 
