@@ -87,3 +87,13 @@ export function validateEmail(rule, str, callback){
     callback()
   }
 }
+
+
+export function validateNumber(rule, str, callback){
+  let reg = /^[0-9]\d*$/
+  if (!reg.test(str)) {
+    callback(new Error(rule.message))
+  } else {
+    callback()
+  }
+}

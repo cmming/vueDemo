@@ -13,18 +13,41 @@
       :prop="item.prop"
     >
       <template v-if="item.type ==='input'">
-        <el-input v-model="model.form.model[item['prop']]"></el-input>
+        <template v-if="item.input_type ==='number'">
+          <el-input
+            :type="item['input_type']"
+            v-model="model.form.model[item['prop']]"
+            :maxlength="GLOBAL_CONFIG.inputMaxLength"
+            onKeypress="return(/[\d]/.test(String.fromCharCode(event.keyCode)))"
+          ></el-input>
+        </template>
+
+        <template v-else>
+          <el-input
+            v-model="model.form.model[item['prop']]"
+            :maxlength="GLOBAL_CONFIG.inputMaxLength"
+          ></el-input>
+        </template>
+
       </template>
 
       <template v-if="item.type ==='radio'">
         <el-radio-group v-model="model.form.model[item['prop']]">
-          <el-radio v-for="(i,k) in item.options" :key="k" :label="i.value">{{i.label}}</el-radio>
+          <el-radio
+            v-for="(i,k) in item.options"
+            :key="k"
+            :label="i.value"
+          >{{i.label}}</el-radio>
         </el-radio-group>
       </template>
 
       <template v-if="item.type ==='checkbox'">
         <el-checkbox-group v-model="model.form.model[item['prop']]">
-          <el-checkbox v-for="(i,k) in item.options" :key="k" :label="i.value">{{i.label}}</el-checkbox>
+          <el-checkbox
+            v-for="(i,k) in item.options"
+            :key="k"
+            :label="i.value"
+          >{{i.label}}</el-checkbox>
         </el-checkbox-group>
       </template>
 
@@ -33,7 +56,10 @@
       </template>
 
       <template v-if="item.type ==='select'">
-        <el-select v-model="model.form.model[item['prop']]" placeholder="请选择">
+        <el-select
+          v-model="model.form.model[item['prop']]"
+          placeholder="请选择"
+        >
           <el-option
             v-for="item in item.options"
             :key="item.value"
@@ -59,7 +85,7 @@
   </el-form>
 </template>
 <script>
-import {mapGetters} from 'vuex'
+import { mapGetters } from "vuex";
 export default {
   name: "CForm",
   props: {
@@ -71,6 +97,18 @@ export default {
   },
   created() {
     this.dealRules();
+    if (_.split(this.$route.path, "/").indexOf("update") !== -1) {
+      // 请求获取一个的详情
+      this.$store.dispatch(this.model.form.config.show_url, {
+        resource_id: _.values(this.$route.params)[0]
+      });
+    } else {
+    }
+    console.log(
+      _.split(this.$route.path, "/").indexOf("update"),
+      _.values(this.$route.params)[0],
+      JSON.stringify(this.$route.params) === "{}"
+    );
   },
   //
   computed: {
@@ -78,11 +116,8 @@ export default {
   },
   methods: {
     onSubmit(formName) {
-      // console.log("submit!");
       this.$refs[formName].validate(valid => {
         if (valid) {
-          // console.log(this.model.form.model)
-          // alert("submit!");
           this.$store
             .dispatch(this.model.form.config.api_url, this.model.form.model)
             .then(res => {
@@ -95,7 +130,6 @@ export default {
               }
             });
         } else {
-          // console.log("error submit!!");
           return false;
         }
       });
@@ -121,7 +155,7 @@ export default {
   //
   watch: {
     language() {
-      this.dealRules()
+      this.dealRules();
     }
   }
 };

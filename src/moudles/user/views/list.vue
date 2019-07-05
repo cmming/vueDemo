@@ -4,7 +4,7 @@
       <search-area :model="user"></search-area>
     </el-card>
     <el-card>
-      <c-table :model="user">
+      <c-table :model="user" @editItem="editItem">
         <template slot="customAction" slot-scope="scope">
           <el-button @click="customEvent(scope.dataScope.row)">自定义</el-button>
         </template>
@@ -31,6 +31,9 @@ export default {
         message: "自定义事件",
         type: "success"
       });
+    },
+    editItem(data){
+      this.$router.push('/admin/user/update/'+data.id)
     }
   }
 };

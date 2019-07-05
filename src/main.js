@@ -3,6 +3,10 @@ import i18n from './lang/index'
 import Element from 'element-ui'
 import 'normalize.css/normalize.css'
 import 'element-ui/lib/theme-chalk/index.css';
+// 
+import GLOBAL_CONFIG from '@/config/globalConfig'
+window.GLOBAL_CONFIG = GLOBAL_CONFIG
+Vue.prototype.GLOBAL_CONFIG = GLOBAL_CONFIG
 import App from './App.vue'
 import router from './router'
 import store from './store'

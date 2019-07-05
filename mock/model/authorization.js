@@ -8,13 +8,14 @@ const authorization = {
                     name: 'dashborad',
                     meta: {
                         title: 'dashborad',
-                        icon: 'dashboard'
+                        icon: 'dashboard',
+                        type:"menu",hidden:false
                     },
                     children: [{
                         path: '',
                         component: 'views/dashborad/index',
                         name: 'dashboradIndex',
-                        meta: { title: 'dashborad',icon: 'dashboard' }
+                        meta: { title: 'dashborad',icon: 'dashboard' ,type:"menu",hidden:false}
                     }]
                 },
                 {
@@ -24,31 +25,32 @@ const authorization = {
                     name: 'ui',
                     meta: {
                         title: 'ui',
-                        icon: 'dashboard'
+                        icon: 'dashboard',
+                        type:"menu",hidden:false
                     },
                     children: [{
                             path: 'form',
                             component: 'views/ui/form',
                             name: 'form',
-                            meta: { title: 'form',icon: 'dashboard' }
+                            meta: { title: 'form',icon: 'dashboard' ,type:"menu",hidden:false}
                         },
                         {
                             path: 'table',
                             component: 'views/ui/table',
                             name: 'table',
-                            meta: { title: 'table',icon: 'dashboard' }
+                            meta: { title: 'table',icon: 'dashboard' ,type:"menu",hidden:false}
                         },
                         {
                             path: 'file',
                             component: 'views/ui/file',
                             name: 'file',
-                            meta: { title: 'file',icon: 'dashboard' }
+                            meta: { title: 'file',icon: 'dashboard' ,type:"menu",hidden:false}
                         },
                         {
                             path: 'imgCropper',
                             component: 'views/ui/imgCropper',
                             name: 'imgCropper',
-                            meta: { title: 'imgCropper',icon: 'dashboard' }
+                            meta: { title: 'imgCropper',icon: 'dashboard' ,type:"menu",hidden:true}
                         }
                     ]
                 },
@@ -59,23 +61,24 @@ const authorization = {
                     name: 'user',
                     meta: {
                         title: 'user',
-                        icon: 'dashboard'
+                        icon: 'dashboard',
+                        type:"menu",hidden:false
                     },
                     children: [{
                         path: 'user',
-                        component: 'moudles/views/list',
+                        component: 'moudles/user/views/list',
                         name: 'userList',
-                        meta: { title: 'userList',icon: 'dashboard' }
+                        meta: { title: 'userList',icon: 'dashboard' ,type:"menu",hidden:false}
                     },{
                         path: 'user/store',
-                        component: 'moudles/views/list',
+                        component: 'moudles/user/views/form',
                         name: 'userStore',
-                        meta: { title: 'userList',icon: 'dashboard' }
+                        meta: { title: 'userList',icon: 'dashboard' ,type:"menu",hidden:false}
                     },{
-                        path: 'user/update',
-                        component: 'moudles/views/list',
+                        path: 'user/update/:post_id',
+                        component: 'moudles/user/views/form',
                         name: 'userUpdate',
-                        meta: { title: 'userList',icon: 'dashboard' }
+                        meta: { title: 'userList',icon: 'dashboard',type:"menu",hidden:true }
                     }]
                 },
             ]

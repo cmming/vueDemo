@@ -1,8 +1,8 @@
+import { validateNumber } from "@/utils/validate";
 export default {
     model_index: "user",
     table: {
-        data: [
-        ],
+        data: [],
         columns: [
             { label_key: "id", prop: "id" },
             { label_key: "name", prop: "name" },
@@ -39,7 +39,8 @@ export default {
 
     form: {
         config: {
-            api_url: "storeBase"
+            api_url: "storeUser",
+            show_url: "showUser",
         },
         model: {
             name: "",
@@ -47,14 +48,14 @@ export default {
         },
         items: [
             { label_key: "name", prop: "name", type: "input", placeholder: true },
-            { label_key: "age", prop: "age", type: "input", placeholder: true },
+            { label_key: "age", prop: "age", type: "input", input_type: "number", placeholder: true },
         ],
         rules: {
             name: [
-                { required: true, trigger: 'blur',message_key:"required" },
+                { required: true, trigger: 'blur', message_key: "required" },
             ],
             age: [
-                { required: true, trigger: 'blur',message_key:"required" },
+                { validator: validateNumber, required: true, trigger: 'blur', message_key: "validateNumberRequired" },
             ],
         },
     }

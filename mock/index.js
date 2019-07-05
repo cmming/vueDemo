@@ -65,6 +65,8 @@ app.put('/user/[0-9]', user.update);
 //保存数据
 app.post('/user', user.store);
 
+app.get('/user/:id', user.show);
+
 
 
 

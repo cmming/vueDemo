@@ -2,6 +2,15 @@
 
 > 定义项目的准备材料
 
+```
+项目浏览器兼容
+由于外部的框架布局在中使用了 flex 所以式不支持 ie9的 
+ie>=10
+
+```
+
+
+
 ## 1、数据mock
 
 > 尽量模拟更多、更灵活的数据。采用 express结合mockjs来生成模拟的数据，express负责根据请求参数做出相应的逻辑。mockjs作为数据的工厂函数，产生更加逼真的数据。
@@ -99,8 +108,8 @@ cnpm i sass-loader node-sass svg-sprite-loader -D
 
 - [x]  1.支持 filter ,表格字段转换
 - [x]  2.支持 自定义事件
-- [x]  3.分页 但是小屏幕显示有问题
-- [ ]  4.搜索区域
+- [x]  3.分页 <font color=red>但是小屏幕显示有问题</font>
+- [x]  4.搜索区域
 
 
 ### 5、2 表单
@@ -136,3 +145,25 @@ cnpm i sass-loader node-sass svg-sprite-loader -D
 500：Internal server error，通常我们并不会显示返回这个状态码，除非程序异常中断
 503：Service unavailable，一般也不会显示返回，通常用于排查问题用
 ```
+
+## 待办事件
+
+ - [ ] 将模型中的 搜索区域和表单区域 以及列表区域镜像整合。使用一个生成数据模型的类进行自动处理
+ - [ ] 将扫描器进行整理，每个模块编写appinfo.js 的注册文件，扫描器将根据模块的配置文件进行模块的自动加载
+
+
+## 问题记录
+
+###  <font color=red>文件上传模块在ie 10 11 都有问题  </font>
+
+```
+"对象不支持“includes”属性或方法"
+```
+![iebug](./images/bugUploadFile.png)
+
+
+###  <font color=red>打包后的文件chunk有问题，没有懒加载  </font>
+
+
+
+

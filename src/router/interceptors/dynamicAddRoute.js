@@ -1,9 +1,8 @@
 import store from '@/store'
 
-const whiteList = ['/errorPage/401', '/errorPage/404','/404','/401']
-// eslint-disable-next-line
-export default function dynamicAddRoute(to, from, next, router, addRoutesAfter) {
+const whiteList = ['/errorPage/401', '/errorPage/404', '/404', '/401']
     // eslint-disable-next-line
+export default function dynamicAddRoute(to, from, next, router, addRoutesAfter) {
     if (_.indexOf(whiteList, to.path) === -1) {
         if (!router.options.isLoad) {
             store.dispatch('getUserInfo').then((res) => {
@@ -12,18 +11,18 @@ export default function dynamicAddRoute(to, from, next, router, addRoutesAfter) 
                 router.addRoutes(routes)
                 let menus = fnAddDynamicMenu(res.routerList)
                 store.dispatch('setUserMenu', menus)
-                //动态路由加载完成后
+                    //动态路由加载完成后
                 addRoutesAfter(router)
                 router.options.isLoad = true
-                //确保加载完成
-                next({ ...to, replace: true })
-                // eslint-disable-next-line
+                    //确保加载完成
+                next({...to, replace: true })
+                    // eslint-disable-next-line
             }).catch(() => {
                 //加载动态路由失败
                 addRoutesAfter(router)
                 router.options.isLoad = true
-                //确保加载完成
-                next({ ...to, replace: true })
+                    //确保加载完成
+                next({...to, replace: true })
             })
 
         } else {
@@ -44,10 +43,10 @@ function fnAddDynamicRoutes(dynamicRoutes) {
                 // 3.捕获不存在的组件给其 一个一定存在的组件
                 let component = val['component']
                 val['component'] = () => {
-                    return import(`@/${component}`)
+                    return import (`@/${component}`)
                         .then((component) => { return component })
-                        .catch(() => import('@/views/errorPage/404'))
-
+                        .catch(() =>
+                            import ('@/views/errorPage/404'))
                 }
                 if (val.children && val.children.length >= 1) {
                     importCompent(val.children)
@@ -75,14 +74,18 @@ function fnAddDynamicRoutes(dynamicRoutes) {
 
 function fnAddDynamicMenu(dynamicMenu) {
     let dynamicMenuTmp = [...dynamicMenu]
+
     function fnAddMenu(dynamicMenuTmps) {
-        dynamicMenuTmps.map(val => {
-            // eslint-disable-next-line
-            _.unset(val, 'component')
-            if (val.children && val.children.length >= 1) {
-                fnAddMenu(val.children)
+        dynamicMenuTmps.map((val) => {
+            if (val.meta.type === 'menu' && !val.meta.hidden) {
+                _.unset(val, 'component')
+                if (val.children && val.children.length >= 1) {
+                    fnAddMenu(val.children)
+                } else {
+                    val['children'] = []
+                }
             } else {
-                val['children'] = []
+                _.pull(dynamicMenuTmps, val)
             }
         })
     }

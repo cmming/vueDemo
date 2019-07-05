@@ -1,18 +1,17 @@
 // 根据响应的数据 弹出相对于的消息
 import httpStatus from '@/config/statusCode'
-import commonConfig from '@/config/commonConfig'
+import globalConfig from '@/config/globalConfig'
 import {
     Notification
 } from 'element-ui'
 import i18n from '@/lang/index'
-
 
 function openNotificationWithIcon(type, langId) {
     Notification({
         // title: i18n.messages[i18n.locale]['backstage']['response']['success']['title'],
         message: i18n.messages[i18n.locale]['response'][langId],
         type: type,
-        duration: commonConfig.notificationDuration
+        duration: globalConfig.notificationDuration
     });
 }
 

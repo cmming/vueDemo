@@ -3,6 +3,7 @@ export default {
     lang: {
         table: {
             columns: {
+                id: "编号",
                 name: "名称",
                 age: "年龄",
 

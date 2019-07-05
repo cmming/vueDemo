@@ -129,6 +129,9 @@ export default {
         .catch(() => {
         });
     },
+    editItem(row){
+      this.$emit('editItem',row)
+    },
     handleSelectionChange(val) {
       this.$emit('handleSelectionChange',val)
       // console.log(val)

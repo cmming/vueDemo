@@ -2,12 +2,12 @@ import user from "../model/index.model";
 import requestMap from "@/api/requestMap";
 
 const state = {
-    user: user
+    model: user
 }
 
 const getters = {
     user: state => {
-        return state.user
+        return state.model
     }
 }
 
@@ -15,6 +15,9 @@ const getters = {
 const mutations = {
     GET_USER_LIST: (state, data) => {
         state.model.table.data = data
+    },
+    SET_USER_FORM: (state, data) => {
+        state.model.form.model = data
     },
 }
 
@@ -34,7 +37,7 @@ const actions = {
     },
     // DELETE_USER
     // eslint-disable-next-line
-    deleteUser({ }, params) {
+    deleteUser({}, params) {
         return new Promise((resolve, reject) => {
             requestMap('DELETE_USER', params).then(response => {
                 // commit('DELETE_USER', response.data);
@@ -57,11 +60,23 @@ const actions = {
             })
         })
     },
+    //SHOW_USER
+    // eslint-disable-next-line
+    showUser({ commit }, params) {
+        return new Promise((resolve, reject) => {
+            requestMap('SHOW_USER', params).then(response => {
+                commit('SET_USER_FORM', response.data);
+                resolve(response)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
 }
 
 
 export default {
-    user:{
+    user: {
         state,
         getters,
         mutations,

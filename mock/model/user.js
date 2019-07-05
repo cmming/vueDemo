@@ -28,7 +28,7 @@ const user = {
             const tmp = {
                 'id|+1': i,
                 name: Random.name(),
-                age:Random.natural( 16, 26 )
+                age: Random.natural(16, 26)
             };
             result.data.push(tmp)
 
@@ -41,6 +41,14 @@ const user = {
     store: (req, res) => {
         console.log(req.body)
         res.status(201).json(Mock.mock(req.body));
+    },
+    show: (req, res) => {
+        let result = {
+            id:req.params.id,
+            name: Random.name(),
+            age: Random.natural(16, 26)
+        }
+        res.status(200).json(result);
     }
 }
 

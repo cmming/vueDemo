@@ -14,5 +14,10 @@ export default {
         method: "post",
         hasData: true,
     },
+    SHOW_USER: {
+        url: "/user",
+        method: "get",
+        hasData: false,
+    },
 
 }
