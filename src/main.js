@@ -17,10 +17,9 @@ import './icons' // icon
 import './components/index'
 import './filter/index';
 Vue.config.productionTip = false
-
 Vue.use(Element, {
     // size: Cookies.get('size') || 'medium' // set element-ui default size
-    size: 'medium'
+    size: store.getters.size
 })
 
 new Vue({

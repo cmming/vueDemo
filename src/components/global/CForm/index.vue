@@ -102,13 +102,7 @@ export default {
       this.$store.dispatch(this.model.form.config.show_url, {
         resource_id: _.values(this.$route.params)[0]
       });
-    } else {
     }
-    console.log(
-      _.split(this.$route.path, "/").indexOf("update"),
-      _.values(this.$route.params)[0],
-      JSON.stringify(this.$route.params) === "{}"
-    );
   },
   //
   computed: {
@@ -119,7 +113,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$store
-            .dispatch(this.model.form.config.api_url, this.model.form.model)
+            .dispatch(this.model.form.config.store_url, this.model.form.model)
             .then(res => {
               if (res.status === 20) {
                 //成功创建数据的回调

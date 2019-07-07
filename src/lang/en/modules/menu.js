@@ -21,13 +21,21 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
 
 
 const menuList = {
-    'dashborad': 'dashborad',
+    'dashborad': {
+        'title': 'dashborad',
+        'dashborad':"dashborad",
+    },
     'ui': {
         'title': 'ui',
         'table': 'table',
         'form': 'form',
         'file': 'file upload',
         'imgCropper':"img cropper"
+    },
+    'error':{
+        'title': 'error page',
+        '404':'page not found',
+        '401':'premission deny'
     },
     ...modules
 }

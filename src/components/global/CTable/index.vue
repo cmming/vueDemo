@@ -114,7 +114,7 @@ export default {
       )
         .then(() => {
           const DELETE_KEY =
-            row[this.model.table.commonAction.delete.delete_key];
+            row[this.model.table.commonAction.delete.key];
           this.$store
             .dispatch(this.model.table.commonAction.delete.action_url, {
               resource_id: DELETE_KEY

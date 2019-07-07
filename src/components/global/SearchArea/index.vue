@@ -77,7 +77,7 @@ export default {
           // console.log(this.model.searchArea.model)
           // alert("submit!");
           this.$store
-            .dispatch(this.model.searchArea.config.api_url, this.model.searchArea.model)
+            .dispatch(this.model.searchArea.config.search_url, this.model.searchArea.model)
             .then(res => {
               if (res.status === 20) {
                 //成功创建数据的回调

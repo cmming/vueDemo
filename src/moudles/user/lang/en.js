@@ -3,6 +3,7 @@ export default {
     lang: {
         table: {
             columns: {
+                id: "id",
                 name: "name",
                 age: "age",
 

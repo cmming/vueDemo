@@ -2,9 +2,9 @@ export default{
     'Created':{
         'post':'post'
     },
-    'title':'提示',
-    'Created.post':'数据创建成功',
-    'No Content.put':'数据跟新成功',
-    'No Content.delete':'数据删除成功',
-    'Not Found':'接口不存在',
+    'title':'prompt',
+    'Created.post':'Data creation succeeded',
+    'No Content.put':'Data update succeeded',
+    'No Content.delete':'Data deletion succeeded',
+    'Not Found':'Interface does not exist',
 }

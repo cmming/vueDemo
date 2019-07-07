@@ -50,7 +50,7 @@
           :icon-class="menu.children[0].meta.icon"
           class-name="m-rigth-sm"
         />
-        <span slot="title">{{$t('menu.'+menu.children[0].meta.title)}}</span>
+        <span slot="title">{{$t('menu.'+menu.meta.title+'.'+menu.children[0].meta.title)}}</span>
       </el-menu-item>
     </template>
   </el-menu>

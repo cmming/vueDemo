@@ -18,19 +18,15 @@ export default {
             show: true,
             label_key: 'action',
             list: { action_url: 'getBaseList', },
-            delete: { show: true, title_key: 'delete_btn', action_url: 'deleteBase', icon_name: '', delete_key: 'id' },
-            edit: { show: true, title_key: 'edit', action_url: 'deleteBase', icon_name: '', delete_key: 'id' },
+            delete: { show: true, title_key: 'delete_btn', action_url: 'deleteBase', icon_name: '', key: 'id' },
+            edit: { show: true, title_key: 'edit', action_url: 'deleteBase', icon_name: '', key: 'id' },
             width: '350px',
-            columns: [
-                { title_key: 'delete', action_url: '', icon_name: '' },
-                { title_key: 'edit', action_url: '', icon_name: '' },
-            ],
         }
     },
 
     searchArea: {
         config: {
-            api_url: "getBaseList"
+            search_url: "getBaseList"
         },
         model: {
             page: 1,
@@ -57,7 +53,7 @@ export default {
 
     form: {
         config: {
-            api_url: "storeBase"
+            store_url: "storeBase"
         },
         model: {
             email: "",

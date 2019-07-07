@@ -3,20 +3,13 @@ export default [{
         component: () =>
             import ('@/views/errorPage/401'),
         name: 'golbalError401',
-        meta: { title: 'form' }
+        meta: { model:'error',title: '401' }
     },
     {
         path: '/404',
         component: () =>
             import ('@/views/errorPage/404'),
         name: 'golbalError404',
-        meta: { title: 'table' }
-    },
-    // {
-    //     path: '*',
-    //     component: () =>
-    //         import ('@/views/errorPage/404'),
-    //     name: 'golbalError404',
-    //     meta: { title: 'table' }
-    // }
+        meta: { model:'error',title: '404' }
+    }
 ]
