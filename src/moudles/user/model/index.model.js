@@ -6,7 +6,9 @@ class User extends ModelGenerator {
         let columns = [
             { label_key: 'id', prop: 'id', type: 'input', default_value: '', data_roles: '', show_table: true, show_form: false, show_update_form: false, show_search: false, input_type: '', placeholder: '' },
             { label_key: 'name', prop: 'name', type: 'input', default_value: '', data_roles: 'required', show_table: true, show_form: true, show_update_form: true, show_search: true, input_type: '', placeholder: '' },
-            { label_key: 'age', prop: 'age', type: 'input', default_value: '', data_roles: 'validateNumberRequired', show_table: true, show_form: true, show_update_form: true, show_search: false, input_type: 'number', placeholder: '' },
+            { label_key: 'email', prop: 'email', type: 'input', default_value: '', data_roles: 'required|validateEmail', show_table: true, show_form: true, show_update_form: true, show_search: false, input_type: '', placeholder: '',can_update:false },
+            // password
+            { label_key: 'password', prop: 'password', type: 'input', default_value: '', data_roles: 'required', show_table: false, show_form: true, show_update_form: false, show_search: false, input_type: 'password', placeholder: '' },
         ]
         super(model_name, columns)
 
@@ -23,7 +25,7 @@ class User extends ModelGenerator {
 
         this.form.config.store_url = 'storeUser'
         this.form.config.show_url = 'showUser'
-        this.form.config.update_url = 'showUser'
+        this.form.config.update_url = 'updateUser'
     }
 
 }

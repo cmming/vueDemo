@@ -5,7 +5,7 @@ export default {
             columns: {
                 id: "编号",
                 name: "名称",
-                age: "年龄",
+                email: '邮箱',
 
             }
         },
@@ -13,9 +13,12 @@ export default {
             name: {
                 label: '名称'
             },
-            age: {
-                label: '年龄'
+            email: {
+                label: '邮箱'
             },
+            password:{
+                label: '密码'
+            }
 
         }
     }

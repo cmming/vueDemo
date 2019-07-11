@@ -1,6 +1,6 @@
 export default {
     GET_USER_LIST: {
-        url: "/users",
+        url: "/user",
         method: "get",
         hasData: true,
     },
@@ -12,6 +12,11 @@ export default {
     STORE_USER: {
         url: "/user",
         method: "post",
+        hasData: true,
+    },
+    UPDATE_USER: {
+        url: "/user",
+        method: "put",
         hasData: true,
     },
     SHOW_USER: {

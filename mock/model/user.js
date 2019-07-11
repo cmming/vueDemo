@@ -48,7 +48,7 @@ const user = {
             name: Random.name(),
             age: Random.natural(16, 26)
         }
-        res.status(200).json(result);
+        res.status(200).json({data:result});
     }
 }
 

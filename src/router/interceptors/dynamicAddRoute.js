@@ -1,6 +1,6 @@
 import store from '@/store'
 
-const whiteList = ['/errorPage/401', '/errorPage/404', '/404', '/401']
+const whiteList = ['/errorPage/401', '/errorPage/404', '/404', '/401','/login']
     // eslint-disable-next-line
 export default function dynamicAddRoute(to, from, next, router, addRoutesAfter) {
     if (_.indexOf(whiteList, to.path) === -1) {
@@ -41,12 +41,13 @@ function fnAddDynamicRoutes(dynamicRoutes) {
                 //1.必须经过转换成一个零时变量 使用表达式 import
                 // 2.同时import 前面必须接一个字符串 否则不认识
                 // 3.捕获不存在的组件给其 一个一定存在的组件
+                // 4.prefetch  webpackPrefetch  空闲时才会下载
                 let component = val['component']
                 val['component'] = () => {
-                    return import (`@/${component}`)
+                    return import (/* webpackPrefetch: true */`@/${component}`)
                         .then((component) => { return component })
                         .catch(() =>
-                            import ('@/views/errorPage/404'))
+                            import (/* webpackPrefetch: true */'@/moudles/errorPage/views/404'))
                 }
                 if (val.children && val.children.length >= 1) {
                     importCompent(val.children)
@@ -77,7 +78,7 @@ function fnAddDynamicMenu(dynamicMenu) {
 
     function fnAddMenu(dynamicMenuTmps) {
         dynamicMenuTmps.map((val) => {
-            if (val.meta.type === 'menu' && !val.meta.hidden) {
+            if (val.meta.type === 'menu') {
                 _.unset(val, 'component')
                 if (val.children && val.children.length >= 1) {
                     fnAddMenu(val.children)

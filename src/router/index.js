@@ -8,8 +8,8 @@ Vue.use(Router)
 /* Router Modules */
 import routers from './map/index'
 const createRouter = () => new Router({
-  // mode: 'hash',
-  mode: 'history',
+  mode: 'hash',
+  // mode: 'history',
   routes: routers,
   isLoad: false
 })

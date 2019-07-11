@@ -13,14 +13,14 @@ export default [{
     children: [{
             path: '401',
             component: () =>
-                import ('@/views/errorPage/401'),
+                import ('@/moudles/errorPage/views/401'),
             name: '401',
             meta: { model:'error',title: '401' }
         },
         {
             path: '404',
             component: () =>
-                import ('@/views/errorPage/404'),
+                import ('@/moudles/errorPage/views/404'),
             name: '404',
             meta: { model:'error',title: '404' }
         }

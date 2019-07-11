@@ -1,6 +1,6 @@
 import user from "../model/index.model";
 import requestMap from "@/api/requestMap";
-
+// console.log(user)
 const state = {
     model: user
 }
@@ -50,7 +50,7 @@ const actions = {
 
     //STORE_USER
     // eslint-disable-next-line
-    storeUser({ }, params) {
+    storeUser({}, params) {
         return new Promise((resolve, reject) => {
             requestMap('STORE_USER', params).then(response => {
                 // commit('DELETE_USER', response.data);
@@ -65,7 +65,18 @@ const actions = {
     showUser({ commit }, params) {
         return new Promise((resolve, reject) => {
             requestMap('SHOW_USER', params).then(response => {
-                commit('SET_USER_FORM', response.data);
+                commit('SET_USER_FORM', response.data.data);
+                resolve(response)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
+
+    // eslint-disable-next-line
+    updateUser({}, params) {
+        return new Promise((resolve, reject) => {
+            requestMap('UPDATE_USER', params).then(response => {
                 resolve(response)
             }).catch(error => {
                 reject(error)

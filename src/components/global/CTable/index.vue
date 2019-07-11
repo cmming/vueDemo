@@ -7,6 +7,7 @@
       style="width: 100%"
       @selection-change="handleSelectionChange"
       :border="true"
+      v-loading="loading"
     >
       <!-- 多选框 -->
       <el-table-column type="selection"></el-table-column>
@@ -76,6 +77,7 @@
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
   name: "CTable",
   props: {
@@ -84,6 +86,9 @@ export default {
       required: true,
       default: () => {}
     }
+  },
+  computed:{
+    ...mapGetters(["loading"])
   },
   data() {
     return {

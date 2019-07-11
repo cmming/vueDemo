@@ -8,12 +8,6 @@ import Colums from './colums.js'
 class ModelGenerator {
 
     constructor(model_name, columns, primary_key = 'id') {
-        // let temp = {
-        //     config: {},
-        //     model: {},
-        //     items: [],
-        //     rules: {},
-        // }
         this.model_name = model_name
         this.columns = columns
         this.table = {
@@ -24,12 +18,14 @@ class ModelGenerator {
         this.searchArea = {
             config: {},
             model: {},
+            base_model: {},
             items: [],
             rules: {},
         }
         this.form = {
             config: {},
             model: {},
+            base_model: {},
             items: [],
             rules: {},
         }
@@ -46,14 +42,18 @@ class ModelGenerator {
                     // console.log(..._.values(val))
                     let columsGenerator = new Colums(..._.values(val))
 
-                    this.table.columns.push(columsGenerator.createTableColumns())
+                    let columnsItem = columsGenerator.createTableColumns()
+                    columnsItem&&this.table.columns.push(columnsItem)
                     this.table.commonAction = this.tableCommonActionGenerator()
 
                     this.form.model = {...this.form.model,...columsGenerator.createFormModel()}
-                    columsGenerator.createFormItems()&&this.form.items.push(columsGenerator.createFormItems())
+                    this.form.base_model = {...this.form.base_model,...columsGenerator.createFormModel()}
+                    let formItem = columsGenerator.createFormItems()
+                    formItem&&this.form.items.push(formItem)
                     this.form.rules = {...this.form.rules,...columsGenerator.createFormRules()}
 
                     this.searchArea.model = {...this.searchArea.model,...columsGenerator.createSearchAreaModel()}
+                    this.searchArea.base_model = {...this.searchArea.base_model,...columsGenerator.createSearchAreaModel()}
                     columsGenerator.createSearchAreaItems()&&this.searchArea.items.push(columsGenerator.createSearchAreaItems())
                     //TODO 搜索区域没有添加验证规则
                     this.searchArea.rules = {}

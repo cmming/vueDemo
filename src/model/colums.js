@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { validateNumber } from "@/utils/validate";
+import { validateNumber,validateEmail } from "@/utils/validate";
 
 class Colums {
     /**
@@ -17,7 +17,7 @@ class Colums {
      * @param {string} placeholder 数据录入时候选择提示用户的信息
      * {label_key:'',prop:'',type:'input',default_value:'',data_roles:[],show_table:true,show_form:true,show_update_form:true,show_search:false,input_type:'',placeholder:''}
      */
-    constructor(label_key, prop, type, default_value, data_roles, show_table = true, show_form = true, show_update_form = true, show_search = false, input_type = '', placeholder = '') {
+    constructor(label_key, prop, type, default_value, data_roles, show_table = true, show_form = true, show_update_form = true, show_search = false, input_type = '', placeholder = '',can_update=undefined) {
         this.label_key = label_key
         this.prop = prop
         this.type = type
@@ -29,6 +29,7 @@ class Colums {
         this.show_search = show_search
         this.input_type = input_type
         this.placeholder = placeholder
+        this.can_update = can_update
     }
 
     // 生成列表的数据模型
@@ -54,10 +55,13 @@ class Colums {
         if (this.show_form) {
             result = {
                 label_key: this.label_key,
+                error:'',
                 prop: this.prop,
                 type: this.type,
                 input_type: this.input_type,
-                placeholder: this.placeholder
+                placeholder: this.placeholder,
+                show_update_form:this.show_update_form,
+                can_update:this.can_update!==undefined?this.can_update:this.show_update_form
             }
         }
 
@@ -154,6 +158,12 @@ class Colums {
                         break;
                     case 'validateNumber':
                         result.push({ validator: validateNumber, trigger: 'blur', message_key: "validateNumber" })
+                        break;
+                    case 'validateEmail':
+                        result.push({ validator: validateEmail, trigger: 'blur', message_key: "validateEmail" })
+                        break;
+                    case 'validateEmailReqiured':
+                        result.push({ validator: validateEmail,required: true, trigger: 'blur', message_key: "validateEmailReqiured" })
                         break;
                     default:
                         break;

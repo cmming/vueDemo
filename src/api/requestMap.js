@@ -1,5 +1,5 @@
 import request from './request'
-import API_TYPE from './index'
+import API_TYPE from './loadApi'
 
 
 export default function requestMap(apiKey, data) {
@@ -21,6 +21,16 @@ export default function requestMap(apiKey, data) {
             method: API_TYPE[apiKey]['method'],
             params: tmpData,
         };
+    }else{
+        res = {
+            url: API_TYPE[apiKey]['url'],
+            method: API_TYPE[apiKey]['method'],
+        };
+    }
+
+    // 自定义 baseurl
+    if(API_TYPE[apiKey]['baseURL']){
+        res = {...res,baseURL:API_TYPE[apiKey]['baseURL']}
     }
 
     return request(res)

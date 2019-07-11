@@ -7,7 +7,8 @@ const state = {
     },
     language: storage.get('app-language') || getLanguage(),
     // small  medium mini default
-    size: storage.get('size') || 'medium'
+    size: storage.get('size') || 'medium',
+    loading: false
 }
 
 const getters = {
@@ -20,6 +21,9 @@ const getters = {
     size: state => {
         return state.size
     },
+    loading: state => {
+        return state.loading
+    },
 }
 
 
@@ -27,11 +31,11 @@ const mutations = {
     TOGGLE_SIDEBAR: state => {
         state.menu.collapse = !state.menu.collapse
         storage.set('menuCollapse', state.menu.collapse)
-        // if (state.menu.collapse) {
-        //     storage.set('menuCollapse', 1)
-        // } else {
-        //     storage.set('menuCollapse', 0)
-        // }
+            // if (state.menu.collapse) {
+            //     storage.set('menuCollapse', 1)
+            // } else {
+            //     storage.set('menuCollapse', 0)
+            // }
     },
     SET_LANGUAGE: (state, data) => {
         state.language = data
@@ -41,6 +45,12 @@ const mutations = {
     SET_SIZE: (state, data) => {
         state.size = data
         storage.set('size', data)
+    },
+    SHOW_LOADING: (state) => {
+        state.loading = true
+    },
+    HIDE_LOADING: (state) => {
+        state.loading = false
     }
 }
 
@@ -54,7 +64,13 @@ const actions = {
     },
     setSize({ commit }, params) {
         commit('SET_SIZE', params)
-    }
+    },
+    showLoading({ commit }, params) {
+        commit('SHOW_LOADING', params)
+    },
+    hideLoading({ commit }, params) {
+        commit('HIDE_LOADING', params)
+    },
 }
 
 

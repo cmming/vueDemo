@@ -13,7 +13,7 @@
     <template v-for="(menu,key) in menuList">
       <!-- 二级菜单 -->
       <el-submenu
-        v-if="menu.children&&menu.children.length>1"
+        v-if="!menu.meta.hidden&&menu.children&&menu.children.length>1"
         :index="menu.path"
         :data-d="menu.path"
         :key="key"
@@ -26,23 +26,26 @@
           <span>{{$t('menu.'+menu.meta.title+'.title')}}</span>
         </template>
 
-        <el-menu-item
-          v-for="(menuItem,k) in menu.children"
-          :key="+key+'-'+k"
-          :index="menu.path+'/'+menuItem.path"
-          :data-d="menu.path+'/'+menuItem.path"
-        >
-          <svg-icon
-            :icon-class="menuItem.meta.icon"
-            class-name="m-rigth-sm"
-          />
-          <span>{{$t('menu.'+menu.meta.title+'.'+menuItem.meta.title)}}</span>
-        </el-menu-item>
+        <template v-for="(menuItem,k) in menu.children">
+          <template v-if="!menuItem.meta.hidden">
+            <el-menu-item
+              :key="+key+'-'+k"
+              :index="menu.path+'/'+menuItem.path"
+              :data-d="menu.path+'/'+menuItem.path"
+            >
+              <svg-icon
+                :icon-class="menuItem.meta.icon"
+                class-name="m-rigth-sm"
+              />
+              <span>{{$t('menu.'+menu.meta.title+'.'+menuItem.meta.title)}}</span>
+            </el-menu-item>
+          </template>
+        </template>
       </el-submenu>
 
       <!-- 一级菜单 -->
       <el-menu-item
-        v-if="!menu.children||menu.children.length==1"
+        v-if="!menu.meta.hidden&&!menu.children||menu.children.length==1"
         :index="menu.path+'/'+menu.children[0].path"
         :key="key"
       >
@@ -62,7 +65,7 @@ export default {
   props: {
     menuList: {
       type: Array,
-      default: ()=>[]
+      default: () => []
     }
   },
   computed: {

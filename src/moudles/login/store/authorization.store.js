@@ -47,8 +47,10 @@ const actions = {
 
 
 export default {
-    state,
-    getters,
-    mutations,
-    actions
+    authorization: {
+        state,
+        getters,
+        mutations,
+        actions
+    }
 }

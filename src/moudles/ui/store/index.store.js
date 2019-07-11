@@ -34,7 +34,7 @@ const actions = {
     },
     // DELETE_BASE
     // eslint-disable-next-line
-    deleteBase({ }, params) {
+    deleteBase({}, params) {
         return new Promise((resolve, reject) => {
             requestMap('DELETE_BASE', params).then(response => {
                 // commit('DELETE_BASE', response.data);
@@ -47,7 +47,7 @@ const actions = {
 
     //STORE_BASE
     // eslint-disable-next-line
-    storeBase({ }, params) {
+    storeBase({}, params) {
         return new Promise((resolve, reject) => {
             requestMap('STORE_BASE', params).then(response => {
                 // commit('DELETE_BASE', response.data);
@@ -61,8 +61,10 @@ const actions = {
 
 
 export default {
-    state,
-    getters,
-    mutations,
-    actions
+    ui: {
+        state,
+        getters,
+        mutations,
+        actions
+    }
 }

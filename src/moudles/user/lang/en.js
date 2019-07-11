@@ -5,7 +5,7 @@ export default {
             columns: {
                 id: "id",
                 name: "name",
-                age: "age",
+                email: "email",
 
             }
         },
@@ -13,10 +13,13 @@ export default {
             name: {
                 label: 'name'
             },
-            age: {
-                label: 'age'
+            email: {
+                label: 'email'
             },
+            password:{
+                label: 'password'
+            }
 
         }
     }
-} 
+}

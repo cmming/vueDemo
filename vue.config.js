@@ -14,9 +14,16 @@ module.exports = {
         proxy: {
             '/api': {
                 ws: false,
-                target: 'http://localhost:3777/',
+                // target: 'http://localhost:3777/',
+                target: 'http://192.168.50.58/api/',
                 changeOrigin: true,
                 pathRewrite: { '^/api': '', }
+            },
+            '/mock': {
+                ws: false,
+                target: 'http://localhost:3777/',
+                changeOrigin: true,
+                pathRewrite: { '^/mock': '', }
             }
         }
     },

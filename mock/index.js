@@ -52,12 +52,12 @@ app.post('/file/chunk',multer({ dest: '/tmp/'}).array('chunk'), file.chunk);
 
 
 ///获取用户信息
-app.post('/authorization/user/info', authorization.info);
+app.get('/authorization/user/info', authorization.info);
 
 
 // 用户管理模块
 
-app.get('/users', user.list);
+app.get('/user', user.list);
 //删除数据
 app.delete('/user/[0-9]', user.list);
 //更新数据
