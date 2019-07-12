@@ -17,7 +17,7 @@ export default {
     DELETE_ROUTER: {
         url: "router",
         method: "delete",
-        hasData: false,
+        hasData: true,
     },
     STORE_ROUTER: {
         url: "/router",

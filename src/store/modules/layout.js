@@ -8,7 +8,8 @@ const state = {
     language: storage.get('app-language') || getLanguage(),
     // small  medium mini default
     size: storage.get('size') || 'medium',
-    loading: false
+    loading: false,
+    axiosPromiseArr:[]
 }
 
 const getters = {
@@ -23,6 +24,9 @@ const getters = {
     },
     loading: state => {
         return state.loading
+    },
+    axiosPromiseArr: state => {
+        return state.axiosPromiseArr
     },
 }
 
@@ -51,7 +55,13 @@ const mutations = {
     },
     HIDE_LOADING: (state) => {
         state.loading = false
-    }
+    },
+    ADD_AXIOS:(state,data)=>{
+        state.axiosPromiseArr.push(data)
+    },
+    DELETE_AXIOS:(state,index)=>{
+        delete state.axiosPromiseArr[index]
+    },
 }
 
 
@@ -70,6 +80,12 @@ const actions = {
     },
     hideLoading({ commit }, params) {
         commit('HIDE_LOADING', params)
+    },
+    storeAxios({ commit }, params) {
+        commit('ADD_AXIOS', params)
+    },
+    deleteAxios({ commit }, params) {
+        commit('DELETE_AXIOS', params)
     },
 }
 

@@ -57,7 +57,7 @@ const actions = {
     updateRole({}, params) {
         return new Promise((resolve, reject) => {
             requestMap('UPDATE_ROLE', params).then(response => {
-                resolve(response.data)
+                resolve(response)
             }).catch(error => {
                 reject(error)
             })
@@ -68,7 +68,7 @@ const actions = {
     addRole({}, params) {
         return new Promise((resolve, reject) => {
             requestMap('STORE_ROLE', params).then(response => {
-                resolve(response.data)
+                resolve(response)
             }).catch(error => {
                 reject(error)
             })
@@ -78,7 +78,7 @@ const actions = {
     deleteRole({}, params) {
         return new Promise((resolve, reject) => {
             requestMap('DELETE_ROLE', params).then(response => {
-                resolve(response.data)
+                resolve(response)
             }).catch(error => {
                 reject(error)
             })

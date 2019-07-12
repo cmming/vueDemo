@@ -55,6 +55,17 @@ const actions = {
             })
         })
     },
+    // eslint-disable-next-line
+    deleteRouter({}, params) {
+        return new Promise((resolve, reject) => {
+            console.log(params)
+            requestMap('DELETE_ROUTER', params).then(response => {
+                resolve(response.data)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
    
 }
 

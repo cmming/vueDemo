@@ -1,6 +1,6 @@
 <template>
   <el-card>
-    <c-form :model="role"></c-form>
+    <c-form :model="role" @onSucces="onSucces"></c-form>
   </el-card>
 </template>
 <script>
@@ -9,6 +9,11 @@ export default {
   computed: {
     ...mapGetters(["role"])
   },
+  methods:{
+    onSucces(){
+      this.$router.push('/admin/systemManager/role')
+    }
+  }
 };
 </script>
 

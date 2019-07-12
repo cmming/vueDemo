@@ -5,4 +5,7 @@ export default {
     "reset": {
         "label":"重置"
     },
+    "add": {
+        "label":"添加"
+    },
 }

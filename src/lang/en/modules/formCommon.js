@@ -5,4 +5,7 @@ export default {
     "reset": {
         "label":"reset"
     },
+    "add": {
+        "label":"add"
+    },
 }

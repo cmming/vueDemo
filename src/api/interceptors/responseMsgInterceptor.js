@@ -2,6 +2,8 @@
 import httpStatus from '@/config/statusCode'
 import globalConfig from '@/config/globalConfig'
 import store from '@/store'
+import router from '@/router/index'
+import { cancelRequest } from '@/router/interceptors/index'
 import {
     Notification
 } from 'element-ui'
@@ -28,7 +30,13 @@ export default function responseMsgInterceptorHandle(response) {
     } else if (response.status === httpStatus.UNAUTHORIZED) {
         if (response.data.status_code && response.data.status_code == 401) {
             store.dispatch('refreshToken').then(() => {
-                // TODO 重新上次的请求
+                //取消所有的请求
+                cancelRequest()
+                // 刷新当前页面
+                router.go({
+                    path: _.replace(window.location.hash,'#',''),
+                    force: true
+                })
             })
         } else {
             openNotificationWithIcon('error', response.statusText)

@@ -39,7 +39,7 @@
         v-if="model.table.commonAction.show"
         align="center"
         :label="$t('tableAction.'+model.table.commonAction.label_key)"
-        :width="model.table.commonAction.width?model.table.commonAction.width:'100px'"
+        :width="model.table.commonAction.width?model.table.commonAction.width:'auto'"
       >
         <template slot-scope="scope">
           <!-- 删除 -->
@@ -126,7 +126,7 @@ export default {
             })
             .then(res => {
               //
-              if (res && res.status === 204) {
+              if (res && res.status === 200) {
                 this.list()
               }
             });

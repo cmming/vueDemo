@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { dynamicAddRoute, mathNotFound, changePageTitle } from './interceptors/index'
+import { dynamicAddRoute, mathNotFound, changePageTitle,cancelRequest } from './interceptors/index'
 
 Vue.use(Router)
 
@@ -27,6 +27,7 @@ export function resetRouter() {
 router.beforeEach((to, from, next) => {
 
   changePageTitle(to)
+  cancelRequest()
   dynamicAddRoute(to, from, next, router, (router) => {
     mathNotFound(router)
   })

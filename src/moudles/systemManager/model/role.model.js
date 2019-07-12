@@ -19,12 +19,15 @@ class Role extends ModelGenerator {
         this.table.commonAction.list.action_url = 'getRoles'
         this.table.commonAction.delete.action_url = 'deleteRole'
         this.table.commonAction.edit.action_url = 'addRole'
+        this.model.table.commonAction.width = '400px'
 
         this.searchArea.config.search_url = 'getRoles'
+        this.searchArea.config.is_add = true
 
         this.form.config.store_url = 'addRole'
         this.form.config.show_url = 'showRole'
         this.form.config.update_url = 'updateRole'
+        this.form.config.label_width = '150px'
     }
 
 

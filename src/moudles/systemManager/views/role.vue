@@ -1,7 +1,10 @@
 <template>
   <div>
     <el-card class="m-bottom-sm search-area">
-      <search-area :model="role"></search-area>
+      <search-area
+        :model="role"
+        @addItem="addItem"
+      ></search-area>
     </el-card>
     <el-card>
       <c-table
@@ -76,7 +79,7 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      configRoleId:'',
+      configRoleId: "",
       defaultProps: {
         children: "children",
         label: "title",
@@ -134,6 +137,9 @@ export default {
           self.dialogVisible = false;
         }
       });
+    },
+    addItem() {
+      this.$router.push("/admin/systemManager/role/store");
     }
   }
 };

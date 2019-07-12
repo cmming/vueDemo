@@ -17,11 +17,14 @@ const service = axios.create({
 })
 
 
-
+const CancelToken = axios.CancelToken;
 service.interceptors.request.use(config => {
     store.dispatch('showLoading')
     config = paramsRequestInterceptors(config)
     config = tokenHandler(config)
+    config.cancelToken = new CancelToken((cancel) => {
+        store.dispatch('storeAxios', cancel)
+    })
     return config
 }, error => {
     store.dispatch('hideLoading')
@@ -36,9 +39,15 @@ service.interceptors.response.use(response => {
     responseMsgInterceptorHandle(response)
     return response;
 }, error => {
-    store.dispatch('hideLoading')
-    responseMsgInterceptorHandle(error.response)
-    return Promise.reject(error.response);
+    if (axios.isCancel(error)) {
+        // 为了终结promise链 就是实际请求 不会走到.catch(rej=>{});这样就不会触发错误提示之类了。
+        return new Promise(() => {});
+    } else {
+        store.dispatch('hideLoading')
+        responseMsgInterceptorHandle(error.response)
+        return Promise.reject(error.response);
+    }
+
 })
 
 export default service

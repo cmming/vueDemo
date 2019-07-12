@@ -5,7 +5,7 @@
     <div class="upload-container">
       <file-upload
         class="table-upload m-rigth-sm"
-        post-action="/api/file/upload"
+        post-action="/mock/file/upload"
         :extensions="extensions"
         :accept="accept"
         :multiple="true"
@@ -16,7 +16,7 @@
         @input-file="inputFile"
         :chunk-enabled="chunkEnabled"
         :chunk="{
-            action: '/api/file/chunk',
+            action: '/mock/file/chunk',
             minSize: chunkMinSize * 1048576,
             maxActive: chunkMaxActive,
             maxRetries: chunkMaxRetries

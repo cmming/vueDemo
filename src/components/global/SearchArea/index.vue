@@ -3,7 +3,6 @@
     :ref="'form_search'+model.model_index"
     :rules="model.searchArea.rules"
     :model="model.searchArea.model"
-    label-width="80px"
     :inline="true"
   >
     <!-- fixed prop 关系到 resetField 是否生效 -->
@@ -51,6 +50,7 @@
         @click="onSubmit('form_search'+model.model_index)"
       >{{$t('formCommon.submit.label')}}</el-button>
       <el-button @click="resetForm('form_search'+model.model_index)">{{$t('formCommon.reset.label')}}</el-button>
+      <el-button v-if="model.searchArea.config.is_add" type="success" @click="addItem">{{$t('formCommon.add.label')}}</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -109,6 +109,9 @@ export default {
           });
         });
       }
+    },
+    addItem(){
+      this.$emit('addItem')
     }
   },
   //

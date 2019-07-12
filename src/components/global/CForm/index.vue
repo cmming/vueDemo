@@ -3,7 +3,7 @@
     :ref="'form_'+model.model_index"
     :rules="model.form.rules"
     :model="model.form.model"
-    label-width="80px"
+    :label-width="model.form.config.label_width?model.form.config.label_width:'80px'"
     v-loading="loading"
   >
     <!-- fixed prop 关系到 resetField 是否生效 -->
@@ -133,19 +133,17 @@ export default {
     onSubmit(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.model.form.items.map(v => {
-            v.error = undefined;
-          });
+          this.clearError()
           let actionUrlAndParams = this.dealSubmitUrlAndParams();
           this.$store
             .dispatch(actionUrlAndParams.action, actionUrlAndParams.params)
             .then(res => {
-              if (res.status === 200) {
+              if (res.status === 201 || res.status === 204) {
                 //成功创建数据的回调
-                this.$emit("on-succes");
+                this.$emit("onSucces");
               } else {
                 //创建失败的回调
-                this.$emit("on-error");
+                this.$emit("onError");
               }
             })
             .catch(error => {
@@ -186,6 +184,11 @@ export default {
 
       return result;
     },
+    clearError() {
+      this.model.form.items.map(v => {
+        v.error = undefined;
+      });
+    },
     dealRules() {
       for (var i in this.model.form.rules) {
         this.model.form.rules[i].map(val => {
@@ -217,6 +220,9 @@ export default {
     //表单添加离开就清空上次填写的数据
     if (this.formStatus === "add") {
       this.resetForm("form_" + this.model.model_index);
+      // 清空所有的错误提示
+      this.$refs["form_" + this.model.model_index].clearValidate();
+      this.clearError()
     }
   },
   //
