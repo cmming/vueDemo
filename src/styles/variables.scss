@@ -4,3 +4,12 @@ $default-bg-color :#545c64;
 $default-bg-color-80 :#545c64*0.8;
 $default-header-bg-color :#fff;
 $default-color :#fff;
+// 
+$menu-bg-color:#545c64;
+$menu-bg-color-80 :#545c64*0.8;
+// the :export directive is the magic sauce for webpack
+// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+:export {
+    menuBg: $menu-bg-color;
+    menuItemBg: $menu-bg-color-80;
+}

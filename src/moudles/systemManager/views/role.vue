@@ -22,13 +22,6 @@
           >
             页面管理
           </el-button>
-          <el-button
-            size="small"
-            type="danger"
-            @click="apiManage(scope.row.id)"
-          >
-            接口管理
-          </el-button>
         </template>
       </c-table>
 
@@ -106,16 +99,12 @@ export default {
         this.dialogVisible = true;
         this.configRoleId = index;
         this.$store.dispatch("getRoleRouter", params).then(res => {
-          console.log(res);
           if (res.status == 200) {
-            self.$store.dispatch("getRouter").then(data => {
-              console.log(self.router, data);
-            });
+            self.$store.dispatch("getRouter")
           }
         });
       }
     },
-    apiManage(data) {},
     editItem(data) {
       this.$router.push("/admin/systemManager/role/update/" + data.id);
     },
@@ -131,7 +120,6 @@ export default {
         resource_id: this.configRoleId,
         ...addItem
       };
-      console.log(paramObj);
       this.$store.dispatch("storeRoleRouter", paramObj).then(res => {
         if (res.status == 204) {
           self.dialogVisible = false;

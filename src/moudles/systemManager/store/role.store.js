@@ -1,6 +1,5 @@
 import role from "../model/role.model";
 import requestMap from "@/api/requestMap";
-console.log(role)
 const state = {
     model: {...role,routers:[]}
 }

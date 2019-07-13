@@ -1,11 +1,12 @@
 <template>
   <!-- @open="handleOpen"
   @close="handleClose"-->
+    <!-- background-color="#545c64" -->
   <el-menu
     :default-active="activeMenu"
     :collapse="menu.collapse"
     class="app-menu"
-    background-color="#545c64"
+    :background-color="settings.menuBg"
     text-color="#fff"
     active-text-color="#ffd04b"
     :router="true"
@@ -78,7 +79,7 @@ export default {
       }
       return path;
     },
-    ...mapGetters(["menu"])
+    ...mapGetters(["menu","settings"])
   },
   created() {
     // eslint-disable-next-line

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import i18n from './lang/index'
 import Element from 'element-ui'
+import './styles/element-variables.scss'
 import 'normalize.css/normalize.css'
 import 'element-ui/lib/theme-chalk/index.css';
 // 

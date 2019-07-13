@@ -1,5 +1,7 @@
 import storage from '@/utils/storage'
 import { getLanguage } from "@/utils/function";
+import variables from '@/styles/element-variables.scss'
+import {menuBg}  from '@/styles/variables.scss'
 
 const state = {
     menu: {
@@ -9,10 +11,18 @@ const state = {
     // small  medium mini default
     size: storage.get('size') || 'medium',
     loading: false,
-    axiosPromiseArr:[]
+    axiosPromiseArr:[],
+    settings:{
+        showSettings:true,
+        theme: variables.theme,
+        menuBg:menuBg
+    }
 }
 
 const getters = {
+    settings:state=>{
+        return state.settings
+    },
     menu: state => {
         return state.menu
     },

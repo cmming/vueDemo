@@ -305,16 +305,13 @@ export default {
       return `<svg-icon icon-class="${symbol}" />`;
     },
     load() {
-      let self = this;
-      this.$store.dispatch("getRouter").then(data => {
-        // console.log(self.router,data)
-      });
+      this.$store.dispatch("getRouter")
     },
     selectIcon(event) {
       this.form.icon = event.target.className;
       this.selectIconDialog = false;
     },
-    renderContent(h, { node, data, store }) {
+    renderContent(h, { node, data }) {
       return (
         <span>
           <span>
@@ -338,19 +335,13 @@ export default {
       };
     },
     createAnsyRouter() {
-      let self = this;
-      this.$store.dispatch("CREATE_ANSY_ROUTER").then(res => {
-        // if(res.status==200){
-        // self.$router.go(-1)
-        // }
-      });
+      this.$store.dispatch("CREATE_ANSY_ROUTER")
     },
     deleteSelected() {
       this.batchDelete();
     },
     batchDelete() {
       var checkKeys = this.$refs.menuTree.getCheckedKeys();
-      console.log(checkKeys);
       if (checkKeys == null || checkKeys.length <= 0) {
         this.$message.warning("请选择要删除的资源");
         return;
@@ -364,10 +355,10 @@ export default {
           self = this;
         this.$store
           .dispatch("deleteRouter", params)
-          .then(res => {
+          .then(() => {
             this.$message("操作成功");
           })
-          .catch(error => {
+          .catch(() => {
             this.$message("操作失败");
           });
         self.load();
@@ -389,12 +380,12 @@ export default {
       if (this.form.id > 0) {
         this.$store
           .dispatch("updateRouter", { ...params, resource_id: params.id })
-          .then(res => {
+          .then(() => {
             // 再次刷新数据
             self.load();
           });
       } else {
-        this.$store.dispatch("addRouter", params).then(res => {
+        this.$store.dispatch("addRouter", params).then(() => {
           // 再次刷新数据
           self.load();
         });
@@ -402,7 +393,7 @@ export default {
     },
     npmRunBuild() {
       this.buildLoading = true;
-      this.$store.dispatch("NPMRUNDUILD").then(res => {
+      this.$store.dispatch("NPMRUNDUILD").then(() => {
         this.buildLoading = false;
         this.$notify({
           type: "success",
