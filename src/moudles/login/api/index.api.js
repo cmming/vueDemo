@@ -15,7 +15,7 @@ export default {
         hasData: false,
     },
     USER_INFO: {
-        url: "/authorization/user/info",
+        url: "/auth/authorization/user/info",
         method: "post",
         hasData: true,
     },

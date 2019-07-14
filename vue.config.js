@@ -15,7 +15,8 @@ module.exports = {
             '/api': {
                 ws: false,
                 // target: 'http://localhost:3777/',
-                target: 'http://192.168.50.58/api/',
+                // target: 'http://192.168.50.58/api/',
+                target: 'http://localhost/api/',
                 changeOrigin: true,
                 pathRewrite: { '^/api': '', }
             },
@@ -39,7 +40,7 @@ module.exports = {
     },
     // 选项...
     publicPath: process.env.NODE_ENV === 'production' ?
-        '/' : '/',
+        './' : '/',
     chainWebpack(config) {
         // set svg-sprite-loader
         config.module

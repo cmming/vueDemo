@@ -5,7 +5,7 @@ import store from '@/store/index'
 // import {responseMsgInterceptors} from './interceptors'
 
 // import responseMsgInterceptorHandle from './interceptors/responseMsgInterceptor'
-import { paramsRequestInterceptors, responseMsgInterceptorHandle, tokenHandler } from './interceptors/index'
+import { paramsRequestInterceptors, responseMsgInterceptorHandle, tokenHandler,cancelRequest } from './interceptors/index'
 
 
 // console.log(process.env)
@@ -17,14 +17,11 @@ const service = axios.create({
 })
 
 
-const CancelToken = axios.CancelToken;
 service.interceptors.request.use(config => {
     store.dispatch('showLoading')
     config = paramsRequestInterceptors(config)
-    config = tokenHandler(config)
-    config.cancelToken = new CancelToken((cancel) => {
-        store.dispatch('storeAxios', cancel)
-    })
+    config = tokenHandler(config,store)
+    cancelRequest(store,config)
     return config
 }, error => {
     store.dispatch('hideLoading')
