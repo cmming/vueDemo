@@ -37,6 +37,10 @@ const menuList = {
         '404':'page not found',
         '401':'premission deny'
     },
+    'register':{
+        'title':"register",
+        'register':"register"
+    },
     ...modules
 }
 

@@ -96,6 +96,14 @@
         >{{$t('login.form.login')}}</el-button>
       </el-form-item>
 
+      <el-form-item>
+        <el-button
+          type="primary"
+          style="width:100%;margin-bottom:30px;"
+          @click.native.prevent="goToRegister"
+        >{{$t('login.form.register')}}</el-button>
+      </el-form-item>
+
     </el-form>
   </div>
 </template>
@@ -133,6 +141,9 @@ export default {
     },
     refreshCaptcha() {
       this.$store.dispatch("getCaptcha");
+    },
+    goToRegister(){
+      this.$router.push('/register')
     }
   }
 };

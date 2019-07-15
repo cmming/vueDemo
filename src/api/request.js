@@ -11,7 +11,9 @@ import { paramsRequestInterceptors, responseMsgInterceptorHandle, tokenHandler,c
 // console.log(process.env)
 const service = axios.create({
     // baseURL: process.env.VUE_APP_BASE_API, // api的base_url
-    baseURL: '/api', // api的base_url
+    // baseURL: '/api', // api的base_url
+    baseURL: 'http://localhost/api',
+    // baseURL: 'http://localhost:81/api',
     timeout: 15000, // request timeout
     // withCredentials: true // 选项表明了是否是跨域请求
 })

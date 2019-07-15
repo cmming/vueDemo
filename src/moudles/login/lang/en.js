@@ -13,7 +13,8 @@ export default {
                 placeholder: "请输入验证码"
             },
             rember_pwd:"记住密码",
-            login:"登录"
+            login:"login",
+            register:"register"
         }
     }
 }

@@ -19,4 +19,14 @@ export default {
         method: "post",
         hasData: true,
     },
+    REGISTER: {
+        url: "/user/register",
+        method: "post",
+        hasData: true,
+    },
+    GET_REGISTER_EMAIL_CODE: {
+        url: "/mail/sendMailToRegister",
+        method: "get",
+        hasData: true,
+    },
 }

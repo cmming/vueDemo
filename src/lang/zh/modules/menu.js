@@ -36,6 +36,10 @@ const menuList = {
         '404':'页面内不存在',
         '401':'权限拒绝'
     },
+    'register':{
+        'title':"注册",
+        'register':"注册"
+    },
     ...modules
 }
 
