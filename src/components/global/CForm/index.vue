@@ -23,7 +23,7 @@
             <template v-if="item.input_type ==='number'">
               <el-input
                 :type="item['input_type']"
-                v-model="model.form.model[item['prop']]"
+                v-model.number="model.form.model[item['prop']]"
                 :maxlength="GLOBAL_CONFIG.inputMaxLength"
                 onKeypress="return(/[\d]/.test(String.fromCharCode(event.keyCode)))"
               ></el-input>
