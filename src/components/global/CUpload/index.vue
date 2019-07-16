@@ -1,16 +1,20 @@
 <template>
   <div class="upload">
-    <file-list :files="files" :fileUploadObj="$refs.upload"></file-list>
+    <file-list
+      :files="files"
+      :fileUploadObj="$refs.upload"
+    ></file-list>
 
     <div class="upload-container">
       <file-upload
         class="table-upload m-rigth-sm"
-        post-action="/mock/file/upload"
+        :post-action="postAction"
         :extensions="extensions"
         :accept="accept"
         :multiple="true"
         :size="size"
         :thread="thread < 1 ? 1 : (thread > 5 ? 5 : thread)"
+        :headers="headers"
         v-model="files"
         @input-filter="inputFilter"
         @input-file="inputFile"
@@ -23,14 +27,20 @@
           }"
         ref="upload"
       >
-        <el-button split-button type="primary">
+        <el-button
+          split-button
+          type="primary"
+        >
           <svg-icon icon-class="add" />
           {{$t('CUpload.fileList.globalAction.choseFile')}}
         </el-button>
       </file-upload>
 
       <div class="dropdown-menu">
-        <label class="dropdown-item" for="file">{{$t('CUpload.fileList.globalAction.addFiles')}}</label>
+        <label
+          class="dropdown-item"
+          for="file"
+        >{{$t('CUpload.fileList.globalAction.addFiles')}}</label>
         <a
           class="dropdown-item"
           href="#"
@@ -48,7 +58,11 @@
       <svg-icon icon-class="start" />
       {{$t('CUpload.fileList.globalAction.start')}}
     </el-button>
-    <el-button type="danger" v-else @click.prevent="$refs.upload.active = false">
+    <el-button
+      type="danger"
+      v-else
+      @click.prevent="$refs.upload.active = false"
+    >
       <svg-icon icon-class="stop" />
       {{$t('CUpload.fileList.globalAction.stop')}}
     </el-button>
@@ -104,6 +118,14 @@ export default {
     chunkMaxRetries: {
       type: Number,
       default: 5
+    },
+    headers: {
+      type: Object,
+      default: () => {}
+    },
+    postAction: {
+      type: String,
+      default: ''
     }
   },
   data() {
