@@ -6,6 +6,7 @@ export default {
                 id: "id",
                 name: "name",
                 email: "email",
+                roles: "roles",
 
             }
         },
@@ -18,7 +19,10 @@ export default {
             },
             password:{
                 label: 'password'
-            }
+            },
+            roles:{
+                label: 'roles'
+            },
 
         }
     }

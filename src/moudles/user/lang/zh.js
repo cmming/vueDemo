@@ -6,6 +6,7 @@ export default {
                 id: "编号",
                 name: "名称",
                 email: '邮箱',
+                roles: '角色',
 
             }
         },
@@ -18,7 +19,10 @@ export default {
             },
             password:{
                 label: '密码'
-            }
+            },
+            roles:{
+                label: '角色'
+            },
 
         }
     }

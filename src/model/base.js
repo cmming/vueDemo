@@ -13,6 +13,7 @@ export default {
             { label_key: "select", prop: "select" },
             { label_key: "datePicker", prop: "datePicker" },
             { label_key: "transfer", prop: "transfer" },
+            { label_key: "autocomplete", prop: "autocomplete" },
         ],
         commonAction: {
             show: true,
@@ -61,6 +62,7 @@ export default {
             checkbox: [],
             select: "",
             datePicker: "",
+            autocomplete: "",
         },
         items: [
             { label_key: "email", prop: "email", type: "input", placeholder: true },
@@ -84,6 +86,7 @@ export default {
             },
             // { label_key: "DatePicker", prop: "datePicker", type: "DatePicker", showTime: true, format: "YYYY-MM-DD HH:mm:ss" },
             { label_key: "datePicker", prop: "datePicker", type: "datePicker" },
+            { label_key: "autocomplete", prop: "autocomplete", type: "autocomplete" },
         ],
         rules: {
             email: [

@@ -8,6 +8,7 @@ export default {
             select: "下拉框",
             datePicker: "时间筛选",
             transfer: "transfer",
+            autocomplete: "自动输入",
         }
     },
     form: {
@@ -25,6 +26,9 @@ export default {
         },
         datePicker: {
             label: '时间筛选'
+        },
+        autocomplete: {
+            label: '自动输入'
         },
 
     }

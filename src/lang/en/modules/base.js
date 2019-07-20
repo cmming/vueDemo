@@ -8,6 +8,7 @@ export default {
             select: "select",
             datePicker: "datePicker",
             transfer: "transfer",
+            autocomplete: "autocomplete",
         }
     },
     form: {
@@ -25,6 +26,9 @@ export default {
         },
         datePicker: {
             label: 'datePicker'
+        },
+        autocomplete: {
+            label: 'autocomplete'
         },
 
     }

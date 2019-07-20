@@ -79,10 +79,20 @@
             ></el-option>
           </el-select>
 
-          <!-- 文件上传 -->
-          <template v-if="item.type ==='file'">
-          </template>
+        </template>
 
+        <!-- 文件上传 -->
+        <template v-if="item.type ==='file'">
+        </template>
+
+        <!-- autocomplete -->
+        <template v-if="item.type ==='autocomplete'">
+          <el-autocomplete
+            v-model="model.form.model[item['prop']]"
+            :fetch-suggestions="item.querySearchAsync"
+            :placeholder="item.placeholder"
+            @select="item.handleSelect"
+          ></el-autocomplete>
         </template>
 
       </el-form-item>
@@ -133,7 +143,7 @@ export default {
     onSubmit(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.clearError()
+          this.clearError();
           let actionUrlAndParams = this.dealSubmitUrlAndParams();
           this.$store
             .dispatch(actionUrlAndParams.action, actionUrlAndParams.params)
@@ -222,7 +232,7 @@ export default {
       this.resetForm("form_" + this.model.model_index);
       // 清空所有的错误提示
       this.$refs["form_" + this.model.model_index].clearValidate();
-      this.clearError()
+      this.clearError();
     }
   },
   //

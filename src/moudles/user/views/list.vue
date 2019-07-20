@@ -6,7 +6,7 @@
     <el-card>
       <c-table :model="user" @editItem="editItem">
         <template slot="customAction" slot-scope="scope">
-          <el-button @click="customEvent(scope.dataScope.row)">自定义</el-button>
+          <el-button @click="setRoles(scope.dataScope.row)">角色管理</el-button>
         </template>
       </c-table>
     </el-card>
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     // eslint-disable-next-line
-    customEvent(data) {
+    setRoles(data) {
       //   console.log(scope);
       this.$notify({
         title: "成功",
