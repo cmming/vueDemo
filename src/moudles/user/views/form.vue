@@ -14,9 +14,8 @@ export default {
   },
   methods: {
     formCreated() {
-      console.log(1);
       //获取用户的角色
-      this.$store.dispatch("getRoles").then(res => {
+      this.$store.dispatch("getRoles").then(() => {
         this.user.form.items[3].options = [];
         // console.log(this.user.form.items[3]);
         this.role.table.data.data.map(val => {

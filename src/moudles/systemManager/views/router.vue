@@ -357,11 +357,11 @@ export default {
           .dispatch("deleteRouter", params)
           .then(() => {
             this.$message("操作成功");
+            self.load();
           })
           .catch(() => {
             this.$message("操作失败");
           });
-        self.load();
       });
     },
     handleNodeClick(data) {

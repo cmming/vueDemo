@@ -1,7 +1,4 @@
 export default {
-    langKey: "login",
-    lang: {
-        'title': '登录',
-        'login': '登录',
-    }
+    'login': '登录',
+    "register": "注册"
 } 

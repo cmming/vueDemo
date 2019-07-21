@@ -5,4 +5,5 @@ export default{
     'No Content.delete':'数据删除成功',
     'Unauthorized':'登录失败',
     'Not Found':'接口不存在',
+    "autonLogin":"自动登录成功"
 }

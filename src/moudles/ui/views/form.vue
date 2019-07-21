@@ -26,9 +26,6 @@ export default {
   created() {
     this.base.form.items[5].querySearchAsync = this.querySearchAsync
     this.base.form.items[5].handleSelect = this.handleSelect
-    setTimeout(() => {
-      console.log(this.$refs["cmcm"].$refs.baseemail);
-    }, 1000);
   },
   methods: {
     querySearchAsync(queryString, cb){
@@ -40,8 +37,9 @@ export default {
         cb(result)
       })
     },
+    // eslint-disable-next-line
     handleSelect(item){
-      console.log(item)
+      // console.log(item)
     },
   }
 };

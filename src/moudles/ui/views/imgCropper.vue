@@ -58,6 +58,7 @@
 <script>
 import ImgCropper from "@/components/imgCropper/index.vue";
 import { VueCropper } from "vue-cropper";
+// eslint-disable-next-line
 import request from "@/api/request";
 import axios from "axios";
 import storage from "@/utils/storage";
@@ -90,17 +91,15 @@ export default {
         enlarge: 1,
         mode: "contain",
         maxImgSize: 2000,
-        fileName: ""
+        fileName: "default.png"
       }
     };
   },
   methods: {
     clickChoseFile() {
-      console.log(555);
       this.$refs.fileContainer.click();
     },
-    choseFile(file) {
-      console.log(file, this.$refs.fileContainer.files[0]);
+    choseFile() {
       // 将file 转化为 blob显示在img 中
       this.option.img = window.URL.createObjectURL(
         this.$refs.fileContainer.files[0]
@@ -108,11 +107,11 @@ export default {
       this.option.fileName = this.$refs.fileContainer.files[0].name;
     },
     imgLoad(msg) {
+      // eslint-disable-next-line
       console.log(msg);
     },
     finish() {
       this.$refs.cropper.getCropBlob(data => {
-        console.log(data);
         var img = window.URL.createObjectURL(data);
         this.model = true;
         this.modelSrc = img;
@@ -133,19 +132,19 @@ export default {
             Authorization: "Bearer " + storage.get("vueDemoToken")
           },
           //添加上传进度监听事件
-          onUploadProgress: e => {
-            var completeProgress = (((e.loaded / e.total) * 100) | 0) + "%";
-            console.log(completeProgress);
-          }
+          // onUploadProgress: e => {
+            // var completeProgress = (((e.loaded / e.total) * 100) | 0) + "%";
+            // console.log(completeProgress);
+          // }
         };
         axios
           .post("/api/file/uploadCompanyImg", formData, config)
-          .then(function(response) {
-            console.log(response);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
+          // .then(function(response) {
+          //   console.log(response);
+          // })
+          // .catch(function(error) {
+          //   console.log(error);
+          // });
       });
 
       // request({

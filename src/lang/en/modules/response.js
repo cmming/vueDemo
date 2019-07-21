@@ -8,4 +8,5 @@ export default{
     'No Content.delete':'Data deletion succeeded',
     'Unauthorized':'Unauthorized',
     'Not Found':'Interface does not exist',
+    "autonLogin":"Automatic login success"
 }

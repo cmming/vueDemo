@@ -1,5 +1,4 @@
 import ModelGenerator from "@/model/ModelGenerator"
-import store from '@/store'
 
 class User extends ModelGenerator {
     constructor() {

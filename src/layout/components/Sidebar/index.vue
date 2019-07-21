@@ -1,7 +1,7 @@
 <template>
   <!-- @open="handleOpen"
   @close="handleClose"-->
-    <!-- background-color="#545c64" -->
+  <!-- background-color="#545c64" -->
   <el-menu
     :default-active="activeMenu"
     :collapse="menu.collapse"
@@ -11,56 +11,12 @@
     active-text-color="#ffd04b"
     :router="true"
   >
-    <template v-for="(menu,key) in menuList">
-      <!-- 二级菜单 -->
-      <el-submenu
-        v-if="!menu.meta.hidden&&menu.children&&menu.children.length>1"
-        :index="menu.path"
-        :data-d="menu.path"
-        :key="key"
-      >
-        <template slot="title">
-          <svg-icon
-            :icon-class="menu.meta.icon"
-            class-name="m-rigth-sm"
-          />
-          <span>{{$t('menu.'+menu.meta.title+'.title')}}</span>
-        </template>
-
-        <template v-for="(menuItem,k) in menu.children">
-          <template v-if="!menuItem.meta.hidden">
-            <el-menu-item
-              :key="+key+'-'+k"
-              :index="menu.path+'/'+menuItem.path"
-              :data-d="menu.path+'/'+menuItem.path"
-            >
-              <svg-icon
-                :icon-class="menuItem.meta.icon"
-                class-name="m-rigth-sm"
-              />
-              <span>{{$t('menu.'+menu.meta.title+'.'+menuItem.meta.title)}}</span>
-            </el-menu-item>
-          </template>
-        </template>
-      </el-submenu>
-
-      <!-- 一级菜单 -->
-      <el-menu-item
-        v-if="!menu.meta.hidden&&!menu.children||menu.children.length==1"
-        :index="menu.path+'/'+menu.children[0].path"
-        :key="key"
-      >
-        <svg-icon
-          :icon-class="menu.children[0].meta.icon"
-          class-name="m-rigth-sm"
-        />
-        <span slot="title">{{$t('menu.'+menu.meta.title+'.'+menu.children[0].meta.title)}}</span>
-      </el-menu-item>
-    </template>
+    <sidebar-item v-for="child in menuList" :key="child.name" :menu="child" :base-path="child.path"></sidebar-item>
   </el-menu>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import SidebarItem from "./SidebarItem";
 export default {
   name: "Sidebar",
   props: {
@@ -68,6 +24,9 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  components: {
+    SidebarItem
   },
   computed: {
     activeMenu() {
@@ -79,7 +38,7 @@ export default {
       }
       return path;
     },
-    ...mapGetters(["menu","settings"])
+    ...mapGetters(["menu", "settings"])
   },
   created() {
     // eslint-disable-next-line
