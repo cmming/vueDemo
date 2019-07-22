@@ -32,6 +32,18 @@ const actions = {
             })
         })
     },
+    // deleteOperationLog
+    deleteOperationLog({
+        commit
+    }, params) {
+        return new Promise((resolve, reject) => {
+            requestMap('DELETE_OPERATIONLOG', params).then(response => {
+                resolve(response)
+            }).catch(error => {
+                reject(error)
+            })
+        })
+    },
 }
 
 

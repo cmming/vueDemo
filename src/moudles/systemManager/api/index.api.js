@@ -67,4 +67,9 @@ export default {
         method: "get",
         hasData: true,
     },
+    DELETE_OPERATIONLOG:{
+        url: "/log",
+        method: "delete",
+        hasData: false,
+    },
 }

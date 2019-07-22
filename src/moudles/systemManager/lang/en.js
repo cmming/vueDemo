@@ -35,6 +35,9 @@ export default {
                 ip: {
                     label: "操作ip",
                 },
+                key_word: {
+                    label: "关键字",
+                },
             }
         },
     }
