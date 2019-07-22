@@ -116,7 +116,7 @@ class Colums {
         let model_default
         let model_key = this.prop
         let result = {}
-        if (this.default_value !== '') {
+        if (this.default_value === '') {
             switch (this.input_type) {
                 case 'string':
                     model_default = ''

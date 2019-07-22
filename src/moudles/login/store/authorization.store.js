@@ -47,7 +47,7 @@ const mutations = {
 
 
 const actions = {
-    getUserInfo({
+    async getUserInfo({
         commit
     }, params) {
         return new Promise((resolve, reject) => {

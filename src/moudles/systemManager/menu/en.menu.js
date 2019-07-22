@@ -4,4 +4,5 @@ export default {
     "roleList": "role list",
     "storeRole": "store role",
     "updateRole": "update role",
+    "operationLog": "Operation log",
 } 

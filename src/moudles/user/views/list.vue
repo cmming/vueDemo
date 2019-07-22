@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card class="m-bottom-sm search-area">
-      <search-area :model="user"></search-area>
+      <search-area :model="user" @addItem="addItem"></search-area>
     </el-card>
     <el-card>
       <c-table :model="user" @editItem="editItem">
@@ -34,6 +34,9 @@ export default {
     },
     editItem(data){
       this.$router.push('/admin/user/update/'+data.id)
+    },
+    addItem() {
+      this.$router.push("/admin/user/store");
     }
   }
 };

@@ -61,4 +61,10 @@ export default {
         method: "put",
         hasData: true,
     },
+    // OperationLog
+    OPERATIONLOGS:{
+        url: "/log",
+        method: "get",
+        hasData: true,
+    },
 }

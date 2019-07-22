@@ -1,4 +1,5 @@
 import ModelGenerator from "@/model/ModelGenerator"
+import requestMap from "@/api/requestMap";
 
 class User extends ModelGenerator {
     constructor() {
@@ -10,11 +11,13 @@ class User extends ModelGenerator {
             // password
             { label_key: 'password', prop: 'password', type: 'input', default_value: '', data_roles: 'required', show_table: false, show_form: true, show_update_form: false, show_search: false, input_type: 'password', placeholder: '' },
             //角色
-            { label_key: 'roles', prop: 'roles', type: 'checkbox', default_value: '', data_roles: '', show_table: false, show_form: true, show_update_form: false, show_search: false, input_type: 'number', placeholder: '' },
+            { label_key: 'roles', prop: 'roles', type: 'checkbox', default_value: [], data_roles: '', show_table: false, show_form: true, show_update_form: true, show_search: false, input_type: '', placeholder: '' },
         ]
         super(model_name, columns)
 
         this.setActionUrl()
+
+        this.getRoles({ page_size: 10000000 })
 
     }
 
@@ -24,6 +27,7 @@ class User extends ModelGenerator {
         this.table.commonAction.edit.action_url = 'storeUser'
 
         this.searchArea.config.search_url = 'getUserList'
+        this.searchArea.config.is_add = true
 
         this.form.config.store_url = 'storeUser'
         this.form.config.show_url = 'showUser'
@@ -31,6 +35,18 @@ class User extends ModelGenerator {
 
         // 渲染角色
 
+    }
+
+    async getRoles(params) {
+        this.form.items[3].options = [];
+        await requestMap('ROLES', params).then(response => {
+            response.data.data.map(val => {
+                this.form.items[3].options.push({
+                    value: val.id,
+                    label: val.name
+                });
+            })
+        })
     }
 
 }

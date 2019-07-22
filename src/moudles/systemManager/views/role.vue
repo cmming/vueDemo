@@ -111,14 +111,13 @@ export default {
     //修改 角色的菜单
     configRolesRouter() {
       var router_id_arr = this.$refs.routerTree.getCheckedKeys(),
-        addItem = {},
         self = this;
-      router_id_arr.forEach((val, index) => {
-        addItem["routers_id[" + index + "]"] = val;
-      });
+      // router_id_arr.forEach((val, index) => {
+      //   addItem["routers_id[" + index + "]"] = val;
+      // });
       var paramObj = {
         resource_id: this.configRoleId,
-        ...addItem
+        routers_id:router_id_arr
       };
       this.$store.dispatch("storeRoleRouter", paramObj).then(res => {
         if (res.status == 204) {

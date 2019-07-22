@@ -1,6 +1,6 @@
 import user from "../model/index.model";
 import requestMap from "@/api/requestMap";
-// console.log(user)
+
 const state = {
     model: user
 }
