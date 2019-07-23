@@ -114,8 +114,8 @@ function fnAddDynamicMenu(dynamicMenu) {
 
 
 // eslint-disable-next-line
-function getUserInfo(to, from, next, router, addRoutesAfter) {
-    store.dispatch('getUserInfo').then((res) => {
+async function getUserInfo(to, from, next, router, addRoutesAfter) {
+    await store.dispatch('getUserInfo').then((res) => {
         let routes = fnAddDynamicRoutes(store.getters.routerList)
 
         router.addRoutes(routes)

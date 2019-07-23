@@ -3,11 +3,11 @@ import httpStatus from '@/config/statusCode'
 import globalConfig from '@/config/globalConfig'
 import store from '@/store'
 import router from '@/router/index'
-import { cancelRequest } from '@/router/interceptors/index'
 import {
     Notification
 } from 'element-ui'
 import i18n from '@/lang/index'
+import request from '@/api/request'
 
 function openNotificationWithIcon(type, langId) {
     Notification({
@@ -30,13 +30,8 @@ export default function responseMsgInterceptorHandle(response) {
     } else if (response.status === httpStatus.UNAUTHORIZED) {
         if (response.data.status_code && response.data.status_code == 401) {
             store.dispatch('refreshToken').then(() => {
-                //取消所有的请求
-                cancelRequest()
-                // 刷新当前页面
-                router.go({
-                    path: _.replace(window.location.hash,'#',''),
-                    force: true
-                })
+                request(response.config)
+                router.push('/refresh')
             })
         } else {
             openNotificationWithIcon('error', response.statusText)
