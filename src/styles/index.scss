@@ -1,20 +1,18 @@
 @import './variables.scss';
+@import './mixin.scss';
 
 @import './base.scss';
 #app {
     .app-side {
-        // height: 100vh;
+        height: auto;
         min-height: $main-min-height +$header-height;
         background-color: $default-bg-color;
         transition: width 0.28s;
         .app-menu {
             border-color: $default-bg-color;
-            .svg-icon{
-                margin-right: 16px;
-            }
             .el-submenu {
                 .el-menu-item{
-                    background-color: $default-bg-color-80 !important
+                    // background-color: $default-bg-color-80 !important
                 }
             }
         }
@@ -26,6 +24,9 @@
             //     display: none
             // }
         }
+    }
+    .app-right{
+        min-height: 100vh;
     }
     .app-header{
         background-color: $default-header-bg-color;
@@ -39,3 +40,8 @@
         min-height: $main-min-height;
     }
 }
+
+
+.zIndex-99999{
+    z-index: 99999 !important;
+  }

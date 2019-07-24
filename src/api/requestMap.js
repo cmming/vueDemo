@@ -1,5 +1,5 @@
 import request from './request'
-import API_TYPE from './index'
+import API_TYPE from './loadApi'
 
 
 export default function requestMap(apiKey, data) {
@@ -7,7 +7,7 @@ export default function requestMap(apiKey, data) {
     // console.log(data)
     let res, tmpData = data;
     //如果是表单 formdata
-    if (API_TYPE[apiKey]['hasData'] && (API_TYPE[apiKey]['method'] === 'post' || API_TYPE[apiKey]['method'] === 'put' || API_TYPE[apiKey]['method'] === 'delete')) {
+    if (API_TYPE[apiKey]['hasData'] && (API_TYPE[apiKey]['method'] === 'post' || API_TYPE[apiKey]['method'] === 'put' || API_TYPE[apiKey]['method'] === 'delete')||tmpData && tmpData.resource_id !== undefined) {
         let resource_id = tmpData && tmpData.resource_id !== undefined ? ('/' + tmpData.resource_id) : ''
         res = {
             url: API_TYPE[apiKey]['url'] + resource_id,
@@ -21,6 +21,16 @@ export default function requestMap(apiKey, data) {
             method: API_TYPE[apiKey]['method'],
             params: tmpData,
         };
+    }else{
+        res = {
+            url: API_TYPE[apiKey]['url'],
+            method: API_TYPE[apiKey]['method'],
+        };
+    }
+
+    // 自定义 baseurl
+    if(API_TYPE[apiKey]['baseURL']){
+        res = {...res,baseURL:API_TYPE[apiKey]['baseURL']}
     }
 
     return request(res)

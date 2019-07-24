@@ -7,26 +7,30 @@ const table = {
     list: (req, res) => {
         let statusCode = 200
         if (req.method === 'DELETE') {
-            statusCode = 201
+            statusCode = 204
         }
         console.log(req.method)
         var result = {
-            "total": Random.integer(60, 100),
-            "per_page": 15,
-            "current_page": 1,
-            "last_page": 4,
-            "first_page_url": "http://laravel.app?page=1",
-            "last_page_url": "http://laravel.app?page=4",
-            "next_page_url": "http://laravel.app?page=2",
-            "prev_page_url": null,
-            "path": "http://laravel.app",
-            "from": 1,
-            "to": 15,
+            "meta": {
+                "pagination": {
+                    "total": Random.integer(60, 100),
+                    "per_page": 15,
+                    "current_page": 1,
+                    "last_page": 4,
+                    "first_page_url": "http://laravel.app?page=1",
+                    "last_page_url": "http://laravel.app?page=4",
+                    "next_page_url": "http://laravel.app?page=2",
+                    "prev_page_url": null,
+                    "path": "http://laravel.app",
+                    "from": 1,
+                    "to": 15,
+                }
+            },
             "data": []
         }
-        for (let i = 0; i < 10; i++) {
+        for (let i = 1; i <= 10; i++) {
             const tmp = {
-                'id': i,
+                'id|+1': i,
                 email: "11294225707@qq.com1",
                 radio: "a",
                 checkbox: ['A'],

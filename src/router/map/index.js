@@ -13,6 +13,6 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
 
 let result = []
 for (let i in modules) {
-    result.push(modules[i])
+    result.push(...modules[i])
 }
 export default result

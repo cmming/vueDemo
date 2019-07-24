@@ -1,25 +1,32 @@
 let express = require('express'); //引入express模块.
 var bodyParser = require('body-parser')
-let Mock = require('mockjs'); //引入mock模块
-let Random = Mock.Random;
+const path = require('path')
+let multer  = require('multer');
+var cors = require('cors')
+
+
+
 
 let apiData = require('./json/api.json')
 let table = require('./model/table')
+let file = require('./model/file')
+let authorization = require('./model/authorization')
 
-console.log(table)
+let user = require('./model/user')
+
+// console.log(table)
 
 let app = express(); //实例化express
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.text());//运用中间件，对请求体的文本进行解析
 
-app.all('*', function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By",' 3.2.1')
-    if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
-    else  next();
-})
+app.use(cors())
+
+// app.use(bodyParser.text());//运用中间件，对请求体的文本进行解析
+app.use(express.static(path.join(__dirname, 'public')))
+
+// app.use(multer({ dest: '/tmp/'}).array('file'));
+app.use(bodyParser.urlencoded({ extended: false }))
+
+
 app.get('/api.json', (req, res) => {
 
     res.json(apiData)
@@ -34,6 +41,32 @@ app.delete('/table/demo/[0-9]', table.list);
 app.put('/table/demo/[0-9]', table.update);
 //保存数据
 app.post('/table/demo', table.store);
+
+
+app.post('/file/upload',multer({ dest: '/tmp/'}).array('file'), file.upload);
+
+
+//request payload
+// app.use(bodyParser.json())
+app.post('/file/chunk',multer({ dest: '/tmp/'}).array('chunk'), file.chunk);
+
+
+///获取用户信息
+app.get('/authorization/user/info', authorization.info);
+
+
+// 用户管理模块
+
+app.get('/user', user.list);
+//删除数据
+app.delete('/user/[0-9]', user.list);
+//更新数据
+app.put('/user/[0-9]', user.update);
+//保存数据
+app.post('/user', user.store);
+
+app.get('/user/:id', user.show);
+
 
 
 

@@ -1,3 +1,5 @@
+import en from './loadEn'
+
 const modulesFiles = require.context('./modules', true, /\.js$/)
 
 // you do not need `import app from './modules/app'`
@@ -10,4 +12,4 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
     return modules
 }, {})
 
-export default modules
+export default {...en,...modules}

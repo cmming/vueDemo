@@ -77,3 +77,23 @@ export function isArray(arg) {
   }
   return Array.isArray(arg)
 }
+
+
+export function validateEmail(rule, str, callback){
+  let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
+  if (!reg.test(str)) {
+    callback(new Error(rule.message))
+  } else {
+    callback()
+  }
+}
+
+
+export function validateNumber(rule, str, callback){
+  let reg = /^[0-9]\d*$/
+  if (!reg.test(str)) {
+    callback(new Error(rule.message))
+  } else {
+    callback()
+  }
+}

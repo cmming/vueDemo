@@ -1,4 +1,5 @@
 export function getLanguage() {
+    //中文mac 下google浏览器显示的是en TODO 
     var JsSrc = (navigator.language || navigator.browserLanguage).toLowerCase();
     if (JsSrc.indexOf('zh') >= 0) {
         // 假如浏览器语言是中文

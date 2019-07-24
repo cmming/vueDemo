@@ -2,6 +2,17 @@
 
 > 定义项目的准备材料
 
+```
+项目浏览器兼容
+由于外部的框架布局在中使用了 flex 所以式不支持 ie9的 
+ie>=10
+
+同时很多使用双核浏览器的 ie小于9的也不支持。
+解决方案：我将会在页面的最前面写一个升级浏览器的提示，如果浏览器检测为ie10 以下的浏览器，就直接提示让用户升级浏览器，至于浏览器的资源部我可以放在代码中。
+```
+
+
+
 ## 1、数据mock
 
 > 尽量模拟更多、更灵活的数据。采用 express结合mockjs来生成模拟的数据，express负责根据请求参数做出相应的逻辑。mockjs作为数据的工厂函数，产生更加逼真的数据。
@@ -50,6 +61,10 @@ Open http://localhost:3200/?url=http://localhost:3777/api.json
 
 > 创建 env 文件 通过 doEnv 插件合并 还可以安装插件让其支持 高级语法 参照react
 
+```
+果然，环境变量有自己的命名规范和 create-react-app 一样（REACT_APP），使用 (VUE_APP)；
+```
+
 
 ## 4 项目开发
 
@@ -67,6 +82,15 @@ cnpm i sass-loader node-sass svg-sprite-loader -D
 
 
 #### 4.2.1 路由懒加载
+
+#### 4.2.2 路由动态加载
+
+```
+1.使用接口动态生成一个动态路由的js文件，然后使用接口调用脚本去打包。这种方式比较耗时。但是整体思路不依赖官方api。（前年在没有官方api的时候用过，这种方式还是很灵活）
+2.使用一个已经写好的动态路由配置文件，然后根据路由前面的角色去匹配用户是否有权限。（用过，模式比较死板）
+3.官方推出一个api addRoutes使得可以动态加载路由。
+
+```
 
 
 ## eslint
@@ -86,5 +110,62 @@ cnpm i sass-loader node-sass svg-sprite-loader -D
 
 - [x]  1.支持 filter ,表格字段转换
 - [x]  2.支持 自定义事件
-- [x]  3.分页 但是小屏幕显示有问题
-- [ ]  4.搜索区域
+- [x]  3.分页 <font color=red>但是小屏幕显示有问题</font>
+- [x]  4.搜索区域
+
+
+### 5、2 表单
+
+
+### 5、3 上传组件
+
+> 文档 https://lian-yue.github.io/vue-upload-component/#/zh-cn/documents#%E5%85%A5%E9%97%A8%E5%BC%80%E5%A7%8B-npm
+
+```
+    cnpm install vue-upload-component -S
+```
+
+所有文件上传都走一个独立的业务接口，方便控制。
+
+### 5、3、1 完成队列的组件
+
+
+## 6 配置统一化
+
+### 6.1 接口配置
+
+
+```
+200：OK，标准的响应成功状态码
+201：Object created，用于 store 操作
+204：No content，操作执行成功，但是没有返回任何内容
+206：Partial content，返回部分资源时使用
+400：Bad request，请求验证失败
+401：Unauthorized，用户需要认证
+403：Forbidden，用户认证通过但是没有权限执行该操作
+404：Not found，请求资源不存在
+500：Internal server error，通常我们并不会显示返回这个状态码，除非程序异常中断
+503：Service unavailable，一般也不会显示返回，通常用于排查问题用
+```
+
+## 待办事件
+
+ - [ ] 将模型中的 搜索区域和表单区域 以及列表区域镜像整合。使用一个生成数据模型的类进行自动处理
+ - [ ] 将扫描器进行整理，每个模块编写appinfo.js 的注册文件，扫描器将根据模块的配置文件进行模块的自动加载
+
+
+## 问题记录
+
+###  <font color=red>文件上传模块在ie 10 11 都有问题  </font>
+
+```
+"对象不支持“includes”属性或方法"
+```
+![iebug](./images/bugUploadFile.png)
+
+
+###  <font color=red>打包后的文件chunk有问题，没有懒加载  </font>
+
+
+
+

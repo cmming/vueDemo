@@ -3,10 +3,11 @@
     <el-aside
       :width="menu.collapse?'65px':'220px'"
       :class="{'close':menu.collapse,'app-side':true}"
+      :style="{'background-color':settings.menuBg}"
     >
-      <sidebar></sidebar>
+      <sidebar :menuList="dynamicMenu"></sidebar>
     </el-aside>
-    <el-container>
+    <el-container class="app-right">
       <el-header
         class="app-header"
         height="60px"
@@ -15,27 +16,35 @@
           :is-active="menu.collapse"
           @toggleClick="toggleMenu"
         />
-        <navbar></navbar>
+        <navbar :language="language"></navbar>
       </el-header>
 
       <el-main class="app-main">
         <router-view />
       </el-main>
+      
+      <right-panel v-if="settings.showSettings">
+        <settings />
+      </right-panel>
+
     </el-container>
   </el-container>
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { Sidebar, Navbar, Hamburger } from "./components/index";
+import { Sidebar, Navbar, Hamburger,Settings } from "./components/index";
+import RightPanel from '@/components/RightPanel'
 export default {
   name: "LayoutAdmin",
   computed: {
-    ...mapGetters(["menu"]),
+    ...mapGetters(["menu", "language", "dynamicMenu","settings"])
   },
   components: {
     Sidebar,
     Navbar,
-    Hamburger
+    Hamburger,
+    RightPanel,
+    Settings
   },
   methods: {
     toggleMenu() {
