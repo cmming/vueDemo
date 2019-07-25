@@ -33,5 +33,12 @@ export default function requestMap(apiKey, data) {
         res = {...res,baseURL:API_TYPE[apiKey]['baseURL']}
     }
 
+    // headers:{
+    //     'Content-Type': 'application/json'
+    // }
+    if(API_TYPE[apiKey]['headers']){
+        res = {...res,headers:API_TYPE[apiKey]['headers']}
+    }
+
     return request(res)
 }
