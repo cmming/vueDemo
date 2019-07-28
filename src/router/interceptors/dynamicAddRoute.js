@@ -132,10 +132,11 @@ async function getUserInfo(to, from, next, router, addRoutesAfter) {
         }
         // eslint-disable-next-line
     }).catch(() => {
+        storage.remove('vueDemoToken')
         //加载动态路由失败
         addRoutesAfter(router)
-        router.options.isLoad = true
+        // router.options.isLoad = true
         //确保加载完成
-        next({ ...to, replace: true })
+        next({ path: "/login" })
     })
 }

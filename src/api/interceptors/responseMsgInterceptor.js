@@ -8,6 +8,7 @@ import {
 } from 'element-ui'
 import i18n from '@/lang/index'
 import request from '@/api/request'
+import storage from '@/utils/storage'
 
 function openNotificationWithIcon(type, langId) {
     Notification({
@@ -20,7 +21,7 @@ function openNotificationWithIcon(type, langId) {
 
 export default function responseMsgInterceptorHandle(response) {
     let langId = (httpStatus.getMsg(response.status)) + ('.' + response.config.method)
-        // console.log(langId)
+    // console.log(langId)
     if (response.status === httpStatus.HTTP_CREATED) {
         openNotificationWithIcon('success', langId)
     } else if (response.status === httpStatus.HTTP_NO_CONTENT) {
@@ -28,14 +29,31 @@ export default function responseMsgInterceptorHandle(response) {
     } else if (response.status === httpStatus.HTTP_NO_FOUND) {
         openNotificationWithIcon('error', response.statusText)
     } else if (response.status === httpStatus.UNAUTHORIZED) {
-        if (response.data.status_code && response.data.status_code == 401) {
-            store.dispatch('refreshToken').then(() => {
-                request(response.config)
-                router.push('/refresh')
-            })
-        } else {
-            openNotificationWithIcon('error', response.statusText)
+        // console.log(response.data.message)
+        let code = response.data.code
+        switch (code) {
+            // 过期可以刷新
+            case 401001:
+                store.dispatch('refreshToken').then(() => {
+                    request(response.config)
+                    router.push('/refresh')
+                })
+                break;
+            case 401005:
+                openNotificationWithIcon('error', response.data.message)
+                break;
+            default:
+                storage.remove('vueDemoToken')
+                router.push('/login')
+                break;
         }
+        // if (response.data.code && response.data.code == 401) {
+        //     alert(1)
+
+        // } else {
+        //     openNotificationWithIcon('error', response.statusText)
+        // }
+    } else {
     }
 
 }

@@ -12,11 +12,11 @@ class httpStatus {
 
     static codeEnums() {
         return {
-            '200': 'OK',
-            '201': 'Created',
-            '204': 'No Content',
-            '401': 'Unauthorized',
-            '404': 'Not Found',
+            200: 'OK',
+            201: 'Created',
+            204: 'No Content',
+            401: 'Unauthorized',
+            404: 'Not Found',
         }
     }
 
