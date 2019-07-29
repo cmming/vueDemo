@@ -17,6 +17,18 @@ import './icons' // icon
 //全局组件自动注册
 import './components/index'
 import './filter/index';
+import Echo from "laravel-echo"
+window.io = require('socket.io-client');
+
+window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: 'http://192.168.50.58:6001',
+    auth: {
+        headers: {
+            'Authorization': 'Bearer ' + store.getters.userInfo.token
+        }
+    }
+});
 Vue.config.productionTip = false
 Vue.use(Element, {
     // size: Cookies.get('size') || 'medium' // set element-ui default size
@@ -24,10 +36,10 @@ Vue.use(Element, {
 })
 
 new Vue({
-  render: h => h(App),
-  i18n,
-  store,
-  router,
+    render: h => h(App),
+    i18n,
+    store,
+    router,
 }).$mount('#app')
 
 
