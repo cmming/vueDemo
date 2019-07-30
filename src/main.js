@@ -22,7 +22,7 @@ window.io = require('socket.io-client');
 
 window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: 'http://192.168.50.58:6001',
+    host: process.env.VUE_APP_WS_BASE_API+':6001',
     auth: {
         headers: {
             'Authorization': 'Bearer ' + store.getters.userInfo.token
