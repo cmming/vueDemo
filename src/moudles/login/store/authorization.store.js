@@ -52,7 +52,7 @@ const actions = {
     }, params) {
         return new Promise((resolve, reject) => {
             requestMap('USER_INFO', params).then(response => {
-                response.data.routerList = routerListTransforms(response.data.testRouterList)
+                response.data.routerList = routerListTransforms(response.data.routerList)
                 // console.log(response.data.testRouterList,response.data.routerList)
                 commit('USER_INFO', response.data.routerList);
                 storage.set('indexPage',response.data.indexPage)
