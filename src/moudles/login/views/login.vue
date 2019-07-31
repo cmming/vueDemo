@@ -1,30 +1,21 @@
 <template>
   <div class="login-container">
     <div class="login-container-title">
-      <span>
-        {{$t('login.title')}}
-      </span>
+      <span>{{$t('login.title')}}</span>
     </div>
-    <el-form
-      ref="form"
-      :model="login"
-      label-position="left"
-    >
+    <el-form ref="form" :model="login.model" label-position="left" :rules="login.rules">
       <el-form-item prop="name">
         <el-input
           name="name"
           type="text"
           v-model="login.model.name"
-          autoComplete="off"
+          autocomplete="off"
           :placeholder="$t('login.form.name.placeholder')"
           @keyup.enter.native="handleLogin"
-          maxlength=30
+          maxlength="30"
         >
           <!-- name -->
-          <svg-icon
-            icon-class="name"
-            slot="prefix"
-          />
+          <svg-icon icon-class="name" slot="prefix" />
         </el-input>
       </el-form-item>
 
@@ -33,59 +24,35 @@
           name="password"
           type="password"
           v-model="login.model.password"
-          autoComplete="off"
+          autocomplete="off"
           :placeholder="$t('login.form.password.placeholder')"
           @keyup.enter.native="handleLogin"
-          maxlength=30
+          maxlength="30"
         >
-          <svg-icon
-            icon-class="password"
-            slot="prefix"
-          />
+          <svg-icon icon-class="password" slot="prefix" />
         </el-input>
       </el-form-item>
 
-      <el-form-item prop="captcha">
+      <el-form-item prop="captcha" :error="login.loginFormError.captcha">
         <el-input
           name="captcha"
           type="text"
           class="login-captcha"
           v-model="login.model.captcha"
-          autoComplete="off"
+          autocomplete="off"
           :placeholder="$t('login.form.captcha.placeholder')"
           @keyup.enter.native="handleLogin"
-          maxlength=30
+          maxlength="30"
         >
-          <svg-icon
-            icon-class="captcha"
-            slot="prefix"
-          />
+          <svg-icon icon-class="captcha" slot="prefix" />
         </el-input>
-        <img
-          class="login-captcha-img"
-          :src="login.model.img"
-          alt=""
-        >
-        <input
-          type="text"
-          hidden
-          v-model="login.model.ckey"
-        >
-        <el-button
-          type="primary"
-          round
-          @click="refreshCaptcha"
-        >刷新</el-button>
+        <img class="login-captcha-img" :src="login.model.img" alt />
+        <input type="text" hidden v-model="login.model.ckey" />
+        <el-button type="primary" round @click="refreshCaptcha">刷新</el-button>
       </el-form-item>
 
-      <el-form-item
-        class="rember-checkbox"
-        style="background:#fff"
-      >
-        <el-checkbox
-          v-model="login.model.rember_pwd"
-          fill="#2BAAB1"
-        >{{$t('login.form.rember_pwd')}}</el-checkbox>
+      <el-form-item class="rember-checkbox" style="background:#fff">
+        <el-checkbox v-model="login.model.rember_pwd" fill="#2BAAB1">{{$t('login.form.rember_pwd')}}</el-checkbox>
       </el-form-item>
 
       <el-form-item>
@@ -103,7 +70,6 @@
           @click.native.prevent="goToRegister"
         >{{$t('login.form.register')}}</el-button>
       </el-form-item>
-
     </el-form>
   </div>
 </template>
@@ -135,15 +101,24 @@ export default {
         ckey: this.login.model.ckey,
         captcha: this.login.model.captcha
       };
-      this.$store.dispatch("login", params).then(()=>{
-        this.$router.push('/admin/dashborad')
-      });
+      this.$store
+        .dispatch("login", params)
+        .then(() => {
+          this.$router.push("/admin/dashborad");
+        })
+        .catch(error => {
+          console.log(error);
+          let errors = error.data.errors;
+          errors.map(val => {
+            this.login.loginFormError[val.field] = val.code;
+          });
+        });
     },
     refreshCaptcha() {
       this.$store.dispatch("getCaptcha");
     },
-    goToRegister(){
-      this.$router.push('/register')
+    goToRegister() {
+      this.$router.push("/register");
     }
   }
 };

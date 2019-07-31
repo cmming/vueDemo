@@ -10,10 +10,10 @@ import i18n from '@/lang/index'
 import request from '@/api/request'
 import storage from '@/utils/storage'
 
-function openNotificationWithIcon(type, langId) {
+function openNotificationWithIcon(type, langId, isI18n = true) {
     Notification({
         // title: i18n.messages[i18n.locale]['backstage']['response']['success']['title'],
-        message: i18n.messages[i18n.locale]['response'][langId],
+        message: isI18n ? i18n.messages[i18n.locale]['response'][langId] : langId,
         type: type,
         duration: globalConfig.notificationDuration
     });
@@ -53,6 +53,8 @@ export default function responseMsgInterceptorHandle(response) {
         // } else {
         //     openNotificationWithIcon('error', response.statusText)
         // }
+    } else if (response.status === httpStatus.BAD_REQUEST) {
+        openNotificationWithIcon('error', response.data.message, false)
     } else {
     }
 
