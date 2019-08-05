@@ -12,4 +12,6 @@ export default function cancelRequest() {
     });
 
     // store.getters.axiosPromiseArr =[]
+    // fixed 清空 否则会缓存所有的请求 造成页面卡顿
+    store.dispatch('initAxios')
 }
