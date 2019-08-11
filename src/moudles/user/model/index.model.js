@@ -17,7 +17,7 @@ class User extends ModelGenerator {
 
         this.setActionUrl()
 
-        this.getRoles({ page_size: 10000000 })
+        // this.getRoles({ page_size: 10000000 })
 
     }
 
@@ -37,17 +37,17 @@ class User extends ModelGenerator {
 
     }
 
-    async getRoles(params) {
-        this.form.items[3].options = [];
-        await requestMap('ROLES', params).then(response => {
-            response.data.data.map(val => {
-                this.form.items[3].options.push({
-                    value: val.id,
-                    label: val.name
-                });
-            })
-        })
-    }
+    // async getRoles(params) {
+    //     this.form.items[3].options = [];
+    //     await requestMap('ROLES', params).then(response => {
+    //         response.data.data.map(val => {
+    //             this.form.items[3].options.push({
+    //                 value: val.id,
+    //                 label: val.name
+    //             });
+    //         })
+    //     })
+    // }
 
 }
 
