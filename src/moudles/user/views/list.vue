@@ -1,7 +1,11 @@
 <template>
   <div>
     <el-card class="m-bottom-sm search-area">
-      <search-area :model="user" @addItem="addItem"></search-area>
+      <search-area :model="user" @addItem="addItem">
+         <template slot="btn">
+          <el-button @click="exportExcel" type="success">导出excel</el-button>
+        </template>
+      </search-area>
     </el-card>
     <el-card>
       <c-table :model="user" @editItem="editItem">
@@ -14,6 +18,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import requestMap from "@/api/requestMap";
 export default {
   computed: {
     ...mapGetters(["user"])
@@ -37,6 +42,9 @@ export default {
     },
     addItem() {
       this.$router.push("/admin/user/store");
+    },
+    exportExcel(){
+      requestMap('EXPORT_USER')
     }
   }
 };

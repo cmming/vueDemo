@@ -72,4 +72,9 @@ export default {
         method: "delete",
         hasData: false,
     },
+    EXPORT_OPERATIONLOG:{
+        url: "/log/export",
+        method: "get",
+        hasData: false,
+    },
 }

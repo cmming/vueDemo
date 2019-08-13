@@ -51,6 +51,7 @@
       >{{$t('formCommon.submit.label')}}</el-button>
       <el-button @click="resetForm('form_search'+model.model_index)">{{$t('formCommon.reset.label')}}</el-button>
       <el-button v-if="model.searchArea.config.is_add" type="success" @click="addItem">{{$t('formCommon.add.label')}}</el-button>
+      <slot name="btn"></slot>
     </el-form-item>
   </el-form>
 </template>

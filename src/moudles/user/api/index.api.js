@@ -24,5 +24,10 @@ export default {
         method: "get",
         hasData: false,
     },
+    EXPORT_USER:{
+        url: "/user/export",
+        method: "get",
+        hasData: false,
+    },
 
 }
