@@ -5,9 +5,9 @@ addons:
   ssh_known_hosts:
   - 47.95.209.77
 before_install:
-- openssl aes-256-cbc -K $encrypted_6d66a5d31f8a_key -iv $encrypted_6d66a5d31f8a_iv
-  -in id_rsa_vue.enc -out ./id_rsa_vue -d
 - ll ~/.ssh/
+- openssl aes-256-cbc -K $encrypted_09d97a7e586a_key -iv $encrypted_09d97a7e586a_iv
+  -in id_rsa_vue.enc -out /home/travis/.ssh/id_rsa_vue -d
 - chmod 600 ~/.ssh/id_rsa_vue
 - echo -e "47.95.209.77\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_success:
