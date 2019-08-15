@@ -11,4 +11,4 @@ before_install:
 - chmod 600 ~/.ssh/id_rsa_vue
 - echo -e "47.95.209.77\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_success:
-- ll
+- ssh root@47.95.209.77 -o StrictHostKeyChecking=no 'cd /home/vueDemo && git pull && npm install && npm run build'   #使用ssh连接服务器
