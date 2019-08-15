@@ -9,5 +9,5 @@ before_install:
   -in id_rsa_vue.pub.enc -out ./id_rsa_vue.pub -d
 after_success:
 - chmod 600 ~/.ssh/id_rsa_vue
-- ssh root@47.95.209.77 -o StrictHostKeyChecking=no 'cd /home/vueDemo && git pull
+- ssh travis@47.95.209.77 -o StrictHostKeyChecking=no 'cd /home/vueDemo && git pull
   && npm install && npm run build'
