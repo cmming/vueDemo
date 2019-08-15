@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <c-upload :headers="headers" :chunkEnabled=false :postAction="postAction"></c-upload>
+      <c-upload :headers="headers" :chunkEnabled=true :postAction="postAction"></c-upload>
     </el-card>
   </div>
 </template>

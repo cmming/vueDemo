@@ -10,4 +10,10 @@ export default [{
         import ('@/moudles/login/views/register'),
     name: 'register',
     meta: { model: 'register', title: 'register' }
+},{
+    path: "",
+    redirect: "/login",
+},{
+    path: "/",
+    redirect: "/login",
 }]

@@ -17,6 +17,11 @@ const mutations = {
         state.model.table.data = data
     },
     SET_USER_FORM: (state, data) => {
+        let rolesTmp = [];
+        data.roles.data.map((val)=>{
+            rolesTmp.push(val.id)
+        })
+        data.roles = rolesTmp
         state.model.form.model = data
     },
 }

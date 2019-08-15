@@ -72,6 +72,9 @@ const mutations = {
     DELETE_AXIOS:(state,index)=>{
         delete state.axiosPromiseArr[index]
     },
+    INIT_AXIOS:(state)=>{
+        state.axiosPromiseArr = []
+    },
 }
 
 
@@ -96,6 +99,9 @@ const actions = {
     },
     deleteAxios({ commit }, params) {
         commit('DELETE_AXIOS', params)
+    },
+    initAxios({ commit }) {
+        commit('INIT_AXIOS')
     },
 }
 

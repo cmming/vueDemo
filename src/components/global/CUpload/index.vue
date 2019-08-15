@@ -23,7 +23,17 @@
             action: '/mock/file/chunk',
             minSize: chunkMinSize * 1048576,
             maxActive: chunkMaxActive,
-            maxRetries: chunkMaxRetries
+            maxRetries: chunkMaxRetries,
+            startBody: {
+              user_id: 1
+            },
+            uploadBody: {
+              user_id: 2
+            },
+            finishBody: {
+              user_id: 3
+            },
+            ...handler
           }"
         ref="upload"
       >
@@ -71,6 +81,8 @@
 <script>
 import FileUpload from "vue-upload-component";
 import FileList from "./components/uploadList";
+import ChunkUploadHandlerCm from  './chunkUploadHandler'
+// import ChunkUploadHandler from "vue-upload-component/src/chunk/ChunkUploadHandler";
 export default {
   name: "CUpload",
   components: {
@@ -130,7 +142,8 @@ export default {
   },
   data() {
     return {
-      files: []
+      files: [],
+      handler:{handler: ChunkUploadHandlerCm}
     };
   },
   methods: {

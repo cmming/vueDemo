@@ -61,7 +61,8 @@ class Colums {
                 input_type: this.input_type,
                 placeholder: this.placeholder,
                 show_update_form:this.show_update_form,
-                can_update:this.can_update!==undefined?this.can_update:this.show_update_form
+                can_update:this.can_update!==undefined?this.can_update:this.show_update_form,
+                options:[]
             }
         }
 
