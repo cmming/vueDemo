@@ -49,13 +49,13 @@
 import { mapGetters } from "vuex";
 import requestMap from "@/api/requestMap";
 import request from "@/api/request";
-import VitualForm from "./vitualForm";
+// import VitualForm from "./vitualForm";
 export default {
   computed: {
     ...mapGetters(["user"])
   },
   components: {
-    VitualForm
+    // VitualForm
   },
   data() {
     return {
