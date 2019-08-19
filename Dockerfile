@@ -1,17 +1,5 @@
-# FROM circleci/node:latest-browsers
+FROM nginx:alpine
 
-# WORKDIR /usr/src/app/
-# USER root
-# COPY package.json ./
-# RUN yarn
-
-# COPY ./ ./
-
-# RUN npm run test:all
-
-# CMD ["npm", "run", "build"]
-
-
-FROM nginx
-COPY dist/ /usr/share/nginx/html/
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./ /var/www/html
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+WORKDIR /var/www/html
