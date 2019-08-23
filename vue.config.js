@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
     // const defaultSettings = require('./src/settings.js')
     // const name = defaultSettings.title || 'vue Element Admin' // page title
 
@@ -7,16 +8,16 @@ function resolve(dir) {
     return path.join(__dirname, dir)
 }
 
-
 module.exports = {
+
+    productionSourceMap:process.env.NODE_ENV === 'production' ?
+    false : true,
 
     devServer: {
         proxy: {
             '/api': {
                 ws: false,
-                // target: 'http://localhost:3777/',
-                // target: 'http://192.168.50.58/api/',
-                target: 'http://localhost/api/',
+                target: process.env.VUE_APP_API_PROXY,
                 changeOrigin: true,
                 pathRewrite: { '^/api': '', }
             },
@@ -29,6 +30,12 @@ module.exports = {
         }
     },
     configureWebpack: {
+        plugins: [
+            new CompressionWebpackPlugin({
+                threshold: 10240,
+                minRatio: 0.8
+              })
+        ],
         // provide the app's title in webpack's name field, so that
         // it can be accessed in index.html to inject the correct title.
         // name: name,
