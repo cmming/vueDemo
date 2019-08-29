@@ -28,6 +28,7 @@ export default {
         url: "/user/export",
         method: "get",
         hasData: false,
+        responseType: 'arraybuffer',
     },
 
 }

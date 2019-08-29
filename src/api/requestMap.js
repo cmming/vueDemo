@@ -39,6 +39,13 @@ export default function requestMap(apiKey, data) {
     if(API_TYPE[apiKey]['headers']){
         res = {...res,headers:API_TYPE[apiKey]['headers']}
     }
+ 
+    // 去除 headers baseURL method url
+    // let setting = _.omit(API_TYPE[apiKey],['headers','baseURL','method','url','hasData'])
+
+    // res = {...setting,...res}
+
+    // console.log(res)
 
     return request(res)
 }

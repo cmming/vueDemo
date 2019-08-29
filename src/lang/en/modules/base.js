@@ -31,5 +31,8 @@ export default {
             label: 'autocomplete'
         },
 
+    },
+    loading:{
+        text:"loading..."
     }
 }

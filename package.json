@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "build:company": "vue-cli-service build --mode company",
+    "build:home": "vue-cli-service build --mode home",
+    "build:travis": "vue-cli-service build --mode travis",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "docs": "docsify serve ./docs/ --port 3999",
@@ -36,6 +39,7 @@
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-service": "^3.8.0",
     "babel-eslint": "^10.0.1",
+    "compression-webpack-plugin": "^3.0.0",
     "cors": "^2.8.5",
     "docsify-cli": "^4.3.0",
     "eslint": "^5.16.0",

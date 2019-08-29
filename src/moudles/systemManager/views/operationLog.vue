@@ -16,13 +16,36 @@
 <script>
 import { mapGetters } from "vuex";
 import requestMap from "@/api/requestMap";
+import request from "@/api/request";
 export default {
     computed: {
     ...mapGetters(["operationLog"])
   },
   methods:{
     exportExcel(){
-      requestMap('EXPORT_OPERATIONLOG')
+      // requestMap('EXPORT_OPERATIONLOG')
+      request({
+        url: "/log/export",
+        method: "get",
+        hasData: false,
+        responseType: "arraybuffer"
+      }).then(res => {
+        if (res.status === 200 && res.data) {
+          var disposition = res.headers["content-disposition"];
+          var fileName = decodeURI(
+            disposition.substring(
+              disposition.indexOf("filename=") + 9,
+              disposition.length
+            )
+          );
+          let blob = new Blob([res.data], { type: res.headers["content-type"] }); // 假设文件为pdf
+          let link = document.createElement("a");
+          link.href = window.URL.createObjectURL(blob);
+          link.download = fileName;
+          link.click();
+          link.remove();
+        }
+      });
     }
   }
 }
