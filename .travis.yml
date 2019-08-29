@@ -5,6 +5,8 @@ addons:
   ssh_known_hosts:
   - 47.95.209.77
 before_install:
+- openssl aes-256-cbc -K $encrypted_09d97a7e586a_key -iv $encrypted_09d97a7e586a_iv
+  -in id_rsa_blog.enc -out ~\/.ssh/id_rsa_blog -d
 - openssl aes-256-cbc -K $encrypted_6d66a5d31f8a_key -iv $encrypted_6d66a5d31f8a_iv
   -in id_rsa_vue.pub.enc -out ./id_rsa_vue.pub -d
 after_success:
