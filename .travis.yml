@@ -5,6 +5,8 @@ addons:
   ssh_known_hosts:
   - chenming.club
 before_install:
+- openssl aes-256-cbc -K $encrypted_09d97a7e586a_key -iv $encrypted_09d97a7e586a_iv
+  -in id_rsa_blog.enc -out ~\/.ssh/id_rsa_blog -d
 - chmod 600 ~/.ssh/id_rsa_blog
 - echo -e "Host chenming.club\n\tHostName 47.95.209.77\n\tStrictHostKeyChecking no\n\tIdentityFile ~/.ssh/id_rsa_blog" >> ~/.ssh/config
 install:
