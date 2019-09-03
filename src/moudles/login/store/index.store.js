@@ -1,6 +1,7 @@
 import login from "../model/index.model";
 import requestMap from "@/api/requestMap";
 import storage from '@/utils/storage'
+import { resetRouter } from '@/router'
 
 const state = {
     model: login,
@@ -72,6 +73,12 @@ const actions = {
                 reject(error)
             })
         })
+    },
+
+    logout({ commit }) {
+        commit('SET_TOKEN', '');
+        storage.set('userInfo', {});
+        resetRouter()
     },
 }
 

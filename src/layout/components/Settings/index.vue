@@ -1,16 +1,25 @@
 <template>
   <div class="drawer-container">
     <div>
-      <h3 class="drawer-title">Page style setting</h3>
+      <h3 class="drawer-title">{{$t('layout.setting.title')}}</h3>
 
-      <div class="drawer-item">
+      <!-- <div class="drawer-item">
         <span>Theme Color</span>
         <theme-picker style="float: right;height: 26px;margin: -3px 8px 0 0;" @change="themeChange" />
+      </div> -->
+
+      <div class="drawer-item">
+        <span>{{$t('layout.setting.backgroundSetting')}}</span>
+        <el-color-picker style="z-index:99999;float: right;height: 26px;margin: -3px 8px 0 0;" popper-class="zIndex-99999" v-model="settings.menuBg"></el-color-picker>
       </div>
 
       <div class="drawer-item">
-        <span>Menu Backgroud Color</span>
-        <el-color-picker style="z-index:99999;float: right;height: 26px;margin: -3px 8px 0 0;" popper-class="zIndex-99999" v-model="settings.menuBg"></el-color-picker>
+        <span> {{$t('layout.setting.fixedHeader')}}</span>
+        <el-switch v-model="settings.fixedHeader" class="drawer-switch" />
+      </div>
+      <div class="drawer-item">
+        <span> {{$t('layout.setting.fixedMenu')}}</span>
+        <el-switch v-model="settings.fixedMenu" class="drawer-switch" />
       </div>
 
       <!-- <div class="drawer-item">

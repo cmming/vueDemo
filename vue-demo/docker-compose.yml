@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+
+  vue_demo_server:
+    build: ./vue-demo
+    restart: unless-stopped
+    networks:
+      - nginx_net
+
+
+networks:
+  nginx_net:
+    external: true

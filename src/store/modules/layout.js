@@ -15,7 +15,10 @@ const state = {
     settings:{
         showSettings:true,
         theme: variables.theme,
-        menuBg:menuBg
+        menuBg:menuBg,
+        uniqueOpened: true,
+        fixedHeader: false,
+        fixedMenu: false,
     }
 }
 

@@ -1,23 +1,24 @@
 @import './variables.scss';
 @import './mixin.scss';
-
 @import './base.scss';
 #app {
     .app-side {
         height: auto;
-        min-height: $main-min-height +$header-height;
+        // min-height: $main-min-height +$header-height;
         background-color: $default-bg-color;
         transition: width 0.28s;
+        overflow-y: auto;
+        overflow-x: hidden;
         .app-menu {
-            border-color: $default-bg-color;
+            // border-color: $default-bg-color;
             .el-submenu {
-                .el-menu-item{
+                .el-menu-item {
                     // background-color: $default-bg-color-80 !important
                 }
             }
         }
-        &.close{
-            span{
+        &.close {
+            span {
                 display: none
             }
             // &.el-menu{
@@ -25,14 +26,14 @@
             // }
         }
     }
-    .app-right{
+    .app-right {
         min-height: 100vh;
     }
-    .app-header{
+    .app-header {
         background-color: $default-header-bg-color;
         box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
         position: relative;
-        .language-icon{
+        .language-icon {
             padding: 0 12px
         }
     }
@@ -41,7 +42,9 @@
     }
 }
 
-
-.zIndex-99999{
+.zIndex-99999 {
     z-index: 99999 !important;
-  }
+}
+
+@import './fixd-menu.scss';
+@import './fixd-header.scss';

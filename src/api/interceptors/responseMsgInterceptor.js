@@ -9,6 +9,7 @@ import {
 import i18n from '@/lang/index'
 import request from '@/api/request'
 import storage from '@/utils/storage'
+import { cancelRequest } from '@/router/interceptors/index'
 
 function openNotificationWithIcon(type, langId, isI18n = true) {
     Notification({
@@ -21,7 +22,7 @@ function openNotificationWithIcon(type, langId, isI18n = true) {
 
 export default function responseMsgInterceptorHandle(response) {
     let langId = (httpStatus.getMsg(response.status)) + ('.' + response.config.method)
-    // console.log(langId)
+        // console.log(langId)
     if (response.status === httpStatus.HTTP_CREATED) {
         openNotificationWithIcon('success', langId)
     } else if (response.status === httpStatus.HTTP_NO_CONTENT) {
@@ -34,9 +35,12 @@ export default function responseMsgInterceptorHandle(response) {
         switch (code) {
             // 过期可以刷新
             case 401001:
+                // 取消请求
+                cancelRequest()
                 store.dispatch('refreshToken').then(() => {
                     request(response.config)
-                    router.push('/refresh')
+                    const { fullPath } = router.currentRoute
+                    router.replace('/admin/redirect' + fullPath)
                 })
                 break;
             case 401005:
@@ -55,7 +59,6 @@ export default function responseMsgInterceptorHandle(response) {
         // }
     } else if (response.status === httpStatus.BAD_REQUEST) {
         openNotificationWithIcon('error', response.data.message, false)
-    } else {
-    }
+    } else {}
 
 }

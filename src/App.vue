@@ -13,6 +13,10 @@ export default {
     // window.Echo.channel("login-remind").listen("LoginRemind", e => {
       // 如果有广播过来你可以进行逻辑操作，比如给用户一个通知
       console.log(e);
+      this.$message({
+        type:'info',
+        message:e.message
+      })
     });
   }
 };
