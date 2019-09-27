@@ -70,6 +70,9 @@ const actions = {
                 }
                 resolve(response)
             }).catch(error => {
+                commit('SET_TOKEN', '');
+                storage.set('userInfo', {});
+                resetRouter()
                 reject(error)
             })
         })

@@ -15,7 +15,8 @@ export default {
       console.log(e);
       this.$message({
         type:'info',
-        message:e.message
+        // message:e.message
+        message:'欢迎登录'
       })
     });
   }

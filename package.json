@@ -65,7 +65,8 @@
       "eslint:recommended"
     ],
     "globals": {
-      "_": true
+      "_": true,
+      "storage":true
     },
     "rules": {
       "no-console": 1

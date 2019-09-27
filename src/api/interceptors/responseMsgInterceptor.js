@@ -41,6 +41,9 @@ export default function responseMsgInterceptorHandle(response) {
                     request(response.config)
                     const { fullPath } = router.currentRoute
                     router.replace('/admin/redirect' + fullPath)
+                }).catch(() => {
+                    const { fullPath } = router.currentRoute
+                    router.replace('/admin/redirect' + fullPath)
                 })
                 break;
             case 401005:

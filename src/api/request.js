@@ -8,7 +8,6 @@ import store from '@/store/index'
 import { responseMsgInterceptorHandle, tokenHandler, cancelRequest } from './interceptors/index'
 
 
-console.log(process.env)
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API, // api的base_url
     // baseURL: 'http://192.168.50.58/api', // api的base_url
