@@ -1,0 +1,19 @@
+@import './mixin.scss';
+.app-side-fixed {
+    position: fixed;
+    z-index: 100;
+    height: 100% !important;
+    @include scrollBar();
+    .app-menu {
+        height: auto !important;
+    }
+    +.app-right {
+        transition: padding-left 0.28s;
+        padding-left: 220px;
+    }
+    &.close {
+        +.app-right {
+            padding-left: 64px;
+        }
+    }
+}

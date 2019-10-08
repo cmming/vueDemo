@@ -31,5 +31,8 @@ export default {
             label: '自动输入'
         },
 
+    },
+    loading:{
+        text:"加载中..."
     }
 }

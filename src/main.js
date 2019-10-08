@@ -13,6 +13,8 @@ import router from './router'
 import store from './store'
 import _ from 'lodash'
 Vue.prototype._ = _
+import storage from './utils/storage';
+window.storage = storage;
 import './icons' // icon
 //全局组件自动注册
 import './components/index'

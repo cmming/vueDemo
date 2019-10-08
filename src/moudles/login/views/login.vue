@@ -3,7 +3,12 @@
     <div class="login-container-title">
       <span>{{$t('login.title')}}</span>
     </div>
-    <el-form ref="form" :model="login.model" label-position="left" :rules="login.rules">
+    <el-form
+      ref="loginForm"
+      :model="login.model"
+      label-position="left"
+      :rules="login.rules"
+    >
       <el-form-item prop="name">
         <el-input
           name="name"
@@ -15,7 +20,10 @@
           maxlength="30"
         >
           <!-- name -->
-          <svg-icon icon-class="name" slot="prefix" />
+          <svg-icon
+            icon-class="name"
+            slot="prefix"
+          />
         </el-input>
       </el-form-item>
 
@@ -29,11 +37,17 @@
           @keyup.enter.native="handleLogin"
           maxlength="30"
         >
-          <svg-icon icon-class="password" slot="prefix" />
+          <svg-icon
+            icon-class="password"
+            slot="prefix"
+          />
         </el-input>
       </el-form-item>
 
-      <el-form-item prop="captcha" :error="login.loginFormError.captcha">
+      <el-form-item
+        prop="captcha"
+        :error="login.items[2].error"
+      >
         <el-input
           name="captcha"
           type="text"
@@ -44,15 +58,36 @@
           @keyup.enter.native="handleLogin"
           maxlength="30"
         >
-          <svg-icon icon-class="captcha" slot="prefix" />
+          <svg-icon
+            icon-class="captcha"
+            slot="prefix"
+          />
         </el-input>
-        <img class="login-captcha-img" :src="login.model.img" alt />
-        <input type="text" hidden v-model="login.model.ckey" />
-        <el-button type="primary" round @click="refreshCaptcha">刷新</el-button>
+        <img
+          class="login-captcha-img"
+          :src="login.model.img"
+          alt
+        />
+        <input
+          type="text"
+          hidden
+          v-model="login.model.ckey"
+        />
+        <el-button
+          type="primary"
+          round
+          @click="refreshCaptcha"
+        >刷新</el-button>
       </el-form-item>
 
-      <el-form-item class="rember-checkbox" style="background:#fff">
-        <el-checkbox v-model="login.model.rember_pwd" fill="#2BAAB1">{{$t('login.form.rember_pwd')}}</el-checkbox>
+      <el-form-item
+        class="rember-checkbox"
+        style="background:#fff"
+      >
+        <el-checkbox
+          v-model="login.model.rember_pwd"
+          fill="#2BAAB1"
+        >{{$t('login.form.rember_pwd')}}</el-checkbox>
       </el-form-item>
 
       <el-form-item>
@@ -95,30 +130,46 @@ export default {
   },
   methods: {
     handleLogin() {
-      let params = {
-        name: this.login.model.name,
-        password: this.login.model.password,
-        ckey: this.login.model.ckey,
-        captcha: this.login.model.captcha
-      };
-      this.$store
-        .dispatch("login", params)
-        .then(() => {
-          this.$router.push("/admin/dashborad");
-        })
-        .catch(error => {
-          console.log(error);
-          let errors = error.data.errors;
-          errors.map(val => {
-            this.login.loginFormError[val.field] = val.code;
-          });
-        });
+      this.$refs["loginForm"].validate(valid => {
+        if (valid) {
+          this.clearError();
+          let params = {
+            name: this.login.model.name,
+            password: this.login.model.password,
+            ckey: this.login.model.ckey,
+            captcha: this.login.model.captcha
+          };
+          this.$store
+            .dispatch("login", params)
+            .then(() => {
+              this.$router.push("/admin/dashborad");
+            })
+            .catch(error => {
+              let errors = error.data.errors;
+              errors.map(val => {
+                this.login.items.map(v => {
+                  if (v.prop === val.field) {
+                    //  v.error = undefined;
+                    v.error = val.code;
+                  }
+                });
+              });
+            });
+        } else {
+          return false;
+        }
+      });
     },
     refreshCaptcha() {
       this.$store.dispatch("getCaptcha");
     },
     goToRegister() {
       this.$router.push("/register");
+    },
+    clearError() {
+      this.login.items.map(v => {
+        v.error = undefined;
+      });
     }
   }
 };

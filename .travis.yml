@@ -3,10 +3,16 @@ node_js:
 - '10'
 addons:
   ssh_known_hosts:
-  - 47.95.209.77
+  - chenming.club
 before_install:
-- openssl aes-256-cbc -K $encrypted_6d66a5d31f8a_key -iv $encrypted_6d66a5d31f8a_iv
-  -in id_rsa_vue.pub.enc -out ./id_rsa_vue.pub -d
+- openssl aes-256-cbc -K $encrypted_09d97a7e586a_key -iv $encrypted_09d97a7e586a_iv
+  -in id_rsa_blog.enc -out ~/.ssh/id_rsa_blog -d
+- chmod 600 ~/.ssh/id_rsa_blog
+- echo -e "Host chenming.club\n\tHostName 47.95.209.77\n\tStrictHostKeyChecking no\n\tIdentityFile ~/.ssh/id_rsa_blog" >> ~/.ssh/config
+install:
+- yarn install
+script:
+- yarn build:travis
 after_success:
-- ssh travis@47.95.209.77 -o StrictHostKeyChecking=no 'cd /home/vueDemo && git pull
-  && npm install && npm run build'
+- scp -o stricthostkeychecking=no -r ./dist root@chenming.club:/home/vue-demo/vue-demo
+- ssh root@chenming.club -o StrictHostKeyChecking=no 'cd /home/vue-demo && docker-compose up -d --build'   #使用ssh连接服务器

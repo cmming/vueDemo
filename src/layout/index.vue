@@ -2,7 +2,7 @@
   <el-container>
     <el-aside
       :width="menu.collapse?'65px':'220px'"
-      :class="{'close':menu.collapse,'app-side':true}"
+      :class="{'close':menu.collapse,'app-side':true,'app-side-fixed':settings.fixedMenu}"
       :style="{'background-color':settings.menuBg}"
     >
       <sidebar :menuList="dynamicMenu"></sidebar>
@@ -11,6 +11,7 @@
       <el-header
         class="app-header"
         height="60px"
+        :class='{"fixed":settings.fixedHeader}'
       >
         <Hamburger
           :is-active="menu.collapse"

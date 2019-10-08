@@ -56,6 +56,7 @@ const actions = {
                 // console.log(response.data.testRouterList,response.data.routerList)
                 commit('USER_INFO', response.data.routerList);
                 storage.set('indexPage',response.data.indexPage)
+                storage.set('userInfo', response.data);
                 // commit('INDEX_PAGE', response.data.indexPage);
                 resolve(response.data)
             }).catch(error => {
