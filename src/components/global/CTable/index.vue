@@ -126,7 +126,7 @@ export default {
             })
             .then(res => {
               //
-              if (res && res.status === 200) {
+              if (res && (res.status === 200 || res.status === 204)) {
                 this.list()
               }
             });

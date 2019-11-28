@@ -22,7 +22,7 @@
           slot="customAction"
           slot-scope="scope"
         >
-          <el-button @click="setRoles(scope.dataScope.row)">角色管理</el-button>
+          <el-button v-show="false" @click="setRoles(scope.dataScope.row)">角色管理</el-button>
         </template>
       </c-table>
     </el-card>
@@ -47,7 +47,6 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import requestMap from "@/api/requestMap";
 import request from "@/api/request";
 // import VitualForm from "./vitualForm";
 export default {

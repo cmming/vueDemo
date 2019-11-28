@@ -9,21 +9,10 @@
         transition: width 0.28s;
         overflow-y: auto;
         overflow-x: hidden;
-        .app-menu {
-            // border-color: $default-bg-color;
-            .el-submenu {
-                .el-menu-item {
-                    // background-color: $default-bg-color-80 !important
-                }
-            }
-        }
         &.close {
             span {
                 display: none
             }
-            // &.el-menu{
-            //     display: none
-            // }
         }
     }
     .app-right {

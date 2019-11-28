@@ -16,17 +16,6 @@
         suffix-icon="el-icon-delete"
         @click="batchDelete"
       >删除</el-button>
-      <el-button
-        type="success"
-        suffix-icon="el-icon-delete"
-        @click="createAnsyRouter"
-      >生成动态路由</el-button>
-      <el-button
-        type="success"
-        suffix-icon="el-icon-delete"
-        @click="npmRunBuild"
-        :loading="buildLoading"
-      >页面打包</el-button>
     </h3>
     <el-row
       slot="body"
@@ -334,9 +323,6 @@ export default {
         parent_id: null
       };
     },
-    createAnsyRouter() {
-      this.$store.dispatch("CREATE_ANSY_ROUTER")
-    },
     deleteSelected() {
       this.batchDelete();
     },
@@ -391,20 +377,6 @@ export default {
         });
       }
     },
-    npmRunBuild() {
-      this.buildLoading = true;
-      this.$store.dispatch("NPMRUNDUILD").then(() => {
-        this.buildLoading = false;
-        this.$notify({
-          type: "success",
-          title: "系统提示",
-          message: "编译成功",
-          //不关闭弹框
-          duration: 3000
-        });
-        // this.$message(res.data.msg);
-      });
-    }
   }
 };
 </script>
