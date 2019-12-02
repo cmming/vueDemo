@@ -1,5 +1,4 @@
 import ModelGenerator from "@/model/ModelGenerator"
-import requestMap from "@/api/requestMap";
 
 class User extends ModelGenerator {
     constructor() {
@@ -37,17 +36,6 @@ class User extends ModelGenerator {
 
     }
 
-    // async getRoles(params) {
-    //     this.form.items[3].options = [];
-    //     await requestMap('ROLES', params).then(response => {
-    //         response.data.data.map(val => {
-    //             this.form.items[3].options.push({
-    //                 value: val.id,
-    //                 label: val.name
-    //             });
-    //         })
-    //     })
-    // }
 
 }
 

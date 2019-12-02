@@ -6,6 +6,7 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
+        "lint:fix": "vue-cli-service lint --fix",
         "build:company": "vue-cli-service build --mode company",
         "build:home": "vue-cli-service build --mode home",
         "build:travis": "vue-cli-service build --mode travis",

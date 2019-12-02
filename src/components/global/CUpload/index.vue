@@ -20,7 +20,7 @@
         @input-file="inputFile"
         :chunk-enabled="chunkEnabled"
         :chunk="{
-            action: '/mock/file/chunk',
+            action: '/api/file/chunk',
             minSize: chunkMinSize * 1048576,
             maxActive: chunkMaxActive,
             maxRetries: chunkMaxRetries,

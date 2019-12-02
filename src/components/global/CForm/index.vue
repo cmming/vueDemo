@@ -160,15 +160,22 @@ export default {
               // console.log(error)
               if (error.status === 422) {
                 let errors = error.data.errors;
-                errors.map(val => {
-                  // console.log(val,this.model.form.items)
-                  this.model.form.items.map(v => {
-                    if (v.prop === val.field) {
-                      //  v.error = undefined;
-                      v.error = val.code;
-                    }
-                  });
-                });
+                // errors.map(val => {
+                //   // console.log(val,this.model.form.items)
+                //   this.model.form.items.map(v => {
+                //     if (v.prop === val.field) {
+                //       //  v.error = undefined;
+                //       v.error = val.code;
+                //     }
+                //   });
+                // });
+                 Object.keys(errors).map(val => {
+                   this.model.form.items.map(v => {
+                    if (v.prop === val) {
+                        v.error = errors[val].join(';');
+                      }
+                    });
+                 })
               }
             });
         } else {

@@ -69,7 +69,7 @@
   import {addClass, removeClass, hasClass} from 'element-ui/src/utils/dom';
   import {addResizeListener, removeResizeListener} from 'element-ui/src/utils/resize-event';
   import {t} from 'element-ui/src/locale';
-  import merge from 'element-ui/src/utils/merge';
+  // import merge from 'element-ui/src/utils/merge';
   import treeter from "../components/treeter"
 
   const sizeMap = {
@@ -159,7 +159,7 @@
     watch: {
       value(val) {
         this.handleResize();
-        if (!!val) {
+        if (val) {
           this.currentPlaceholder = '';
         } else {
           this.currentPlaceholder = this.placeholder;
@@ -229,13 +229,13 @@
       },
 
       setSelected(ids) {
-        if (!!ids) {
+        if (ids) {
           if (this.multiple) {
             this.$refs.tree.setCheckedKeys(ids);
             this.selected = this.$refs.tree.getCheckedNodes();
           } else {
             this.selected = this.findFromTree(this.treeData, ids, this.propNames.id, this.propNames.children);
-            this.selectedLabel = !!this.selected ? this.selected[this.propNames.label] : '';
+            this.selectedLabel = this.selected ? this.selected[this.propNames.label] : '';
           }
         } else {
           this.selected = this.multiple ? [] : {};
@@ -292,12 +292,12 @@
         this.selected = nodeData;
         this.handleResize();
       },
-      handleCheckChange(data, checked, indeterminate) {
+      handleCheckChange() {
         if (!this.multiple) return;
         this.selected = this.$refs.tree.getCheckedNodes();
         let tmpValue = [];
         if (this.selected) {
-          this.selected.forEach((item, index) => {
+          this.selected.forEach((item) => {
             tmpValue.push(item.id);
           });
         }
