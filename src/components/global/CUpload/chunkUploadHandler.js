@@ -217,13 +217,20 @@ import {
         this.resolve = resolve
         this.reject = reject
       })
-      this.getFileMD5(this.file.file,process =>{
-          console.log(process)
-      },md5 => {
-          this.fileMd5 = md5
-          this.start()
-        })
-        // this.start()
+      console.log(this.file.md5)
+      // 优化文件的MD5计算
+      if (this.file.md5 === undefined){
+        this.getFileMD5(this.file.file,process =>{
+          // eslint-disable-next-line
+            console.log(process)
+        },md5 => {
+            this.fileMd5 = md5
+            this.file.md5 = md5
+            this.start()
+          })
+      } else {
+        this.start()
+      }
   
       return this.promise
     }
@@ -412,11 +419,13 @@ import {
             } else {
                 callback(spark.end())
                 // console.log('finished loading');
+                // eslint-disable-next-line
                 console.info('computed hash', spark.end());  // Compute hash
             }
         };
 
         fileReader.onerror = function () {
+          // eslint-disable-next-line
             console.warn('oops, something went wrong.');
         };
 

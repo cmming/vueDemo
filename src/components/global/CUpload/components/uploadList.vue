@@ -31,18 +31,18 @@
       <template slot-scope="scope">
         <template v-if="scope.row.error">
           <el-progress
-            :percentage=" _.toNumber(scope.row.progress)"
+            :percentage="toNumber(scope.row.progress)"
             status="exception"
           ></el-progress>
         </template>
 
         <template v-if="scope.row.active">
-          <el-progress :percentage=" _.toNumber(scope.row.progress)"></el-progress>
+          <el-progress :percentage="ceil(toNumber(scope.row.progress),1)"></el-progress>
         </template>
 
         <template v-if="scope.row.success">
           <el-progress
-            :percentage=" _.toNumber(scope.row.progress)"
+            :percentage="toNumber(scope.row.progress)"
             status="success"
           ></el-progress>
         </template>
@@ -69,7 +69,7 @@
         <el-button
           v-if="scope.row.active"
           type="danger"
-          @click.prevent="fileUploadObj.update(scope.row, {active: false})"
+          @click.prevent="stopFile(scope.row, {active: false})"
         >
           <svg-icon icon-class="stop" />{{$t('CUpload.fileList.action.stop')}}
         </el-button>
@@ -96,6 +96,8 @@
   </el-table>
 </template>
 <script>
+import toNumber from 'lodash/toNumber'
+import ceil from 'lodash/ceil'
 export default {
   props: {
     files: {
@@ -105,6 +107,19 @@ export default {
     fileUploadObj: {
       type: Object,
       default: () => {}
+    }
+  },
+  methods: {
+    toNumber (data) {
+      return toNumber(data)
+    },
+    ceil (data) {
+      return ceil(data)
+    },
+    stopFile (file, data) {
+      // 分片文件上传 暂停，
+      file.active = false
+      this.fileUploadObj.update(file, data)
     }
   }
 };
