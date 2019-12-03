@@ -4,6 +4,7 @@ import {
     sendFormRequest
   } from 'vue-upload-component/src/utils/request'
   import { Notification } from 'element-ui';
+  import SparkMD5 from 'spark-md5'
   
   
   export default class ChunkUploadHandler {
@@ -142,6 +143,10 @@ import {
         return !!chunk.uploaded
       })
     }
+
+    fileMd5 () {
+        return this.file.md5
+    }
   
     /**
      * Creates all the chunks in the initial state
@@ -212,7 +217,13 @@ import {
         this.resolve = resolve
         this.reject = reject
       })
-      this.start()
+      this.getFileMD5(this.file.file,process =>{
+          console.log(process)
+      },md5 => {
+          this.fileMd5 = md5
+          this.start()
+        })
+        // this.start()
   
       return this.promise
     }
@@ -232,7 +243,8 @@ import {
           phase: 'start',
           mime_type: this.fileType,
           size: this.fileSize,
-          name: this.fileName
+          name: this.fileName,
+          md5: this.fileMd5
         })
       }).then(res => {
         if (res.status !== 'success') {
@@ -245,7 +257,7 @@ import {
         }
   
         this.sessionId = res.data.session_id
-        this.chunkSize = res.data.end_offset
+        this.chunkSize = parseInt(res.data.end_offset)
   
         this.createChunks()
         this.startChunking()
@@ -312,6 +324,7 @@ import {
         start_offset: chunk.startOffset,
         chunk: chunk.blob,
         chunks: parseInt(chunk.startOffset/this.chunkSize),
+        md5: this.fileMd5
       })).then(res => {
         chunk.active = false
         if (res.status === 'success') {
@@ -355,6 +368,7 @@ import {
           size: this.fileSize,
           name: this.fileName,
           chunks: this.chunks.length,
+          md5: this.fileMd5
         })
       }).then(res => {
         this.file.response = res
@@ -372,5 +386,48 @@ import {
         this.reject('server')
       })
     }
+
+
+    /**
+     * 
+     * @param {*} file 文件
+     * @param {*} callback 计算成功回调
+     */
+    getFileMD5 (file, progress, callback) {
+        let blobSlice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlice,
+            chunkSize = 2097152,                             // Read in chunks of 2MB
+            chunks = Math.ceil(file.size / chunkSize),
+            currentChunk = 0,
+            spark = new SparkMD5.ArrayBuffer(),
+            fileReader = new FileReader();
+
+        fileReader.onload = function (e) {
+            progress(parseInt((currentChunk + 1)/chunks*100))
+            // console.log('read chunk nr', currentChunk + 1, 'of', chunks);
+            spark.append(e.target.result);                   // Append array buffer
+            currentChunk++;
+
+            if (currentChunk < chunks) {
+                loadNext();
+            } else {
+                callback(spark.end())
+                // console.log('finished loading');
+                console.info('computed hash', spark.end());  // Compute hash
+            }
+        };
+
+        fileReader.onerror = function () {
+            console.warn('oops, something went wrong.');
+        };
+
+        function loadNext() {
+            var start = currentChunk * chunkSize,
+                end = ((start + chunkSize) >= file.size) ? file.size : start + chunkSize;
+
+            fileReader.readAsArrayBuffer(blobSlice.call(file, start, end));
+        }
+
+        loadNext();
+        }
   }
   
