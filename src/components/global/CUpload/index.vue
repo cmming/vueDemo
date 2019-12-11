@@ -137,11 +137,11 @@ export default {
     },
     postAction: {
       type: String,
-      default: process.env.VUE_APP_BASE_API + '/file/uploadCompanyImg'
+      default: process.env.VUE_APP_BASE_API + 'file/uploadCompanyImg'
     },
     chunkAction: {
       type: String,
-      default: process.env.VUE_APP_BASE_API + '/api/file/chunk'
+      default: process.env.VUE_APP_BASE_API + 'file/chunk'
     }
   },
   data() {
