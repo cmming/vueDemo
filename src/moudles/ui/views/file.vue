@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <c-upload :headers="headers" :chunkEnabled=true :postAction="postAction"></c-upload>
+      <c-upload :headers="headers" :chunkEnabled=true></c-upload>
     </el-card>
   </div>
 </template>
@@ -11,7 +11,6 @@ export default {
   data(){
     return {
       headers:{Authorization:'Bearer '+storage.get('vueDemoToken')},
-      postAction:'/api/file/uploadCompanyImg'
     }
   }
 };

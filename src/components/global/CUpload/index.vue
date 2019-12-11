@@ -20,7 +20,7 @@
         @input-file="inputFile"
         :chunk-enabled="chunkEnabled"
         :chunk="{
-            action: '/api/file/chunk',
+            action: chunkAction,
             minSize: chunkMinSize * 1048576,
             maxActive: chunkMaxActive,
             maxRetries: chunkMaxRetries,
@@ -137,7 +137,11 @@ export default {
     },
     postAction: {
       type: String,
-      default: ''
+      default: process.env.VUE_APP_BASE_API + '/file/uploadCompanyImg'
+    },
+    chunkAction: {
+      type: String,
+      default: process.env.VUE_APP_BASE_API + '/api/file/chunk'
     }
   },
   data() {
