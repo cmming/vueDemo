@@ -56,14 +56,14 @@
           <el-checkbox-group v-model="model.form.model[item['prop']]">
             <el-checkbox
               v-for="(i,k) in item.options"
-              :key="k"
+              :key="item['prop']+k"
               :label="i.value"
             >{{i.label}}</el-checkbox>
           </el-checkbox-group>
         </template>
 
         <template v-if="item.type ==='datePicker'">
-          <el-date-picker v-model="model.form.model[item['prop']]"></el-date-picker>
+          <el-date-picker v-model="model.form.model[item['prop']]" value-format="yyyy-MM-dd"></el-date-picker>
         </template>
 
         <template v-if="item.type ==='select'">
@@ -72,10 +72,10 @@
             placeholder="请选择"
           >
             <el-option
-              v-for="item in item.options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              v-for="i in item.options"
+              :key="item['prop']+i.value"
+              :label="i.label"
+              :value="i.value"
             ></el-option>
           </el-select>
 
@@ -93,6 +93,16 @@
             :placeholder="item.placeholder"
             @select="item.handleSelect"
           ></el-autocomplete>
+        </template>
+
+         <!-- transfer -->
+        <template v-if="item.type ==='transfer'">
+          <el-transfer
+            filterable
+            :titles="item.titles?item.titles:[$t('formCommon.transfer.title.uncheck'),$t('formCommon.transfer.title.checkd')]"
+            v-model="model.form.model[item['prop']]"
+            :data="item.options"
+          ></el-transfer>
         </template>
 
       </el-form-item>
@@ -160,15 +170,6 @@ export default {
               // console.log(error)
               if (error.status === 422) {
                 let errors = error.data.errors;
-                // errors.map(val => {
-                //   // console.log(val,this.model.form.items)
-                //   this.model.form.items.map(v => {
-                //     if (v.prop === val.field) {
-                //       //  v.error = undefined;
-                //       v.error = val.code;
-                //     }
-                //   });
-                // });
                  Object.keys(errors).map(val => {
                    this.model.form.items.map(v => {
                     if (v.prop === val) {
@@ -234,13 +235,13 @@ export default {
     }
   },
   beforeDestroy() {
-    //表单添加离开就清空上次填写的数据
-    if (this.formStatus === "add") {
-      this.resetForm("form_" + this.model.model_index);
-      // 清空所有的错误提示
-      this.$refs["form_" + this.model.model_index].clearValidate();
-      this.clearError();
-    }
+    this.resetForm('form_' + this.model.model_index)
+    // 清空所有的错误提示
+    this.$refs['form_' + this.model.model_index].clearValidate()
+    // 清空后台填充再表单中的错误
+    this.clearError()
+    // this.model.form.model = this.formBaseData;
+    this.model.form.model = this.model.form.base_model
   },
   //
   watch: {

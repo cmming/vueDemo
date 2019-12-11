@@ -1,11 +1,25 @@
 export default {
-    "submit": {
-        "label":"submit"
+    'submit': {
+      'label': 'submit'
     },
-    "reset": {
-        "label":"reset"
+    'reset': {
+      'label': 'reset'
     },
-    "add": {
-        "label":"add"
+    'add': {
+      'label': 'add'
     },
-}
+    'update': {
+      'label': 'update'
+    },
+    'transfer': {
+      'title': {
+        'checkd': 'checkd',
+        'uncheck': 'uncheck'
+      }
+    },
+    'input_placeholder': 'please enter',
+    'select_placeholder': 'please choose',
+    'searchSelect_placeholder': 'please enter',
+    'search': 'search'
+  }
+  

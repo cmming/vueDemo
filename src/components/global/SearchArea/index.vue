@@ -35,10 +35,10 @@
       <template v-if="item.type ==='select'">
         <el-select v-model="model.searchArea.model[item['prop']]" placeholder="请选择">
           <el-option
-            v-for="item in item.options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
+            v-for="i in item.options"
+            :key="item['prop']+i.value"
+            :label="i.label"
+            :value="i.value"
           ></el-option>
         </el-select>
       </template>

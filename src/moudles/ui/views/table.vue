@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-card class="m-bottom-sm search-area">
-      <search-area :model="base"></search-area>
+      <search-area :model="base" @addItem="addItem"></search-area>
     </el-card>
     <el-card>
-      <c-table :model="base">
+      <c-table :model="base" @editItem="editItem">
         <template slot="customAction" slot-scope="scope">
           <el-button @click="customEvent(scope.dataScope.row)">自定义</el-button>
         </template>
@@ -31,7 +31,13 @@ export default {
         message: "自定义事件",
         type: "success"
       });
-    }
+    },
+    editItem(data){
+      this.$router.replace({path: `/admin/ui/form/update/${data.id}`})
+    },
+    addItem() {
+      this.$router.push("/admin/ui/form");
+    },
   }
 };
 </script>

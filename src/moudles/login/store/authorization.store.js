@@ -17,7 +17,7 @@ function routerListTransforms(data) {
         })
     }
 
-    // item(data)
+    item(data)
     return data
 }
 

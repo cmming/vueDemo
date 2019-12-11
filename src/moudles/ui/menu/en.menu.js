@@ -4,4 +4,5 @@ export default {
     "table": "table",
     "file": "file",
     "imgCropper": "imgCropper",
+    "updateForm": "data update",
 }
