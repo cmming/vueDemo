@@ -12,7 +12,8 @@
         @click.middle.native="!isAffix(tag)?closeSelectedTag(tag):''"
         @contextmenu.prevent.native="openMenu(tag,$event)"
       >
-        {{ tag.title }}
+        <!-- {{ tag.title }} -->
+        {{$t('menu.'+ tag.name)}}
         <span v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
       </router-link>
     </scroll-pane>
@@ -223,9 +224,12 @@ export default {
         margin-right: 15px;
       }
       &.active {
-        background-color: #42b983;
-        color: #fff;
-        border-color: #42b983;
+        // background-color: #42b983;
+        // color: #fff;
+        // border-color: #42b983;
+        background-color: #545c64;
+        color: #ffd04b;
+        border-color: #545c64;
         &::before {
           content: '';
           background: #fff;

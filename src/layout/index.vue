@@ -10,13 +10,14 @@
     <el-container class="app-right">
       <el-header
         class="app-header"
-        height="60px"
+        height="50px"
         :class='{"fixed":settings.fixedHeader}'
       >
         <Hamburger
           :is-active="menu.collapse"
           @toggleClick="toggleMenu"
         />
+        <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
         <navbar :language="language"></navbar>
       </el-header>
 
@@ -36,6 +37,7 @@
 import { mapGetters } from "vuex";
 import { Sidebar, Navbar, Hamburger, Settings, TagsView } from "./components/index";
 import RightPanel from '@/components/RightPanel'
+import Breadcrumb from '@/components/Breadcrumb'
 export default {
   name: "LayoutAdmin",
   computed: {
@@ -47,7 +49,8 @@ export default {
     Hamburger,
     RightPanel,
     Settings,
-    TagsView
+    TagsView,
+    Breadcrumb
   },
   methods: {
     toggleMenu() {
@@ -61,6 +64,6 @@ export default {
 .el-header {
   background-color: #b3c0d1;
   color: #333;
-  line-height: 60px;
+  line-height: 50px;
 }
 </style>

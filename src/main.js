@@ -3,7 +3,6 @@ import i18n from './lang/index'
 import Element from 'element-ui'
 import './styles/element-variables.scss'
 import 'normalize.css/normalize.css'
-import 'element-ui/lib/theme-chalk/index.css';
 // 
 import GLOBAL_CONFIG from '@/config/globalConfig'
 window.GLOBAL_CONFIG = GLOBAL_CONFIG

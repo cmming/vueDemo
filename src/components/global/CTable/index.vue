@@ -44,6 +44,7 @@
         <template slot-scope="scope">
           <!-- 删除 -->
           <el-button
+            plain
             v-if="model.table.commonAction.delete&&model.table.commonAction.delete.show"
             type="danger"
             @click="deleteItem(scope.row)"
@@ -54,6 +55,7 @@
 
           <!-- 修改 -->
           <el-button
+            plain
             v-if="model.table.commonAction.delete&&model.table.commonAction.edit.show"
             type="primary"
             @click="editItem(scope.row)"

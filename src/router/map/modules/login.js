@@ -15,5 +15,5 @@ export default [{
     redirect: "/login",
 },{
     path: "/",
-    redirect: "/login",
+    redirect: "/admin/dashborad/index",
 }]

@@ -78,7 +78,7 @@ export default {
     float: left;
     list-style: none;
     position: relative;
-    padding: 0 22px;
+    padding: 0 10px;
     cursor: pointer;
     ::v-deep svg {
       color: #000 !important;

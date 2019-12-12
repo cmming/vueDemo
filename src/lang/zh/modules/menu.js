@@ -63,6 +63,7 @@ const menuList = {
     //     'title':"注册",
     //     'register':"注册"
     // },
+    'Dashboard': '首页',
     ...modules
 }
 
