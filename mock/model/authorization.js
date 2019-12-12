@@ -69,17 +69,17 @@ const authorization = {
                     },
                     children: [{
                         path: 'user',
-                        component: 'moudles/user/views/list',
+                        component: 'modules/user/views/list',
                         name: 'userList',
                         meta: { title: 'userList',icon: 'dashboard' ,type:"menu",hidden:false,model:'user'}
                     },{
                         path: 'user/store',
-                        component: 'moudles/user/views/form',
+                        component: 'modules/user/views/form',
                         name: 'userStore',
                         meta: { title: 'userStore',icon: 'dashboard' ,type:"menu",hidden:false,model:'user'}
                     },{
                         path: 'user/update/:post_id',
-                        component: 'moudles/user/views/form',
+                        component: 'modules/user/views/form',
                         name: 'userUpdate',
                         meta: { title: 'userUpdate',icon: 'dashboard',type:"menu",hidden:true,model:'user' }
                     }]

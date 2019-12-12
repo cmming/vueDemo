@@ -9,7 +9,7 @@
     <el-col
       :lg="24"
       :xs="0"
-      class="over-flow-auto"
+      class="over-flow-auto hidden-xs-only"
       style="text-align: center;"
     >
       <div class="pagination-container">
@@ -29,7 +29,7 @@
     <el-col
       :lg="0"
       :xs="24"
-      class="over-flow-auto"
+      class="over-flow-auto hidden-sm-and-up"
     >
       <div class="pagination-container">
         <el-pagination
@@ -47,6 +47,7 @@
   </el-row>
 </template>
 <script>
+import 'element-ui/lib/theme-chalk/display.css'
 export default {
   name: "CPagination",
   props: {

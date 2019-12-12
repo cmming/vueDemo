@@ -15,7 +15,6 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import requestMap from "@/api/requestMap";
 import request from "@/api/request";
 export default {
     computed: {
@@ -23,7 +22,6 @@ export default {
   },
   methods:{
     exportExcel(){
-      // requestMap('EXPORT_OPERATIONLOG')
       request({
         url: "/log/export",
         method: "get",

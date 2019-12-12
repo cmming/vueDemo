@@ -9,8 +9,8 @@ import { responseMsgInterceptorHandle, tokenHandler, cancelRequest } from './int
 
 
 const service = axios.create({
-    baseURL: process.env.VUE_APP_BASE_API, // api的base_url
-    // baseURL: 'http://192.168.50.58/api', // api的base_url
+    // baseURL: process.env.VUE_APP_BASE_API, // api的base_url
+    baseURL: 'http://192.168.50.179:280/api', // api的base_url
     // baseURL: 'http://api.chenming.club/api',
     // baseURL: 'http://192.168.50.58:81/api',
     timeout: 15000, // request timeout

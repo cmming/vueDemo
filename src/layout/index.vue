@@ -20,6 +20,7 @@
         <navbar :language="language"></navbar>
       </el-header>
 
+      <tags-view />
       <el-main class="app-main">
         <router-view />
       </el-main>
@@ -33,7 +34,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import { Sidebar, Navbar, Hamburger,Settings } from "./components/index";
+import { Sidebar, Navbar, Hamburger, Settings, TagsView } from "./components/index";
 import RightPanel from '@/components/RightPanel'
 export default {
   name: "LayoutAdmin",
@@ -45,7 +46,8 @@ export default {
     Navbar,
     Hamburger,
     RightPanel,
-    Settings
+    Settings,
+    TagsView
   },
   methods: {
     toggleMenu() {

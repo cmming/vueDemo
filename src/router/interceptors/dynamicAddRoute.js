@@ -60,7 +60,7 @@ function fnAddDynamicRoutes(dynamicRoutes) {
                     return import ( /* webpackPrefetch: true */ `@/${component}`)
                         .then((component) => { return component })
                         .catch(() =>
-                            import ( /* webpackPrefetch: true */ '@/moudles/errorPage/views/404'))
+                            import ( /* webpackPrefetch: true */ '@/modules/errorPage/views/404'))
                 }
                 if (val.children && val.children.length >= 1) {
                     importCompent(val.children)
