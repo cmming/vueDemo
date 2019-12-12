@@ -5,20 +5,18 @@
     </div>
     <el-form
       ref="registerForm"
-      :model="register"
+      :model="register.model"
       :rules="register.rules"
       label-position="left"
     >
-      <el-form-item prop="name">
+      <el-form-item prop="name" :error="register.items[0].error">
         <el-input
-          name="name"
           type="text"
           v-model="register.model.name"
           autocomplete="off"
           :placeholder="$t('register.form.name.placeholder')"
           @keyup.enter.native="handleLogin"
           maxlength="30"
-          :error="register.items[0].error"
         >
           <!-- name -->
           <svg-icon
@@ -28,16 +26,14 @@
         </el-input>
       </el-form-item>
 
-      <el-form-item prop="email">
+      <el-form-item prop="email" :error="register.items[1].error">
         <el-input
-          name="email"
           type="text"
           v-model="register.model.email"
           autocomplete="off"
           :placeholder="$t('register.form.email.placeholder')"
           @keyup.enter.native="handleLogin"
           maxlength="30"
-          :error="register.items[1].error"
         >
           <!-- name -->
           <svg-icon
@@ -47,9 +43,8 @@
         </el-input>
       </el-form-item>
 
-      <el-form-item prop="code">
+      <el-form-item prop="code" :error="register.items[2].error">
         <el-input
-          name="code"
           type="text"
           class="login-captcha"
           v-model="register.model.code"
@@ -57,7 +52,6 @@
           :placeholder="$t('register.form.code.placeholder')"
           @keyup.enter.native="handleLogin"
           maxlength="30"
-          :error="register.items[2].error"
         >
           <svg-icon
             icon-class="captcha"
@@ -71,16 +65,14 @@
         >发送</el-button>
       </el-form-item>
 
-      <el-form-item prop="password">
+      <el-form-item prop="password" :error="register.items[3].error">
         <el-input
-          name="password"
           type="password"
           v-model="register.model.password"
           autocomplete="off"
           :placeholder="$t('register.form.password.placeholder')"
           @keyup.enter.native="handleLogin"
           maxlength="30"
-          :error="register.items[3].error"
         >
           <svg-icon
             icon-class="password"
@@ -106,20 +98,10 @@
         </el-input>
       </el-form-item>
 
-      <el-form-item
-        class="rember-checkbox"
-        style="background:#fff"
-      >
-        <el-checkbox
-          v-model="register.model.rember_pwd"
-          fill="#2BAAB1"
-        >{{$t('register.form.rember_pwd')}}</el-checkbox>
-      </el-form-item>
-
       <el-form-item>
         <el-button
           type="primary"
-          style="width:100%;margin-bottom:30px;"
+          style="width:100%;margin:30px 0;"
           @click.native.prevent="handleRegister"
         >{{$t('register.form.register')}}</el-button>
       </el-form-item>
@@ -140,17 +122,17 @@ export default {
   computed: {
     ...mapGetters(["register"])
   },
-  created() {},
-  data() {
-    return {
-      // login: {
-      //   name: "",
-      //   password: "",
-      //   rember_pwd: "",
-      //   ckey: "",
-      //   captcha: ""
-      // }
+  created(){
+    var validatePass2 = (rule, value, callback) => {
+        if (value === '') {
+            callback(new Error('请再次输入密码'));
+        } else if (value !== this.register.model.password) {
+            callback(new Error('两次输入密码不一致!'));
+        } else {
+            callback();
+        }
     };
+    this.register.rules['checkPassword'] = [{ required: true, validator: validatePass2, trigger: "change" }]
   },
   methods: {
     handleRegister() {
@@ -166,6 +148,17 @@ export default {
           this.$store.dispatch("register", params).then(() => {
             this.$message.success("注册成功，请登录");
             this.$router.push("/login");
+          }).catch(error=>{
+            if (error.status === 422) {
+              let errors = error.data.errors;
+                Object.keys(errors).map(val => {
+                  this.register.items.map(v => {
+                  if (v.prop === val) {
+                      v.error = errors[val].join(';');
+                    }
+                  });
+                })
+            }
           });
         } else {
           return false;
@@ -182,21 +175,16 @@ export default {
           this.$message.success("验证码发送成功");
         })
         .catch(error => {
-          // console.log(error);
-          if(error.data.errors&&error.data.errors[0]&&error.data.errors[0].code)
-          {
-            this.$message.error(error.data.errors[0].code);
+          if (error.status === 422) {
+            let errors = error.data.errors;
+              Object.keys(errors).map(val => {
+                this.register.items.map(v => {
+                if (v.prop === val) {
+                    v.error = errors[val].join(';');
+                  }
+                });
+              })
           }
-          let errors = error.data.errors;
-          errors.map(val => {
-            this.register.items.map(v => {
-              if (v.prop === val.field) {
-                //  v.error = undefined;
-                v.error = val.code;
-              }
-            });
-          });
-          return false;
         });
     },
     goToLogin() {

@@ -3,7 +3,8 @@ export default {
         name: "",
         email: "",
         password: "",
-        code: ""
+        code: "",
+        checkPassword: ""
     },
     rules: {
         name: [
@@ -17,12 +18,13 @@ export default {
         ],
         email: [
             { required: true, message: "请输入邮箱", trigger: "change" },
-        ]
+        ],
     },
     items: [
         { label_key: "name", prop: "name", type: "input", placeholder: true, error: "" },
         { label_key: "email", prop: "email", type: "input", placeholder: true, error: "" },
         { label_key: "code", prop: "code", type: "input", placeholder: true, error: "" },
         { label_key: "password", prop: "password", type: "input", placeholder: true, error: "" },
+        { label_key: "checkPassword", prop: "password", type: "input", placeholder: true, error: "" },
     ]
 }
