@@ -56,6 +56,9 @@ function fnAddDynamicRoutes(dynamicRoutes) {
                 // 3.捕获不存在的组件给其 一个一定存在的组件
                 // 4.prefetch  webpackPrefetch  空闲时才会下载
                 let component = val['component']
+                if(component === 'layout/empty' || component === 'layout/index') {
+                    val['redirect'] = 'noRedirect'
+                } 
                 val['component'] = () => {
                     return import ( /* webpackPrefetch: true */ `@/${component}`)
                         .then((component) => { return component })

@@ -69,6 +69,7 @@ const menuList = {
     //     'register':"register"
     // },
     'Dashboard': 'Dashboard',
+    '404': 'Page not found',
     ...modules
 }
 

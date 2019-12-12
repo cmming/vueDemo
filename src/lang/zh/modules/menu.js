@@ -64,6 +64,7 @@ const menuList = {
     //     'register':"注册"
     // },
     'Dashboard': '首页',
+    '404': '页面不存在',
     ...modules
 }
 

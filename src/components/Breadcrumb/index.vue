@@ -1,7 +1,7 @@
 <template>
   <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
+      <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.name">
         <span v-if="item.redirect==='noRedirect'||index==levelList.length-1||(item.parent===undefined&&item.path!=='/admin/dashborad/index')" class="no-redirect">
           <!-- {{ item.meta.title }} -->
           {{$t('menu.'+ item.meta.title)}} {{item.component}}
@@ -43,7 +43,7 @@ export default {
       const first = matched[0]
 
       if (!this.isDashboard(first)) {
-        matched = [{ path: '/admin/dashborad/index', meta: { title: 'Dashboard' }}].concat(matched)
+        matched = [{ path: '/admin/dashborad/index', name:'dashboradMain', meta: { title: 'Dashboard' }}].concat(matched)
       }
 
       this.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
