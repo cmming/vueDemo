@@ -34,8 +34,12 @@ export default {
   data() {
     return {
       userInfoFormStatus: false,
-      userName: storage.get("userInfo").info.name
     };
+  },
+  computed:{
+    userName(){
+      return storage.get("userInfo")?storage.get("userInfo").info.name:''
+    }
   },
   methods: {
     // eslint-disable-next-line

@@ -10,11 +10,12 @@ import i18n from '@/lang/index'
 import request from '@/api/request'
 import storage from '@/utils/storage'
 import { cancelRequest } from '@/router/interceptors/index'
+import { getUrlAllParams } from '@/utils'
 
-function openNotificationWithIcon(type, langId, isI18n = true) {
+function openNotificationWithIcon(type, langId) {
     Notification({
         // title: i18n.messages[i18n.locale]['backstage']['response']['success']['title'],
-        message: isI18n ? i18n.messages[i18n.locale]['response'][langId] : langId,
+        message: i18n.messages[i18n.locale]['response'][langId] ? i18n.messages[i18n.locale]['response'][langId] : langId,
         type: type,
         duration: globalConfig.notificationDuration
     });
@@ -38,15 +39,19 @@ export default function responseMsgInterceptorHandle(response) {
                 // 取消请求
                 cancelRequest()
                 store.dispatch('refreshToken').then(() => {
-                    request(response.config)
-                    const { fullPath } = router.currentRoute
-                    router.replace('/admin/redirect' + fullPath)
-                }).catch(() => {
-                    const { fullPath } = router.currentRoute
-                    router.replace('/admin/redirect' + fullPath)
+                    // fix baseURL重叠
+                    response.config.baseURL = ''
+                    response.config.data = getUrlAllParams(response.config.data)
+                    // 重新上次的请求
+                    request(response.config).then(() => {
+                        let prePath = window.location.hash.replace('#', '')
+                        router.replace({ path: '/redirect' + prePath === '/login' ? storage.get('indexPage') : prePath })
+                    })
                 })
                 break;
             case 401005:
+                store.dispatch('logout')
+                router.replace({ path: '/redirect/login' })
                 openNotificationWithIcon('error', response.data.message)
                 break;
             default:
@@ -54,14 +59,8 @@ export default function responseMsgInterceptorHandle(response) {
                 router.push('/login')
                 break;
         }
-        // if (response.data.code && response.data.code == 401) {
-        //     alert(1)
-
-        // } else {
-        //     openNotificationWithIcon('error', response.statusText)
-        // }
     } else if (response.status === httpStatus.BAD_REQUEST) {
         openNotificationWithIcon('error', response.data.message, false)
-    } else {}
+    }
 
 }

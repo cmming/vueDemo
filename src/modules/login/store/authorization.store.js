@@ -52,13 +52,21 @@ const actions = {
     }, params) {
         return new Promise((resolve, reject) => {
             requestMap('USER_INFO', params).then(response => {
+                // response.data.routerList = routerListTransforms(response.data.routerList)
+                // // console.log(response.data.testRouterList,response.data.routerList)
+                // commit('USER_INFO', response.data.routerList);
+                // storage.set('indexPage',response.data.indexPage)
+                // storage.set('userInfo', response.data);
+                // // commit('INDEX_PAGE', response.data.indexPage);
+                // resolve(response.data)
+
+                response.data.indexPage = response.data.routerList[0].path + (response.data.routerList[0].children.length ? ('/' + response.data.routerList[0].children[0].path) : '')
                 response.data.routerList = routerListTransforms(response.data.routerList)
-                // console.log(response.data.testRouterList,response.data.routerList)
-                commit('USER_INFO', response.data.routerList);
-                storage.set('indexPage',response.data.indexPage)
-                storage.set('userInfo', response.data);
-                // commit('INDEX_PAGE', response.data.indexPage);
+                storage.set('indexPage', response.data.indexPage)
+                commit('USER_INFO', response.data.routerList)
+                storage.set('userInfo', response.data)
                 resolve(response.data)
+
             }).catch(error => {
                 reject(error)
             })

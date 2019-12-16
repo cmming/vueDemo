@@ -1,3 +1,5 @@
+import split from 'lodash/split'
+import forEach from 'lodash/forEach'
 /**
  * Created by PanJiaChen on 16/11/18.
  */
@@ -347,4 +349,26 @@ export function removeClass(ele, cls) {
     const reg = new RegExp('(\\s|^)' + cls + '(\\s|$)')
     ele.className = ele.className.replace(reg, ' ')
   }
+}
+
+
+export function getUrlAllParams (url) {
+  var url_data
+  var res = {}
+  // 解决乱码问题
+  if (!url) {
+    url = decodeURI(window.location.href)
+    url_data = split(url, '?').length > 1 ? split(url, '?')[1] : null
+    if (!url_data) return null
+  } else {
+    url_data = url
+  }
+
+  var params_arr = split(url_data, '&')
+  forEach(params_arr, function (item) {
+    var key = split(item, '=')[0]
+    var value = split(item, '=')[1]
+    res[key] = value
+  })
+  return res
 }

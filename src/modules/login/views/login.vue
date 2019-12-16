@@ -141,8 +141,12 @@ export default {
           };
           this.$store
             .dispatch("login", params)
-            .then(() => {
-              this.$router.push("/admin/dashborad");
+            .then((res) => {
+              if (res.status === 200) {
+                this.$store.dispatch('getUserInfo').then(() => {
+                  this.$router.push(storage.get('indexPage'))
+                })
+              }
             })
             .catch(error => {
               let errors = error.data.errors;

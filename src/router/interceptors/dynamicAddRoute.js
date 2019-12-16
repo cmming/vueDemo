@@ -127,7 +127,7 @@ async function getUserInfo(to, from, next, router, addRoutesAfter) {
             router.options.isLoad = true
                 //确保加载完成
             if (to.path == '/login') {
-                next({ path: res.indexPage, replace: true })
+                next({ path: storage.get('indexPage'), replace: true })
             } else {
                 next({...to, replace: true })
             }
