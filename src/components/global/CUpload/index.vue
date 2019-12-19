@@ -25,13 +25,16 @@
             maxActive: chunkMaxActive,
             maxRetries: chunkMaxRetries,
             startBody: {
-              user_id: 1
+              user_id: 1,
+              Authorization: Authorization
             },
             uploadBody: {
-              user_id: 2
+              user_id: 2,
+              Authorization: Authorization
             },
             finishBody: {
-              user_id: 3
+              user_id: 3,
+              Authorization: Authorization
             },
             ...handler
           }"
@@ -147,7 +150,8 @@ export default {
   data() {
     return {
       files: [],
-      handler:{handler: ChunkUploadHandlerCm}
+      handler:{handler: ChunkUploadHandlerCm},
+      Authorization:"Bearer "+ storage.get('vueDemoToken')
     };
   },
   methods: {
