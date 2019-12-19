@@ -217,7 +217,6 @@ import {
         this.resolve = resolve
         this.reject = reject
       })
-      console.log(this.file.md5)
       // 优化文件的MD5计算
       if (this.file.md5 === undefined){
         this.getFileMD5(this.file.file,process =>{

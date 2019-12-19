@@ -20,6 +20,7 @@
         @input-file="inputFile"
         :chunk-enabled="chunkEnabled"
         :chunk="{
+            headers: headers,
             action: chunkAction,
             minSize: chunkMinSize * 1048576,
             maxActive: chunkMaxActive,
@@ -133,9 +134,7 @@ export default {
     },
     headers: {
       type: Object,
-      default: () => {
-        return {Authorization:"Bearer "+ storage.get('vueDemoToken')}
-      }
+      default: () => {}
     },
     postAction: {
       type: String,
