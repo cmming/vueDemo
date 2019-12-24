@@ -13,12 +13,12 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters(["base"])
+    ...mapGetters(['base'])
   },
-  created() {
+  created () {
     // eslint-disable-next-line
     // console.log(this.base);
   },
@@ -27,18 +27,17 @@ export default {
     customEvent(data) {
       //   console.log(scope);
       this.$notify({
-        title: "成功",
-        message: "自定义事件",
-        type: "success"
-      });
+        title: '成功',
+        message: '自定义事件',
+        type: 'success'
+      })
     },
-    editItem(data){
-      this.$router.replace({path: `/admin/ui/form/update/${data.id}`})
+    editItem (data) {
+      this.$router.replace({ path: `/admin/ui/form/update/${data.id}` })
     },
-    addItem() {
-      this.$router.push("/admin/ui/form");
-    },
+    addItem () {
+      this.$router.push('/admin/ui/form')
+    }
   }
-};
+}
 </script>
-

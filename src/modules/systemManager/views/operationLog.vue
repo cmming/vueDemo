@@ -14,36 +14,36 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import request from "@/api/request";
+import { mapGetters } from 'vuex'
+import request from '@/api/request'
 export default {
-    computed: {
-    ...mapGetters(["operationLog"])
+  computed: {
+    ...mapGetters(['operationLog'])
   },
-  methods:{
-    exportExcel(){
+  methods: {
+    exportExcel () {
       request({
-        url: "/log/export",
-        method: "get",
+        url: '/log/export',
+        method: 'get',
         hasData: false,
-        responseType: "arraybuffer"
+        responseType: 'arraybuffer'
       }).then(res => {
         if (res.status === 200 && res.data) {
-          var disposition = res.headers["content-disposition"];
+          var disposition = res.headers['content-disposition']
           var fileName = decodeURI(
             disposition.substring(
-              disposition.indexOf("filename=") + 9,
+              disposition.indexOf('filename=') + 9,
               disposition.length
             )
-          );
-          let blob = new Blob([res.data], { type: res.headers["content-type"] }); // 假设文件为pdf
-          let link = document.createElement("a");
-          link.href = window.URL.createObjectURL(blob);
-          link.download = fileName;
-          link.click();
-          link.remove();
+          )
+          let blob = new Blob([res.data], { type: res.headers['content-type'] }) // 假设文件为pdf
+          let link = document.createElement('a')
+          link.href = window.URL.createObjectURL(blob)
+          link.download = fileName
+          link.click()
+          link.remove()
         }
-      });
+      })
     }
   }
 }

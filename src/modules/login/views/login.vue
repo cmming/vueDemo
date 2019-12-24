@@ -109,15 +109,15 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters(["login"])
+    ...mapGetters(['login'])
   },
-  created() {
-    this.$store.dispatch("getCaptcha");
+  created () {
+    this.$store.dispatch('getCaptcha')
   },
-  data() {
+  data () {
     return {
       // login: {
       //   name: "",
@@ -126,21 +126,21 @@ export default {
       //   ckey: "",
       //   captcha: ""
       // }
-    };
+    }
   },
   methods: {
-    handleLogin() {
-      this.$refs["loginForm"].validate(valid => {
+    handleLogin () {
+      this.$refs['loginForm'].validate(valid => {
         if (valid) {
-          this.clearError();
+          this.clearError()
           let params = {
             name: this.login.model.name,
             password: this.login.model.password,
             ckey: this.login.model.ckey,
             captcha: this.login.model.captcha
-          };
+          }
           this.$store
-            .dispatch("login", params)
+            .dispatch('login', params)
             .then((res) => {
               if (res.status === 200) {
                 this.$store.dispatch('getUserInfo').then(() => {
@@ -149,34 +149,34 @@ export default {
               }
             })
             .catch(error => {
-              let errors = error.data.errors;
+              let errors = error.data.errors
               errors.map(val => {
                 this.login.items.map(v => {
                   if (v.prop === val.field) {
                     //  v.error = undefined;
-                    v.error = val.code;
+                    v.error = val.code
                   }
-                });
-              });
-            });
+                })
+              })
+            })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
-    refreshCaptcha() {
-      this.$store.dispatch("getCaptcha");
+    refreshCaptcha () {
+      this.$store.dispatch('getCaptcha')
     },
-    goToRegister() {
-      this.$router.push("/register");
+    goToRegister () {
+      this.$router.push('/register')
     },
-    clearError() {
+    clearError () {
       this.login.items.map(v => {
-        v.error = undefined;
-      });
+        v.error = undefined
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -202,4 +202,3 @@ export default {
   }
 }
 </style>
-

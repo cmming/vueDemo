@@ -80,12 +80,12 @@
   </div>
 </template>
 <script>
-import FileUpload from "vue-upload-component";
-import FileList from "./components/uploadList";
-import ChunkUploadHandlerCm from  './chunkUploadHandler'
+import FileUpload from 'vue-upload-component'
+import FileList from './components/uploadList'
+import ChunkUploadHandlerCm from './chunkUploadHandler'
 // import ChunkUploadHandler from "vue-upload-component/src/chunk/ChunkUploadHandler";
 export default {
-  name: "CUpload",
+  name: 'CUpload',
   components: {
     FileUpload,
     FileList
@@ -109,7 +109,7 @@ export default {
     // 文件 MIME type
     accept: {
       type: String,
-      default: "*"
+      default: '*'
     },
     // 文件大小限制 0 不限制
     size: {
@@ -145,63 +145,63 @@ export default {
       default: process.env.VUE_APP_BASE_API + 'file/chunk'
     }
   },
-  data() {
+  data () {
     return {
       files: [],
-      handler:{handler: ChunkUploadHandlerCm}
-    };
+      handler: { handler: ChunkUploadHandlerCm }
+    }
   },
   methods: {
-    onAddFolader() {
+    onAddFolader () {
       if (!this.$refs.upload.features.directory) {
-        this.alert("Your browser does not support");
-        return;
+        this.alert('Your browser does not support')
+        return
       }
-      let input = this.$refs.upload.$el.querySelector("input");
-      input.directory = true;
-      input.webkitdirectory = true;
-      this.directory = true;
-      input.onclick = null;
-      input.click();
+      let input = this.$refs.upload.$el.querySelector('input')
+      input.directory = true
+      input.webkitdirectory = true
+      this.directory = true
+      input.onclick = null
+      input.click()
       input.onclick = () => {
-        this.directory = false;
-        input.directory = false;
-        input.webkitdirectory = false;
-      };
+        this.directory = false
+        input.directory = false
+        input.webkitdirectory = false
+      }
     },
-    inputFilter(newFile, oldFile, prevent) {
+    inputFilter (newFile, oldFile, prevent) {
       if (newFile && !oldFile) {
         // Before adding a file
         // 添加文件前
         // Filter system files or hide files
         // 过滤系统文件 和隐藏文件
         if (/(\/|^)(Thumbs\.db|desktop\.ini|\..+)$/.test(newFile.name)) {
-          return prevent();
+          return prevent()
         }
         // Filter php html js file
         // 过滤 php html js 文件
         if (/\.(php5?|html?|jsx?)$/i.test(newFile.name)) {
-          return prevent();
+          return prevent()
         }
       }
 
       if (newFile && (!oldFile || newFile.file !== oldFile.file)) {
         // Create a blob field
         // 创建 blob 字段
-        newFile.blob = "";
-        let URL = window.URL || window.webkitURL;
+        newFile.blob = ''
+        let URL = window.URL || window.webkitURL
         if (URL && URL.createObjectURL) {
-          newFile.blob = URL.createObjectURL(newFile.file);
+          newFile.blob = URL.createObjectURL(newFile.file)
         }
         // Thumbnails
         // 缩略图
-        newFile.thumb = "";
-        if (newFile.blob && newFile.type.substr(0, 6) === "image/") {
-          newFile.thumb = newFile.blob;
+        newFile.thumb = ''
+        if (newFile.blob && newFile.type.substr(0, 6) === 'image/') {
+          newFile.thumb = newFile.blob
         }
       }
     },
-    inputFile(newFile, oldFile) {
+    inputFile (newFile, oldFile) {
       if (newFile && !oldFile) {
         // add
         // console.log("add", newFile);
@@ -216,7 +216,7 @@ export default {
       }
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .table-upload {
@@ -262,5 +262,3 @@ export default {
   }
 }
 </style>
-
-

@@ -23,7 +23,6 @@
      </template>
     </el-table-column>
 
-
     <el-table-column
       prop="progress"
       :label="$t('CUpload.fileList.column.progress')"
@@ -122,6 +121,5 @@ export default {
       this.fileUploadObj.update(file, data)
     }
   }
-};
+}
 </script>
-

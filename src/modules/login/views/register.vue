@@ -117,86 +117,86 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters(["register"])
+    ...mapGetters(['register'])
   },
-  created(){
+  created () {
     var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-            callback(new Error('请再次输入密码'));
-        } else if (value !== this.register.model.password) {
-            callback(new Error('两次输入密码不一致!'));
-        } else {
-            callback();
-        }
-    };
-    this.register.rules['checkPassword'] = [{ required: true, validator: validatePass2, trigger: "change" }]
+      if (value === '') {
+        callback(new Error('请再次输入密码'))
+      } else if (value !== this.register.model.password) {
+        callback(new Error('两次输入密码不一致!'))
+      } else {
+        callback()
+      }
+    }
+    this.register.rules['checkPassword'] = [{ required: true, validator: validatePass2, trigger: 'change' }]
   },
   methods: {
-    handleRegister() {
-      this.$refs["registerForm"].validate(valid => {
+    handleRegister () {
+      this.$refs['registerForm'].validate(valid => {
         if (valid) {
-          this.clearError();
+          this.clearError()
           let params = {
             name: this.register.model.name,
             password: this.register.model.password,
             email: this.register.model.email,
             code: this.register.model.code
-          };
-          this.$store.dispatch("register", params).then(() => {
-            this.$message.success("注册成功，请登录");
-            this.$router.push("/login");
-          }).catch(error=>{
+          }
+          this.$store.dispatch('register', params).then(() => {
+            this.$message.success('注册成功，请登录')
+            this.$router.push('/login')
+          }).catch(error => {
             if (error.status === 422) {
-              let errors = error.data.errors;
-                Object.keys(errors).map(val => {
-                  this.register.items.map(v => {
+              let errors = error.data.errors
+              Object.keys(errors).map(val => {
+                this.register.items.map(v => {
                   if (v.prop === val) {
-                      v.error = errors[val].join(';');
-                    }
-                  });
+                    v.error = errors[val].join(';')
+                  }
                 })
+              })
             }
-          });
+          })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
-    sendCode() {
-      let params = { email: this.register.model.email };
-      this.clearError();
+    sendCode () {
+      let params = { email: this.register.model.email }
+      this.clearError()
       this.$store
-        .dispatch("getRegisterCode", params)
+        .dispatch('getRegisterCode', params)
         .then(() => {
           // TODO 验证码发送成功
-          this.$message.success("验证码发送成功");
+          this.$message.success('验证码发送成功')
         })
         .catch(error => {
           if (error.status === 422) {
-            let errors = error.data.errors;
-              Object.keys(errors).map(val => {
-                this.register.items.map(v => {
+            let errors = error.data.errors
+            Object.keys(errors).map(val => {
+              this.register.items.map(v => {
                 if (v.prop === val) {
-                    v.error = errors[val].join(';');
-                  }
-                });
+                  v.error = errors[val].join(';')
+                }
               })
+            })
           }
-        });
+        })
     },
-    goToLogin() {
-      this.$router.push("/login");
+    goToLogin () {
+      this.$router.push('/login')
     },
-    clearError() {
+    clearError () {
       this.register.items.map(v => {
-        v.error = undefined;
-      });
+        v.error = undefined
+      })
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -222,4 +222,3 @@ export default {
   }
 }
 </style>
-

@@ -4,16 +4,15 @@
   </el-card>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
   computed: {
-    ...mapGetters(["role"])
+    ...mapGetters(['role'])
   },
-  methods:{
-    onSucces(){
+  methods: {
+    onSucces () {
       this.$router.push('/admin/systemManager/role')
     }
   }
-};
+}
 </script>
-

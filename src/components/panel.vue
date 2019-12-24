@@ -15,20 +15,20 @@
   </div>
 </template>
 <script type="text/javascript">
-  export default{
-    name:"ImpPanel",
-    props: {
-      widthBorder:{
-          type:Boolean
-      },
-      title: {
-        type: String
-      },
-      footer: {
-        type: String
-      }
+export default {
+  name: 'ImpPanel',
+  props: {
+    widthBorder: {
+      type: Boolean
+    },
+    title: {
+      type: String
+    },
+    footer: {
+      type: String
     }
   }
+}
 </script>
 <style scoped>
   .box{

@@ -230,77 +230,77 @@
 
 </template>
 <script type="text/babel">
-import { mapGetters } from "vuex";
-import panel from "@/components/panel.vue";
-import selectTree from "@/components/selectTree.vue";
-import treeter from "@/components/treeter";
-import merge from "element-ui/src/utils/merge";
+import { mapGetters } from 'vuex'
+import panel from '@/components/panel.vue'
+import selectTree from '@/components/selectTree.vue'
+import treeter from '@/components/treeter'
+import merge from 'element-ui/src/utils/merge'
 
-import icons from "@/components/SvgIcon/generateIconsView";
+import icons from '@/components/SvgIcon/generateIconsView'
 
 export default {
   mixins: [treeter],
   components: {
-    "imp-panel": panel,
-    "el-select-tree": selectTree
+    'imp-panel': panel,
+    'el-select-tree': selectTree
   },
-  data() {
+  data () {
     return {
       buildLoading: false,
       selectIconDialog: false,
-      formLabelWidth: "100px",
+      formLabelWidth: '100px',
       defaultProps: {
-        children: "children",
-        label: "name",
-        id: "id"
+        children: 'children',
+        label: 'name',
+        id: 'id'
       },
       maxId: 7000000,
       menuTree: [],
       form: {
         id: null,
-        name: "",
+        name: '',
         sort: 0,
-        icon: "",
-        path: "",
-        hidden: "",
+        icon: '',
+        path: '',
+        hidden: '',
         parent_id: 0,
         noCache: 1,
-        component: "",
-        title: "",
-        type: "",
-        model: ""
+        component: '',
+        title: '',
+        type: '',
+        model: ''
       },
       iconsMap: []
-    };
+    }
   },
   computed: {
-    ...mapGetters(["router","loading"])
+    ...mapGetters(['router', 'loading'])
   },
-  mounted() {
+  mounted () {
     const iconsMap = icons.state.iconsMap.map(i => {
-      return i.default.id.split("-")[1];
-    });
-    this.iconsMap = iconsMap;
+      return i.default.id.split('-')[1]
+    })
+    this.iconsMap = iconsMap
   },
-  created() {
-    this.load();
+  created () {
+    this.load()
   },
   methods: {
-    handleClipboard(text) {
-      this.selectIconDialog = false;
-      this.form.icon = text;
+    handleClipboard (text) {
+      this.selectIconDialog = false
+      this.form.icon = text
     },
-    generateIconCode(symbol) {
-      return `<svg-icon icon-class="${symbol}" />`;
+    generateIconCode (symbol) {
+      return `<svg-icon icon-class="${symbol}" />`
     },
-    load() {
-      this.$store.dispatch("getRouter")
+    load () {
+      this.$store.dispatch('getRouter')
     },
-    selectIcon(event) {
-      this.form.icon = event.target.className;
-      this.selectIconDialog = false;
+    selectIcon (event) {
+      this.form.icon = event.target.className
+      this.selectIconDialog = false
     },
-    renderContent(h, { node, data }) {
+    renderContent (h, { node, data }) {
       return (
         <span>
           <span>
@@ -310,75 +310,75 @@ export default {
             </span>
           </span>
         </span>
-      );
+      )
     },
-    newAdd() {
+    newAdd () {
       this.form = {
         id: null,
-        name: "",
+        name: '',
         sort: 0,
-        icon: "",
-        path: "",
-        hidden: "",
+        icon: '',
+        path: '',
+        hidden: '',
         parent_id: null
-      };
-    },
-    deleteSelected() {
-      this.batchDelete();
-    },
-    batchDelete() {
-      var checkKeys = this.$refs.menuTree.getCheckedKeys();
-      if (checkKeys == null || checkKeys.length <= 0) {
-        this.$message.warning("请选择要删除的资源");
-        return;
       }
-      this.$confirm("确定删除?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
+    },
+    deleteSelected () {
+      this.batchDelete()
+    },
+    batchDelete () {
+      var checkKeys = this.$refs.menuTree.getCheckedKeys()
+      if (checkKeys === null || checkKeys.length <= 0) {
+        this.$message.warning('请选择要删除的资源')
+        return
+      }
+      this.$confirm('确定删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       }).then(() => {
-        let params = {id:checkKeys},
-          self = this;
+        let params = { id: checkKeys }
+        let self = this
         this.$store
-          .dispatch("deleteRouter", params)
+          .dispatch('deleteRouter', params)
           .then(() => {
-            this.$message("操作成功");
-            self.load();
+            this.$message('操作成功')
+            self.load()
           })
           .catch(() => {
-            this.$message("操作失败");
-          });
-      });
+            this.$message('操作失败')
+          })
+      })
     },
-    handleNodeClick(data) {
-      this.form = merge({}, data);
+    handleNodeClick (data) {
+      this.form = merge({}, data)
     },
-    onSubmit() {
-      let params = this.form,
-        self = this;
+    onSubmit () {
+      let params = this.form
+      let self = this
       // 判断是 修改还是添加
-      if (this.form.id == null) {
-        this.form.id = 0;
+      if (this.form.id === null) {
+        this.form.id = 0
       }
-      if (this.form.parent_id == null) {
-        this.form.parent_id = 0;
+      if (this.form.parent_id === null) {
+        this.form.parent_id = 0
       }
       if (this.form.id > 0) {
         this.$store
-          .dispatch("updateRouter", { ...params, resource_id: params.id })
+          .dispatch('updateRouter', { ...params, resource_id: params.id })
           .then(() => {
             // 再次刷新数据
-            self.load();
-          });
+            self.load()
+          })
       } else {
-        this.$store.dispatch("addRouter", params).then(() => {
+        this.$store.dispatch('addRouter', params).then(() => {
           // 再次刷新数据
-          self.load();
-        });
+          self.load()
+        })
       }
-    },
+    }
   }
-};
+}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>

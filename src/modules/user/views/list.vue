@@ -46,22 +46,22 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import request from "@/api/request";
+import { mapGetters } from 'vuex'
+import request from '@/api/request'
 // import VitualForm from "./vitualForm";
 export default {
   computed: {
-    ...mapGetters(["user"])
+    ...mapGetters(['user'])
   },
   components: {
     // VitualForm
   },
-  data() {
+  data () {
     return {
-      action: process.env.VUE_APP_BASE_API + "/user/export"
-    };
+      action: process.env.VUE_APP_BASE_API + '/user/export'
+    }
   },
-  created() {
+  created () {
     // eslint-disable-next-line
     // console.log(this.base);
   },
@@ -70,40 +70,40 @@ export default {
     setRoles(data) {
       //   console.log(scope);
       this.$notify({
-        title: "成功",
-        message: "自定义事件",
-        type: "success"
-      });
+        title: '成功',
+        message: '自定义事件',
+        type: 'success'
+      })
     },
-    editItem(data) {
-      this.$router.push("/admin/user/update/" + data.id);
+    editItem (data) {
+      this.$router.push('/admin/user/update/' + data.id)
     },
-    addItem() {
-      this.$router.push("/admin/user/store");
+    addItem () {
+      this.$router.push('/admin/user/store')
     },
-    exportExcel() {
+    exportExcel () {
       request({
-        url: "/user/export",
-        method: "get",
+        url: '/user/export',
+        method: 'get',
         hasData: false,
-        responseType: "arraybuffer"
+        responseType: 'arraybuffer'
       }).then(res => {
         if (res.status === 200 && res.data) {
-          var disposition = res.headers["content-disposition"];
+          var disposition = res.headers['content-disposition']
           var fileName = decodeURI(
             disposition.substring(
-              disposition.indexOf("filename=") + 9,
+              disposition.indexOf('filename=') + 9,
               disposition.length
             )
-          );
-          let blob = new Blob([res.data], { type: res.headers["content-type"] }); // 假设文件为pdf
-          let link = document.createElement("a");
-          link.href = window.URL.createObjectURL(blob);
-          link.download = fileName;
-          link.click();
-          link.remove();
+          )
+          let blob = new Blob([res.data], { type: res.headers['content-type'] }) // 假设文件为pdf
+          let link = document.createElement('a')
+          link.href = window.URL.createObjectURL(blob)
+          link.download = fileName
+          link.click()
+          link.remove()
         }
-      });
+      })
       // requestMap("EXPORT_USER").then(res => {
       //   console.log(res);
       //   //  var a = document.createElement("a");
@@ -118,6 +118,5 @@ export default {
       // this.$refs["downloadBtn"].click();
     }
   }
-};
+}
 </script>
-

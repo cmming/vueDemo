@@ -14,30 +14,29 @@
       </div>
     </el-card>
 
-    <tinymce :height="300" v-model="content" id='tinymce'></tinymce> 
+    <tinymce :height="300" v-model="content" id='tinymce'></tinymce>
   </div>
 </template>
 <script>
-import storage from "@/utils/storage"
-import Xterm from "./xterm";
+import storage from '@/utils/storage'
+import Xterm from './xterm'
 import Tinymce from '@/components/Tinymce'
 export default {
-  data(){
+  data () {
     return {
-      headers:{Authorization:'Bearer '+storage.get('vueDemoToken')},
-      sshs:[],
-      content:''
+      headers: { Authorization: 'Bearer ' + storage.get('vueDemoToken') },
+      sshs: [],
+      content: ''
     }
   },
-  components:{
+  components: {
     Xterm,
     Tinymce
   },
-  methods:{
-    addSsh(){
+  methods: {
+    addSsh () {
       this.sshs.push(+new Date())
     }
   }
-};
+}
 </script>
-

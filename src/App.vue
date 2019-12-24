@@ -4,22 +4,22 @@
   </div>
 </template>
 <script>
-import "@/styles/index.scss";
+import '@/styles/index.scss'
 export default {
-  name: "app",
-  mounted() {
-    const userId= storage.get('userInfo').info.id
-    window.Echo.private(`login.remind.${userId}`).listen("LoginRemind", e => {
+  name: 'app',
+  mounted () {
+    const userId = storage.get('userInfo').info.id
+    window.Echo.private(`login.remind.${userId}`).listen('LoginRemind', e => {
     // window.Echo.channel("private-login-remind").listen("LoginRemind", e => {
     // window.Echo.channel("login-remind").listen("LoginRemind", e => {
       // 如果有广播过来你可以进行逻辑操作，比如给用户一个通知
       // console.log(e);
       this.$message({
-        type:'info',
+        type: 'info',
         // message:e.message
-        message:e.message?e.message:'欢迎登录'
+        message: e.message ? e.message : '欢迎登录'
       })
-    });
+    })
   }
-};
+}
 </script>

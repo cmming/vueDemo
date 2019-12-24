@@ -56,27 +56,27 @@
   </el-card>
 </template>
 <script>
-import ImgCropper from "@/components/imgCropper/index.vue";
-import { VueCropper } from "vue-cropper";
+import ImgCropper from '@/components/imgCropper/index.vue'
+import { VueCropper } from 'vue-cropper'
 // eslint-disable-next-line
 import request from "@/api/request";
-import axios from "axios";
-import storage from "@/utils/storage";
+import axios from 'axios'
+import storage from '@/utils/storage'
 export default {
   components: {
     ImgCropper,
     VueCropper
   },
-  data() {
+  data () {
     return {
       model: false,
-      modelSrc: "",
-      blob: "",
+      modelSrc: '',
+      blob: '',
       option: {
-        img: "https://avatars2.githubusercontent.com/u/15681693?s=460&v=4",
+        img: 'https://avatars2.githubusercontent.com/u/15681693?s=460&v=4',
         size: 1,
         full: false,
-        outputType: "png",
+        outputType: 'png',
         canMove: true,
         fixedBox: true,
         original: false,
@@ -89,63 +89,63 @@ export default {
         high: false,
         cropData: {},
         enlarge: 1,
-        mode: "contain",
+        mode: 'contain',
         maxImgSize: 2000,
-        fileName: "default.png"
+        fileName: 'default.png'
       }
-    };
+    }
   },
   methods: {
-    clickChoseFile() {
-      this.$refs.fileContainer.click();
+    clickChoseFile () {
+      this.$refs.fileContainer.click()
     },
-    choseFile() {
+    choseFile () {
       // 将file 转化为 blob显示在img 中
       this.option.img = window.URL.createObjectURL(
         this.$refs.fileContainer.files[0]
-      );
-      this.option.fileName = this.$refs.fileContainer.files[0].name;
+      )
+      this.option.fileName = this.$refs.fileContainer.files[0].name
     },
-    imgLoad(msg) {
+    imgLoad (msg) {
       // eslint-disable-next-line
       console.log(msg);
     },
-    finish() {
+    finish () {
       this.$refs.cropper.getCropBlob(data => {
-        var img = window.URL.createObjectURL(data);
-        this.model = true;
-        this.modelSrc = img;
-        this.blob = data;
-      });
+        var img = window.URL.createObjectURL(data)
+        this.model = true
+        this.modelSrc = img
+        this.blob = data
+      })
     },
-    upload() {
+    upload () {
       this.$refs.cropper.getCropBlob(data => {
-        this.blob = data;
-        const formData = new FormData();
-        formData.append("file", this.blob, this.option.fileName);
+        this.blob = data
+        const formData = new FormData()
+        formData.append('file', this.blob, this.option.fileName)
         // console.log(formData, request);
 
         let config = {
-          //添加请求头
+          // 添加请求头
           headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: "Bearer " + storage.get("vueDemoToken")
-          },
-          //添加上传进度监听事件
+            'Content-Type': 'multipart/form-data',
+            Authorization: 'Bearer ' + storage.get('vueDemoToken')
+          }
+          // 添加上传进度监听事件
           // onUploadProgress: e => {
-            // var completeProgress = (((e.loaded / e.total) * 100) | 0) + "%";
-            // console.log(completeProgress);
+          // var completeProgress = (((e.loaded / e.total) * 100) | 0) + "%";
+          // console.log(completeProgress);
           // }
-        };
+        }
         axios
-          .post("/api/file/uploadCompanyImg", formData, config)
+          .post('/api/file/uploadCompanyImg', formData, config)
           // .then(function(response) {
           //   console.log(response);
           // })
           // .catch(function(error) {
           //   console.log(error);
           // });
-      });
+      })
 
       // request({
       //   url: "/file/uploadCompanyImg",
@@ -158,6 +158,5 @@ export default {
       // });
     }
   }
-};
+}
 </script>
-

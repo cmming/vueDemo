@@ -51,7 +51,7 @@
 </template>
 <script>
 export default {
-  name: "SidebarItem",
+  name: 'SidebarItem',
   props: {
     // route object
     menu: {
@@ -63,6 +63,5 @@ export default {
       default: ''
     }
   }
-};
+}
 </script>
-

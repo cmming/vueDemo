@@ -42,12 +42,12 @@
 </template>
 
 <script>
-import ThemePicker from '@/components/ThemePicker'
-import {mapGetters} from 'vuex'
+// import ThemePicker from '@/components/ThemePicker'
+import { mapGetters } from 'vuex'
 
 export default {
-  components: { ThemePicker },
-  data() {
+  // components: { ThemePicker },
+  data () {
     return {}
   },
   computed: {
@@ -87,7 +87,7 @@ export default {
     // }
   },
   methods: {
-    themeChange(val) {
+    themeChange (val) {
       this.$store.dispatch('settings/changeSetting', {
         key: 'theme',
         value: val

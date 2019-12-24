@@ -1,4 +1,4 @@
 export default {
-    "dashborad": "dashborad manage",
-    "dashboradIndex": "dashborad",
+  'dashborad': 'dashborad manage',
+  'dashboradIndex': 'dashborad'
 }

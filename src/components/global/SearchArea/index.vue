@@ -56,9 +56,9 @@
   </el-form>
 </template>
 <script>
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
-  name: "SearchArea",
+  name: 'SearchArea',
   props: {
     model: {
       type: Object,
@@ -68,10 +68,10 @@ export default {
   },
   //
   computed: {
-    ...mapGetters(["language"])
+    ...mapGetters(['language'])
   },
   methods: {
-    onSubmit(formName) {
+    onSubmit (formName) {
       // console.log("submit!");
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -81,46 +81,45 @@ export default {
             .dispatch(this.model.searchArea.config.search_url, this.model.searchArea.model)
             .then(res => {
               if (res.status === 20) {
-                //成功创建数据的回调
-                this.$emit("on-succes");
+                // 成功创建数据的回调
+                this.$emit('on-succes')
               } else {
-                //创建失败的回调
-                this.$emit("on-error");
+                // 创建失败的回调
+                this.$emit('on-error')
               }
-            });
+            })
         } else {
           // console.log("error submit!!");
-          return false;
+          return false
         }
-      });
+      })
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     },
-    dealRules() {
+    dealRules () {
       for (var i in this.model.searchArea.rules) {
         this.model.searchArea.rules[i].map(val => {
-          //获取lable
+          // 获取lable
           let ruleLable = this.$t(
-            this.model.model_index + ".searchArea." + i + ".label"
-          );
+            this.model.model_index + '.searchArea.' + i + '.label'
+          )
           // console.log(ruleLable);
-          val["message"] = this.$t("validate." + val["message_key"], {
+          val['message'] = this.$t('validate.' + val['message_key'], {
             label: ruleLable
-          });
-        });
+          })
+        })
       }
     },
-    addItem(){
+    addItem () {
       this.$emit('addItem')
     }
   },
   //
   watch: {
-    language() {
+    language () {
       this.dealRules()
     }
   }
-};
+}
 </script>
-

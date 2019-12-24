@@ -5,10 +5,10 @@
 </template>
 <script>
 export default {
-    computed:{
-        path(){
-            return this.$route.path
-        }
-    },
+  computed: {
+    path () {
+      return this.$route.path
+    }
+  }
 }
 </script>

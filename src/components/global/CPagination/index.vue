@@ -49,7 +49,7 @@
 <script>
 import 'element-ui/lib/theme-chalk/display.css'
 export default {
-  name: "CPagination",
+  name: 'CPagination',
   props: {
     model: {
       type: Object,
@@ -59,14 +59,13 @@ export default {
   },
   methods: {
     //   页面的大小发送变化
-    handleSizeChange(page_size) {
-      this.$emit("handleSizeChange", page_size);
+    handleSizeChange (page_size) {
+      this.$emit('handleSizeChange', page_size)
     },
     // 页面的页数发生变化
-    handleCurrentChange(page) {
-      this.$emit("handleCurrentChange", page);
+    handleCurrentChange (page) {
+      this.$emit('handleCurrentChange', page)
     }
   }
-};
+}
 </script>
-

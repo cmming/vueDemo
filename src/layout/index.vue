@@ -25,7 +25,7 @@
       <el-main class="app-main">
         <router-view />
       </el-main>
-      
+
       <right-panel v-if="settings.showSettings">
         <settings />
       </right-panel>
@@ -34,14 +34,14 @@
   </el-container>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import { Sidebar, Navbar, Hamburger, Settings, TagsView } from "./components/index";
+import { mapGetters } from 'vuex'
+import { Sidebar, Navbar, Hamburger, Settings, TagsView } from './components/index'
 import RightPanel from '@/components/RightPanel'
 import Breadcrumb from '@/components/Breadcrumb'
 export default {
-  name: "LayoutAdmin",
+  name: 'LayoutAdmin',
   computed: {
-    ...mapGetters(["menu", "language", "dynamicMenu","settings"])
+    ...mapGetters(['menu', 'language', 'dynamicMenu', 'settings'])
   },
   components: {
     Sidebar,
@@ -53,11 +53,11 @@ export default {
     Breadcrumb
   },
   methods: {
-    toggleMenu() {
-      this.$store.dispatch("toggleSideBar");
+    toggleMenu () {
+      this.$store.dispatch('toggleSideBar')
     }
   }
-};
+}
 </script>
 
 <style>

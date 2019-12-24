@@ -1,3 +1,3 @@
 export default {
-    appname:'CUpload'
+  appname: 'CUpload'
 }

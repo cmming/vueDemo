@@ -11,9 +11,8 @@ export default {
   props: {
     action: {
       type: String,
-      default: ""
+      default: ''
     }
   }
-};
+}
 </script>
-

@@ -15,10 +15,10 @@
   </el-menu>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import SidebarItem from "./SidebarItem";
+import { mapGetters } from 'vuex'
+import SidebarItem from './SidebarItem'
 export default {
-  name: "Sidebar",
+  name: 'Sidebar',
   props: {
     menuList: {
       type: Array,
@@ -29,23 +29,21 @@ export default {
     SidebarItem
   },
   computed: {
-    activeMenu() {
-      const route = this.$route;
-      const { meta, path } = route;
+    activeMenu () {
+      const route = this.$route
+      const { meta, path } = route
       // if set path, the sidebar will highlight the path you set
       if (meta.activeMenu) {
-        return meta.activeMenu;
+        return meta.activeMenu
       }
-      return path;
+      return path
     },
-    ...mapGetters(["menu", "settings"])
+    ...mapGetters(['menu', 'settings'])
   },
-  created() {
+  created () {
     // eslint-disable-next-line
     console.log(this.$t("menu.dashborad"));
   },
   method: {}
-};
+}
 </script>
-
-

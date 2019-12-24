@@ -67,68 +67,67 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
-  data() {
+  data () {
     return {
       dialogVisible: false,
-      configRoleId: "",
+      configRoleId: '',
       defaultProps: {
-        children: "children",
-        label: "title",
-        id: "id"
+        children: 'children',
+        label: 'title',
+        id: 'id'
       }
-    };
+    }
   },
   computed: {
-    ...mapGetters(["role", "router", "loading"])
+    ...mapGetters(['role', 'router', 'loading'])
   },
-  created() {
+  created () {
     // eslint-disable-next-line
     // console.log(this.base);
   },
   methods: {
-    addRoleRouter(index) {
-      if (index == "") {
-        this.$message.error("请选中一个数据,然后再进行资源配置");
+    addRoleRouter (index) {
+      if (index === '') {
+        this.$message.error('请选中一个数据,然后再进行资源配置')
       } else {
-        let self = this,
-          params = {
-            resource_id: index
-          };
-        this.dialogVisible = true;
-        this.configRoleId = index;
-        this.$store.dispatch("getRoleRouter", params).then(res => {
-          if (res.status == 200) {
-            self.$store.dispatch("getRouter")
+        let self = this
+        let params = {
+          resource_id: index
+        }
+        this.dialogVisible = true
+        this.configRoleId = index
+        this.$store.dispatch('getRoleRouter', params).then(res => {
+          if (res.status === 200) {
+            self.$store.dispatch('getRouter')
           }
-        });
+        })
       }
     },
-    editItem(data) {
-      this.$router.push("/admin/systemManager/role/update/" + data.id);
+    editItem (data) {
+      this.$router.push('/admin/systemManager/role/update/' + data.id)
     },
-    //修改 角色的菜单
-    configRolesRouter() {
-      var router_id_arr = this.$refs.routerTree.getCheckedKeys(),
-        self = this;
+    // 修改 角色的菜单
+    configRolesRouter () {
+      var router_id_arr = this.$refs.routerTree.getCheckedKeys()
+      var self = this
       // router_id_arr.forEach((val, index) => {
       //   addItem["routers_id[" + index + "]"] = val;
       // });
       var paramObj = {
         resource_id: this.configRoleId,
-        routers_id:router_id_arr
-      };
-      this.$store.dispatch("storeRoleRouter", paramObj).then(res => {
-        if (res.status == 204) {
-          self.dialogVisible = false;
+        routers_id: router_id_arr
+      }
+      this.$store.dispatch('storeRoleRouter', paramObj).then(res => {
+        if (res.status === 204) {
+          self.dialogVisible = false
         }
-      });
+      })
     },
-    addItem() {
-      this.$router.push("/admin/systemManager/role/store");
+    addItem () {
+      this.$router.push('/admin/systemManager/role/store')
     }
   }
-};
+}
 </script>
-

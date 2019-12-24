@@ -13,13 +13,13 @@
         :key="key"
         :label="$t(model.model_index+'.form.'+item.label_key+'.label')"
         :prop="item.prop"
-        v-if="formStatus == 'add'||formStatus == 'update'&&item.show_update_form"
+        v-if="formStatus === 'add'||formStatus === 'update'&&item.show_update_form"
         :error="item.error"
       >
 
         <template v-if="item.type ==='input'">
 
-          <template v-if="formStatus == 'add'||item.can_update">
+          <template v-if="formStatus === 'add'||item.can_update">
             <template v-if="item.input_type ==='number'">
               <el-input
                 :type="item['input_type']"
@@ -102,9 +102,9 @@
   </el-form>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
-  name: "CForm",
+  name: 'CForm',
   props: {
     model: {
       type: Object,
@@ -112,122 +112,121 @@ export default {
       default: () => {}
     }
   },
-  data() {
+  data () {
     return {
-      formStatus: "add",
-      formBaseData: ""
-    };
+      formStatus: 'add',
+      formBaseData: ''
+    }
   },
-  created() {
-    this.dealRules();
+  created () {
+    this.dealRules()
 
-    this.formBaseData = this.model.form.model;
+    this.formBaseData = this.model.form.model
 
-    this.dealJudgeFormStatus(this.$route);
+    this.dealJudgeFormStatus(this.$route)
   },
   //
   computed: {
-    ...mapGetters(["language", "loading"])
+    ...mapGetters(['language', 'loading'])
   },
   methods: {
-    onSubmit(formName) {
+    onSubmit (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.model.form.items.map(v => {
-            v.error = undefined;
-          });
-          let actionUrlAndParams = this.dealSubmitUrlAndParams();
+            v.error = undefined
+          })
+          let actionUrlAndParams = this.dealSubmitUrlAndParams()
           this.$store
             .dispatch(actionUrlAndParams.action, actionUrlAndParams.params)
             .then(res => {
               if (res.status === 200) {
-                //成功创建数据的回调
-                this.$emit("on-succes");
+                // 成功创建数据的回调
+                this.$emit('on-succes')
               } else {
-                //创建失败的回调
-                this.$emit("on-error");
+                // 创建失败的回调
+                this.$emit('on-error')
               }
             })
             .catch(error => {
               // console.log(error)
               if (error.status === 422) {
-                let errors = error.data.errors;
+                let errors = error.data.errors
                 errors.map(val => {
                   // console.log(val,this.model.form.items)
                   this.model.form.items.map(v => {
                     if (v.prop === val.field) {
                       //  v.error = undefined;
-                      v.error = val.code;
+                      v.error = val.code
                     }
-                  });
-                });
+                  })
+                })
               }
-            });
+            })
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
     },
-    dealSubmitUrlAndParams() {
-      let result = { action: "", params: {} };
-      if (_.split(this.$route.path, "/").indexOf("update") !== -1) {
-        result.action = this.model.form.config.update_url;
+    dealSubmitUrlAndParams () {
+      let result = { action: '', params: {} }
+      if (_.split(this.$route.path, '/').indexOf('update') !== -1) {
+        result.action = this.model.form.config.update_url
         result.params = {
           ...this.model.form.model,
           resource_id: this.$route.params.id
-        };
+        }
       } else {
-        result.action = this.model.form.config.store_url;
-        result.params = this.model.form.model;
+        result.action = this.model.form.config.store_url
+        result.params = this.model.form.model
       }
 
-      return result;
+      return result
     },
-    dealRules() {
+    dealRules () {
       for (var i in this.model.form.rules) {
         this.model.form.rules[i].map(val => {
-          //获取lable
+          // 获取lable
           let ruleLable = this.$t(
-            this.model.model_index + ".form." + i + ".label"
-          );
-          val["message"] = this.$t("validate." + val["message_key"], {
+            this.model.model_index + '.form.' + i + '.label'
+          )
+          val['message'] = this.$t('validate.' + val['message_key'], {
             label: ruleLable
-          });
-        });
+          })
+        })
       }
     },
-    dealJudgeFormStatus(path) {
-      if (_.split(path.path, "/").indexOf("update") !== -1) {
-        this.formStatus = "update";
+    dealJudgeFormStatus (path) {
+      if (_.split(path.path, '/').indexOf('update') !== -1) {
+        this.formStatus = 'update'
         // 请求获取一个的详情
         this.$store.dispatch(this.model.form.config.show_url, {
           resource_id: _.values(this.$route.params)[0]
-        });
+        })
       } else {
-        //重置
-        this.formStatus = "add";
-        this.model.form.model = this.formBaseData;
+        // 重置
+        this.formStatus = 'add'
+        this.model.form.model = this.formBaseData
       }
     }
   },
-  beforeDestroy() {
-    //表单添加离开就清空上次填写的数据
-    if (this.formStatus === "add") {
-      this.resetForm("form_" + this.model.model_index);
+  beforeDestroy () {
+    // 表单添加离开就清空上次填写的数据
+    if (this.formStatus === 'add') {
+      this.resetForm('form_' + this.model.model_index)
     }
   },
   //
   watch: {
-    language() {
-      this.dealRules();
+    language () {
+      this.dealRules()
     },
-    $route(to) {
-      this.dealJudgeFormStatus(to);
+    $route (to) {
+      this.dealJudgeFormStatus(to)
     }
   }
-};
+}
 </script>
-

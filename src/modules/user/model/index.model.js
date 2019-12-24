@@ -1,42 +1,38 @@
-import ModelGenerator from "@/model/ModelGenerator"
+import ModelGenerator from '@/model/ModelGenerator'
 
 class User extends ModelGenerator {
-    constructor() {
-        let model_name = 'user'
-        let columns = [
-            { label_key: 'id', prop: 'id', type: 'input', default_value: '', data_roles: '', show_table: true, show_form: false, show_update_form: false, show_search: false, input_type: '', placeholder: '' },
-            { label_key: 'name', prop: 'name', type: 'input', default_value: '', data_roles: 'required', show_table: true, show_form: true, show_update_form: true, show_search: true, input_type: '', placeholder: '' },
-            { label_key: 'email', prop: 'email', type: 'input', default_value: '', data_roles: 'required|validateEmail', show_table: true, show_form: true, show_update_form: true, show_search: false, input_type: '', placeholder: '', can_update: false },
-            // password
-            { label_key: 'password', prop: 'password', type: 'input', default_value: '', data_roles: 'required', show_table: false, show_form: true, show_update_form: false, show_search: false, input_type: 'password', placeholder: '' },
-            //角色
-            { label_key: 'roles', prop: 'roles', type: 'checkbox', default_value: [], data_roles: '', show_table: false, show_form: true, show_update_form: true, show_search: false, input_type: '', placeholder: '' },
-        ]
-        super(model_name, columns)
+  constructor () {
+    let model_name = 'user'
+    let columns = [
+      { label_key: 'id', prop: 'id', type: 'input', default_value: '', data_roles: '', show_table: true, show_form: false, show_update_form: false, show_search: false, input_type: '', placeholder: '' },
+      { label_key: 'name', prop: 'name', type: 'input', default_value: '', data_roles: 'required', show_table: true, show_form: true, show_update_form: true, show_search: true, input_type: '', placeholder: '' },
+      { label_key: 'email', prop: 'email', type: 'input', default_value: '', data_roles: 'required|validateEmail', show_table: true, show_form: true, show_update_form: true, show_search: false, input_type: '', placeholder: '', can_update: false },
+      // password
+      { label_key: 'password', prop: 'password', type: 'input', default_value: '', data_roles: 'required', show_table: false, show_form: true, show_update_form: false, show_search: false, input_type: 'password', placeholder: '' },
+      // 角色
+      { label_key: 'roles', prop: 'roles', type: 'checkbox', default_value: [], data_roles: '', show_table: false, show_form: true, show_update_form: true, show_search: false, input_type: '', placeholder: '' }
+    ]
+    super(model_name, columns)
 
-        this.setActionUrl()
+    this.setActionUrl()
 
-        // this.getRoles({ page_size: 10000000 })
+    // this.getRoles({ page_size: 10000000 })
+  }
 
-    }
+  setActionUrl () {
+    this.table.commonAction.list.action_url = 'getUserList'
+    this.table.commonAction.delete.action_url = 'deleteUser'
+    this.table.commonAction.edit.action_url = 'storeUser'
 
-    setActionUrl() {
-        this.table.commonAction.list.action_url = 'getUserList'
-        this.table.commonAction.delete.action_url = 'deleteUser'
-        this.table.commonAction.edit.action_url = 'storeUser'
+    this.searchArea.config.search_url = 'getUserList'
+    this.searchArea.config.is_add = true
 
-        this.searchArea.config.search_url = 'getUserList'
-        this.searchArea.config.is_add = true
+    this.form.config.store_url = 'storeUser'
+    this.form.config.show_url = 'showUser'
+    this.form.config.update_url = 'updateUser'
 
-        this.form.config.store_url = 'storeUser'
-        this.form.config.show_url = 'showUser'
-        this.form.config.update_url = 'updateUser'
-
-        // 渲染角色
-
-    }
-
-
+    // 渲染角色
+  }
 }
 
 export default new User().model
@@ -53,7 +49,6 @@ export default new User().model
 // data_model.table.commonAction.list.action_url = 'getUserList'
 // data_model.table.commonAction.delete.action_url = 'deleteUser'
 // data_model.table.commonAction.edit.action_url = 'storeUser'
-
 
 // data_model.searchArea.config.search_url = 'getUserList'
 

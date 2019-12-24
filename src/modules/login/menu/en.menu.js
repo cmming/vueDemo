@@ -1,4 +1,4 @@
 export default {
-    'login': 'login',
-    "register": "register"
-} 
+  'login': 'login',
+  'register': 'register'
+}
