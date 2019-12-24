@@ -5,4 +5,5 @@ export default {
     "file": "file",
     "imgCropper": "imgCropper",
     "updateForm": "data update",
+    "xterm": "ssh",
 }

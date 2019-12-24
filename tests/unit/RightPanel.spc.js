@@ -7,7 +7,6 @@ describe('index.vue', () => {
     const wrapper = shallowMount(RightPanel, {
       propsData: { clickNotClose }
     })
-    console.log(wrapper)
-    // expect(wrapper.text()).toMatch(clickNotClose)
+    expect(wrapper.text()).toMatch(clickNotClose)
   })
 })
