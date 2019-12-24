@@ -1,4 +1,6 @@
 import {
+  // eslint-disable-next-line
+  default as request,
   createRequest,
   sendFormRequest
 } from 'vue-upload-component/src/utils/request'
@@ -237,7 +239,7 @@ export default class ChunkUploadHandler {
      * Sends a request to the backend to initialise the chunks
      */
   start () {
-    sendFormRequest({
+    request({
       method: 'POST',
       headers: Object.assign({}, this.headers, {
         'Content-Type': 'application/json'
@@ -359,7 +361,7 @@ export default class ChunkUploadHandler {
   finish () {
     this.updateFileProgress()
 
-    sendFormRequest({
+    request({
       method: 'POST',
       headers: Object.assign({}, this.headers, {
         'Content-Type': 'application/json'
