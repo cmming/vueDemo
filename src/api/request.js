@@ -18,7 +18,7 @@ const service = axios.create({
 
 service.interceptors.request.use(config => {
   store.dispatch('showLoading')
-  config = tokenHandler(config, store)
+  config = tokenHandler(config)
   cancelRequest(store, config)
   return config
 }, error => {

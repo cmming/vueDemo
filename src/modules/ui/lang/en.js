@@ -39,7 +39,9 @@ export default {
     },
     loading: {
       text: 'loading...'
-    }
+    },
+    tinymceTips: 'Rich text is a core feature of the management backend, but at the same time it is a place with lots of pits. In the process of selecting rich texts, I also took a lot of detours. The common rich texts on the market have been basically used, and I finally chose Tinymce. See the more detailed rich text comparison and introduction.',
+    documentation: 'Documentation'
   }
 
 }

@@ -22,9 +22,9 @@
       </el-header>
 
       <tags-view />
-      <el-main class="app-main">
+      <div class="app-main">
         <router-view />
-      </el-main>
+      </div>
 
       <right-panel v-if="settings.showSettings">
         <settings />
@@ -52,6 +52,20 @@ export default {
     TagsView,
     Breadcrumb
   },
+  // mounted () {
+  //   const userId = storage.get('userInfo').info.id
+  //   window.Echo.private(`login.remind.${userId}`).listen('LoginRemind', e => {
+  //   // window.Echo.channel("private-login-remind").listen("LoginRemind", e => {
+  //   // window.Echo.channel("login-remind").listen("LoginRemind", e => {
+  //     // 如果有广播过来你可以进行逻辑操作，比如给用户一个通知
+  //     // console.log(e);
+  //     this.$message({
+  //       type: 'info',
+  //       // message:e.message
+  //       message: e.message ? e.message : '欢迎登录'
+  //     })
+  //   })
+  // },
   methods: {
     toggleMenu () {
       this.$store.dispatch('toggleSideBar')

@@ -13,25 +13,20 @@
         <xterm></xterm>
       </div>
     </el-card>
-
-    <tinymce :height="300" v-model="content" id='tinymce'></tinymce>
   </div>
 </template>
 <script>
 import storage from '@/utils/storage'
 import Xterm from './xterm'
-import Tinymce from '@/components/Tinymce'
 export default {
   data () {
     return {
       headers: { Authorization: 'Bearer ' + storage.get('vueDemoToken') },
-      sshs: [],
-      content: ''
+      sshs: []
     }
   },
   components: {
-    Xterm,
-    Tinymce
+    Xterm
   },
   methods: {
     addSsh () {

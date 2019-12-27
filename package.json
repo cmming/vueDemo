@@ -15,7 +15,8 @@
     "mock": "nodemon mock/index.js",
     "pro:dev": "http-server ./dist/ --port 3888",
     "swagger": "http-server ./swagger-ui/dist",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "commit": "npx git-cz"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -27,7 +28,7 @@
     "normalize.css": "^8.0.1",
     "path-to-regexp": "2.4.0",
     "screenfull": "^4.2.0",
-    "socket.io-client": "^2.2.0",
+    "socket.io-client": "2.2.0",
     "spark-md5": "^3.0.0",
     "store": "^2.0.12",
     "vue": "^2.6.10",
@@ -40,7 +41,6 @@
     "xterm-addon-fit": "^0.3.0"
   },
   "devDependencies": {
-    "@babel/polyfill": "^7.4.4",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-plugin-unit-jest": "^3.11.0",
