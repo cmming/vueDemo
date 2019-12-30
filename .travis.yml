@@ -14,6 +14,7 @@ install:
 script:
 - yarn build:travis
 after_success:
+- ssh root@chenming.club -o StrictHostKeyChecking=no 'rm -rf /home/vue-demo/vue-demo/dist/*'
 - scp -o stricthostkeychecking=no -r ./dist root@chenming.club:/home/vue-demo/vue-demo
 - scp -o stricthostkeychecking=no -r ./server/* root@chenming.club:/home/laravel-docker/project/project/webssh
-- ssh root@chenming.club -o StrictHostKeyChecking=no 'rm -rf /home/vue-demo/vue-demo/dist/* && cd /home/vue-demo && docker-compose up -d --build && cd /home/laravel-docker/project/project/webssh && docker-compose up -d'   #使用ssh连接服务器
+- ssh root@chenming.club -o StrictHostKeyChecking=no 'cd /home/vue-demo && docker-compose up -d --build && cd /home/laravel-docker/project/project/webssh && docker-compose up -d'   #使用ssh连接服务器
