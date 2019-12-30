@@ -53,7 +53,9 @@ export default {
       this.term.open(document.getElementById(this.dataId))
       fitAddon.fit()
 
-      const socket = io('http://localhost:9999')
+      // const socket = io('http://localhost:280/ssh')
+      console.log(process.env.VUE_APP_TERM_WEBSCOKET_SERVER)
+      const socket = io(process.env.VUE_APP_TERM_WEBSCOKET_SERVER)
       socket.emit('createNewServer', {
         msgId: this.msgId,
         ...this.sshConfig

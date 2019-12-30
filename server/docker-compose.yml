@@ -1,0 +1,15 @@
+version: '3.5'
+
+services: 
+
+  term_webscoket_server:
+    image: chmi294225707/node:webssh_v1
+    restart: unless-stopped
+    ports: 
+      - "6002:9999"
+    networks:
+      - nginx_net
+  
+networks:
+  nginx_net:
+    external: true
