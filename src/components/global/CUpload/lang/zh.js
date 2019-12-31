@@ -9,7 +9,10 @@ export default {
         speed: '速度',
         status: '状态',
         action: '操作',
-        thumb: '缩略图'
+        thumb: '缩略图',
+        error: '失败',
+        success: '成功',
+        active: '上传中'
       },
       action: {
         stop: '暂停',

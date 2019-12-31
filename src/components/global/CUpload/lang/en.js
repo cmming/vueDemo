@@ -9,7 +9,10 @@ export default {
         speed: 'speed',
         status: 'status',
         action: 'action',
-        thumb: 'thumb'
+        thumb: 'thumb',
+        error: 'error',
+        success: 'success',
+        active: 'active'
       },
       action: {
         stop: 'stop',
