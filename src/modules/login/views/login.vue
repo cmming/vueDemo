@@ -9,7 +9,7 @@
       label-position="left"
       :rules="login.rules"
     >
-      <el-form-item prop="name">
+      <el-form-item prop="name" :error="login.items[0].error">
         <el-input
           name="name"
           type="text"
@@ -27,7 +27,7 @@
         </el-input>
       </el-form-item>
 
-      <el-form-item prop="password">
+      <el-form-item prop="password" :error="login.items[1].error">
         <el-input
           name="password"
           type="password"
@@ -47,6 +47,7 @@
       <el-form-item
         prop="captcha"
         :error="login.items[2].error"
+        v-show = "showCode>3"
       >
         <el-input
           name="captcha"
@@ -63,21 +64,18 @@
             slot="prefix"
           />
         </el-input>
-        <img
-          class="login-captcha-img"
-          :src="login.model.img"
-          alt
-        />
-        <input
-          type="text"
-          hidden
-          v-model="login.model.ckey"
-        />
-        <el-button
-          type="primary"
-          round
-          @click="refreshCaptcha"
-        >刷新</el-button>
+        <div v-loading="codeLoading" @click="refreshCaptcha" style="cursor: pointer;display: inline-block;">
+          <img
+            class="login-captcha-img"
+            :src="login.model.img"
+            alt="加载中"
+          />
+          <input
+            type="text"
+            hidden
+            v-model="login.model.ckey"
+          />
+        </div>
       </el-form-item>
 
       <el-form-item
@@ -95,13 +93,14 @@
           type="primary"
           style="width:100%;margin-bottom:30px;"
           @click.native.prevent="handleLogin"
+          :loading="loginLoading"
         >{{$t('login.form.login')}}</el-button>
       </el-form-item>
 
       <el-form-item>
         <el-button
           type="primary"
-          style="width:100%;margin-bottom:30px;"
+          style="width:100%;margin-bottom:30px;height:40px"
           @click.native.prevent="goToRegister"
         >{{$t('login.form.register')}}</el-button>
       </el-form-item>
@@ -115,7 +114,10 @@ export default {
     ...mapGetters(['login'])
   },
   created () {
-    this.$store.dispatch('getCaptcha')
+    // this.$store.dispatch('getCaptcha')
+    if (this.showCode > 3) {
+      this.refreshCaptcha()
+    }
   },
   data () {
     return {
@@ -126,10 +128,14 @@ export default {
       //   ckey: "",
       //   captcha: ""
       // }
+      codeLoading: true,
+      loginLoading: false,
+      showCode: storage.get('showCode') ? storage.get('showCode') : 0
     }
   },
   methods: {
     handleLogin () {
+      this.loginLoading = true
       this.$refs['loginForm'].validate(valid => {
         if (valid) {
           this.clearError()
@@ -142,19 +148,31 @@ export default {
           this.$store
             .dispatch('login', params)
             .then((res) => {
+              this.loginLoading = false
               if (res.status === 200) {
+                this.showCode = 0
+                storage.set('showCode', this.showCode)
+                const loadingFullPage = this.$loading({
+                  lock: true,
+                  text: this.$t('common.loading'),
+                  spinner: 'el-icon-loading',
+                  background: 'rgba(0, 0, 0, 0.7)'
+                })
                 this.$store.dispatch('getUserInfo').then(() => {
                   this.$router.push(storage.get('indexPage'))
+                  loadingFullPage.close()
                 })
               }
             })
             .catch(error => {
+              this.showCode++
+              storage.set('showCode', this.showCode)
+              this.loginLoading = false
               let errors = error.data.errors
-              errors.map(val => {
+              Object.keys(errors).map(val => {
                 this.login.items.map(v => {
-                  if (v.prop === val.field) {
-                    //  v.error = undefined;
-                    v.error = val.code
+                  if (v.prop === val) {
+                    v.error = errors[val].join(';')
                   }
                 })
               })
@@ -165,7 +183,11 @@ export default {
       })
     },
     refreshCaptcha () {
+      this.codeLoading = true
       this.$store.dispatch('getCaptcha')
+      .then(() => {
+        this.codeLoading = false
+      })
     },
     goToRegister () {
       this.$router.push('/register')
@@ -174,6 +196,13 @@ export default {
       this.login.items.map(v => {
         v.error = undefined
       })
+    }
+  },
+  watch: {
+    showCode (val) {
+      if (val > 3) {
+        this.refreshCaptcha()
+      }
     }
   }
 }
@@ -195,8 +224,8 @@ export default {
   }
   .login-captcha-img {
     display: inline-block;
-    margin-left: 5%;
-    width: 30%;
+    margin-left: 10px;
+    width: 130px;
     vertical-align: bottom;
     background: #dfdfdf;
   }
