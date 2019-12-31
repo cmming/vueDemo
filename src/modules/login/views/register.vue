@@ -213,12 +213,5 @@ export default {
   .login-captcha {
     width: 40%;
   }
-  .login-captcha-img {
-    display: inline-block;
-    margin-left: 5%;
-    width: 30%;
-    vertical-align: bottom;
-    background: #dfdfdf;
-  }
 }
 </style>
