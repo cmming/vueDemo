@@ -1,8 +1,7 @@
 <template>
-  <el-table
-    :data="files"
-  >
+  <el-table :data="files">
     <el-table-column
+      show-overflow-tooltip
       prop="size"
       :label="$t('CUpload.fileList.column.size')"
     >
@@ -11,6 +10,7 @@
 
     <el-table-column
       prop="name"
+      show-overflow-tooltip
       :label="$t('CUpload.fileList.column.name')"
     ></el-table-column>
 
@@ -18,11 +18,15 @@
       prop="thumb"
       :label="$t('CUpload.fileList.column.thumb')"
     >
-     <template slot-scope="scope">
-       <img v-if="scope.row.thumb" :src="scope.row.thumb" width="40" height="auto" />
-     </template>
+      <template slot-scope="scope">
+        <img
+          v-if="scope.row.thumb"
+          :src="scope.row.thumb"
+          width="40"
+          height="auto"
+        />
+      </template>
     </el-table-column>
-
 
     <el-table-column
       prop="progress"
@@ -31,45 +35,53 @@
       <template slot-scope="scope">
         <template v-if="scope.row.error">
           <el-progress
-            :percentage=" _.toNumber(scope.row.progress)"
+            :percentage="toNumber(scope.row.progress)"
             status="exception"
           ></el-progress>
         </template>
 
         <template v-if="scope.row.active">
-          <el-progress :percentage=" _.toNumber(scope.row.progress)"></el-progress>
+          <el-progress
+            :data-er="scope.row.progress"
+            :percentage="ceil(toNumber(scope.row.progress),1)"
+          ></el-progress>
         </template>
 
         <template v-if="scope.row.success">
           <el-progress
-            :percentage=" _.toNumber(scope.row.progress)"
+            :percentage="toNumber(scope.row.progress)"
             status="success"
           ></el-progress>
         </template>
       </template>
     </el-table-column>
 
+    <!-- 文件分片的时候不能显示速度 -->
     <el-table-column
       prop="speed"
       :label="$t('CUpload.fileList.column.speed')"
+      v-if="false"
     >
       <template slot-scope="scope">{{scope.row.speed|formatSize}}/s</template>
     </el-table-column>
 
     <el-table-column :label="$t('CUpload.fileList.column.status')">
       <template slot-scope="scope">
-        <template v-if="scope.row.error">error</template>
-        <template v-else-if="scope.row.success">success</template>
-        <template v-else-if="scope.row.active">active</template>
+        <template v-if="scope.row.error">{{$t('CUpload.fileList.column.error')}}</template>
+        <template v-else-if="scope.row.success">{{$t('CUpload.fileList.column.success')}}</template>
+        <template v-else-if="scope.row.active">{{$t('CUpload.fileList.column.active')}}</template>
       </template>
     </el-table-column>
 
-    <el-table-column :label="$t('CUpload.fileList.column.action')" width="200px">
+    <el-table-column
+      :label="$t('CUpload.fileList.column.action')"
+      width="220"
+    >
       <template slot-scope="scope">
         <el-button
           v-if="scope.row.active"
           type="danger"
-          @click.prevent="fileUploadObj.update(scope.row, {active: false})"
+          @click.prevent="stopFile(scope.row, {active: false})"
         >
           <svg-icon icon-class="stop" />{{$t('CUpload.fileList.action.stop')}}
         </el-button>
@@ -96,6 +108,8 @@
   </el-table>
 </template>
 <script>
+import toNumber from 'lodash/toNumber'
+import ceil from 'lodash/ceil'
 export default {
   props: {
     files: {
@@ -106,7 +120,24 @@ export default {
       type: Object,
       default: () => {}
     }
+  },
+  methods: {
+    toNumber (data) {
+      return toNumber(data)
+    },
+    ceil (data) {
+      return ceil(data)
+    },
+    stopFile (file, data) {
+      // 分片文件上传 暂停，
+      file.active = false
+      this.fileUploadObj.update(file, data)
+    }
   }
-};
+  // watch: {
+  //   files (val) {
+  //     console.log(val, this.fileUploadObj)
+  //   }
+  // }
+}
 </script>
-

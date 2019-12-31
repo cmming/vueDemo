@@ -1,3 +1,4 @@
+@import './mixin.scss';
 .m-top-sm{
     margin-top: 20px
 }
@@ -8,5 +9,11 @@
 .m-rigth-sm{
     margin-right: 20px
 }
-
+.scroll-bar {
+    @include scroll-bar();
+}
+* {
+    box-sizing: border-box;
+    @include scroll-bar();
+}
 

@@ -9,7 +9,7 @@
     <el-col
       :lg="24"
       :xs="0"
-      class="over-flow-auto"
+      class="over-flow-auto hidden-xs-only"
       style="text-align: center;"
     >
       <div class="pagination-container">
@@ -29,7 +29,7 @@
     <el-col
       :lg="0"
       :xs="24"
-      class="over-flow-auto"
+      class="over-flow-auto hidden-sm-and-up"
     >
       <div class="pagination-container">
         <el-pagination
@@ -47,8 +47,9 @@
   </el-row>
 </template>
 <script>
+import 'element-ui/lib/theme-chalk/display.css'
 export default {
-  name: "CPagination",
+  name: 'CPagination',
   props: {
     model: {
       type: Object,
@@ -58,14 +59,13 @@ export default {
   },
   methods: {
     //   页面的大小发送变化
-    handleSizeChange(page_size) {
-      this.$emit("handleSizeChange", page_size);
+    handleSizeChange (page_size) {
+      this.$emit('handleSizeChange', page_size)
     },
     // 页面的页数发生变化
-    handleCurrentChange(page) {
-      this.$emit("handleCurrentChange", page);
+    handleCurrentChange (page) {
+      this.$emit('handleCurrentChange', page)
     }
   }
-};
+}
 </script>
-

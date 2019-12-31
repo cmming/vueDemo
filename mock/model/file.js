@@ -29,14 +29,14 @@ const file = {
 
         let params = '',
             data = '';
-        if (req.get('Content-Type') == 'application/json') {
+        if (req.get('Content-Type') === 'application/json') {
             req.on('data', (chunk) => { data += chunk; });
             req.on('end', () => {
                 params = JSON.parse(data);
                 console.log(params)
-                if (params.phase == "start") {
+                if (params.phase === "start") {
                     res.status(200).json(result);
-                } else if (params.phase == "finish") {
+                } else if (params.phase === "finish") {
                     //合并文件
                     res.status(200).json(result);
                 }

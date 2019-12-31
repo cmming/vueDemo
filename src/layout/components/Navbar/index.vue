@@ -22,30 +22,7 @@
     </li>
 
     <li class="admin-header-nav-item">
-      <el-dropdown
-        class="right-menu-item hover-effect"
-        trigger="click"
-        @command="handleLanguageCommand"
-      >
-        <!-- fixed: Error in callback for watcher "focusing": "TypeError: selfDefine.className.replace is not a function" -->
-        <div>
-          <svg-icon
-            icon-class="language"
-            class-name="language-icon"
-          ></svg-icon>
-        </div>
-
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item
-            :disabled="language==='zh'"
-            command="zh"
-          >中文</el-dropdown-item>
-          <el-dropdown-item
-            :disabled="language==='en'"
-            command="en"
-          >English</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+      <lang-select class="set-language"></lang-select>
     </li>
 
     <li class="admin-header-nav-item">
@@ -54,44 +31,45 @@
   </ul>
 </template>
 <script>
-import { changePageTitle } from "@/router/interceptors/index";
-import SizeSelect from "@/components/SizeSelect";
-import Screenfull from "@/components/Screenfull";
-import HeaderAvator from "../HeaderAvator/index";
+import { changePageTitle } from '@/router/interceptors/index'
+import SizeSelect from '@/components/SizeSelect'
+import Screenfull from '@/components/Screenfull'
+import HeaderAvator from '../HeaderAvator/index'
+import LangSelect from '@/components/LangSelect'
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   props: {
     language: {
       type: String,
       required: true,
-      default: "zh"
+      default: 'zh'
     }
   },
   components: {
     SizeSelect,
     Screenfull,
-    HeaderAvator
+    HeaderAvator,
+    LangSelect
   },
   methods: {
-    handleLanguageCommand(lang) {
+    handleLanguageCommand (lang) {
       // console.log(lang,this)
-      this.$i18n.locale = lang;
-      this.$store.dispatch("setLanguage", lang);
+      this.$i18n.locale = lang
+      this.$store.dispatch('setLanguage', lang)
 
       this.$message({
-        message: lang == "en" ? "switch language success" : "切换语言成功",
-        type: "success"
-      });
+        message: lang === 'en' ? 'switch language success' : '切换语言成功',
+        type: 'success'
+      })
       // 切换标题的语言
-      changePageTitle(this.$route);
+      changePageTitle(this.$route)
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .admin-header-nav {
   float: right;
-  height: 100%;
   background: transparent;
   padding: 0;
   margin: 0;
@@ -100,13 +78,13 @@ export default {
     float: left;
     list-style: none;
     position: relative;
-    padding: 0 22px;
+    padding: 0 10px;
     cursor: pointer;
-    /deep/ svg {
+    ::v-deep svg {
       color: #000 !important;
       font-size: 16px !important;
     }
-    /deep/ i {
+    ::v-deep i {
       // color: #fff !important;
       color: #000 !important;
       font-size: 16px !important;
@@ -121,15 +99,6 @@ export default {
       background: #f56c6c;
       color: #fff;
     }
-    .avator {
-      width: 26px;
-      height: auto;
-      margin-right: 5px;
-      border-radius: 100%;
-      vertical-align: middle;
-    }
   }
 }
 </style>
-
-

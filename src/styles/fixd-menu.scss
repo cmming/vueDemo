@@ -3,7 +3,7 @@
     position: fixed;
     z-index: 100;
     height: 100% !important;
-    @include scrollBar();
+    @include scroll-bar();
     .app-menu {
         height: auto !important;
     }
@@ -16,4 +16,8 @@
             padding-left: 64px;
         }
     }
+}
+
+.el-menu{
+    border-right: none
 }

@@ -31,33 +31,37 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
-      userInfoFormStatus: false,
-      userName: storage.get("userInfo").info.name
-    };
+      userInfoFormStatus: false
+    }
+  },
+  computed: {
+    userName () {
+      return storage.get('userInfo') ? storage.get('userInfo').info.name : ''
+    }
   },
   methods: {
     // eslint-disable-next-line
     handleSelect(key, keyPath) {
       switch (key) {
-        case "logOut":
-          this.$store.dispatch("logout");
-          this.$router.push({ path: "/login" });
-          break;
-        case "editPwd":
-          this.$refs.userInfoForm.dialogVisible = true;
-          this.userInfoFormStatus = true;
-          break;
+        case 'logOut':
+          this.$store.dispatch('logout')
+          this.$router.push({ path: '/login' })
+          break
+        case 'editPwd':
+          this.$refs.userInfoForm.dialogVisible = true
+          this.userInfoFormStatus = true
+          break
         default:
-          break;
+          break
       }
     },
-    changeStatus(status) {
-      this.userInfoFormStatus = status;
+    changeStatus (status) {
+      this.userInfoFormStatus = status
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .avator {
@@ -68,4 +72,3 @@ export default {
   vertical-align: middle;
 }
 </style>
-

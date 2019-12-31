@@ -44,6 +44,7 @@
         <template slot-scope="scope">
           <!-- 删除 -->
           <el-button
+            plain
             v-if="model.table.commonAction.delete&&model.table.commonAction.delete.show"
             type="danger"
             @click="deleteItem(scope.row)"
@@ -54,6 +55,7 @@
 
           <!-- 修改 -->
           <el-button
+            plain
             v-if="model.table.commonAction.delete&&model.table.commonAction.edit.show"
             type="primary"
             @click="editItem(scope.row)"
@@ -77,9 +79,9 @@
   </div>
 </template>
 <script>
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
-  name: "CTable",
+  name: 'CTable',
   props: {
     model: {
       type: Object,
@@ -87,73 +89,72 @@ export default {
       default: () => {}
     }
   },
-  computed:{
-    ...mapGetters(["loading"])
+  computed: {
+    ...mapGetters(['loading'])
   },
-  data() {
+  data () {
     return {
       multipleSelection: []
-    };
+    }
   },
 
-  created() {
-    this.list();
+  created () {
+    this.list()
   },
 
   methods: {
-    list() {
+    list () {
       this.$store.dispatch(
         this.model.table.commonAction.list.action_url,
         this.model.searchArea.model
-      );
+      )
     },
-    deleteItem(row) {
+    deleteItem (row) {
       this.$confirm(
-        this.$t("tableAction.delete.confirm.title"),
-        this.$t("el.messagebox.title"),
+        this.$t('tableAction.delete.confirm.title'),
+        this.$t('el.messagebox.title'),
         {
-          confirmButtonText: this.$t("el.messagebox.confirm"),
-          cancelButtonText: this.$t("el.messagebox.cancel"),
-          type: "warning"
+          confirmButtonText: this.$t('el.messagebox.confirm'),
+          cancelButtonText: this.$t('el.messagebox.cancel'),
+          type: 'warning'
         }
       )
         .then(() => {
           const DELETE_KEY =
-            row[this.model.table.commonAction.delete.key];
+            row[this.model.table.commonAction.delete.key]
           this.$store
             .dispatch(this.model.table.commonAction.delete.action_url, {
               resource_id: DELETE_KEY
             })
             .then(res => {
               //
-              if (res && res.status === 200) {
+              if (res && (res.status === 200 || res.status === 204)) {
                 this.list()
               }
-            });
+            })
         })
         .catch(() => {
-        });
+        })
     },
-    editItem(row){
-      this.$emit('editItem',row)
+    editItem (row) {
+      this.$emit('editItem', row)
     },
-    handleSelectionChange(val) {
-      this.$emit('handleSelectionChange',val)
+    handleSelectionChange (val) {
+      this.$emit('handleSelectionChange', val)
       // console.log(val)
-      this.multipleSelection = val;
+      this.multipleSelection = val
     },
-    handleCurrentChange(page) {
+    handleCurrentChange (page) {
       // 修改请求参数
-      this.model.searchArea.model.page = page;
+      this.model.searchArea.model.page = page
       // console.log(page,this.model.searchArea.model.page)
-      this.list();
+      this.list()
       // 发送请求
     },
-    handleSizeChange(page_size) {
-      this.model.searchArea.model.page_size = page_size;
-      this.list();
+    handleSizeChange (page_size) {
+      this.model.searchArea.model.page_size = page_size
+      this.list()
     }
   }
-};
+}
 </script>
-

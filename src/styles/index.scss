@@ -9,27 +9,17 @@
         transition: width 0.28s;
         overflow-y: auto;
         overflow-x: hidden;
-        .app-menu {
-            // border-color: $default-bg-color;
-            .el-submenu {
-                .el-menu-item {
-                    // background-color: $default-bg-color-80 !important
-                }
-            }
-        }
         &.close {
             span {
                 display: none
             }
-            // &.el-menu{
-            //     display: none
-            // }
         }
     }
     .app-right {
         min-height: 100vh;
     }
     .app-header {
+        padding: 0 5px;
         background-color: $default-header-bg-color;
         box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
         position: relative;
@@ -38,7 +28,12 @@
         }
     }
     .app-main {
-        min-height: $main-min-height;
+        /* 50= navbar  50  */
+        min-height: calc(100vh - 50px);
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        padding: 20px;
     }
 }
 

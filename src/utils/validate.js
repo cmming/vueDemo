@@ -6,7 +6,7 @@
  * @param {string} path
  * @returns {Boolean}
  */
-export function isExternal(path) {
+export function isExternal (path) {
   return /^(https?:|mailto:|tel:)/.test(path)
 }
 
@@ -14,7 +14,7 @@ export function isExternal(path) {
  * @param {string} str
  * @returns {Boolean}
  */
-export function validUsername(str) {
+export function validUsername (str) {
   const valid_map = ['admin', 'editor']
   return valid_map.indexOf(str.trim()) >= 0
 }
@@ -23,7 +23,7 @@ export function validUsername(str) {
  * @param {string} url
  * @returns {Boolean}
  */
-export function validURL(url) {
+export function validURL (url) {
   const reg = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/
   return reg.test(url)
 }
@@ -32,7 +32,7 @@ export function validURL(url) {
  * @param {string} str
  * @returns {Boolean}
  */
-export function validLowerCase(str) {
+export function validLowerCase (str) {
   const reg = /^[a-z]+$/
   return reg.test(str)
 }
@@ -41,7 +41,7 @@ export function validLowerCase(str) {
  * @param {string} str
  * @returns {Boolean}
  */
-export function validUpperCase(str) {
+export function validUpperCase (str) {
   const reg = /^[A-Z]+$/
   return reg.test(str)
 }
@@ -50,17 +50,16 @@ export function validUpperCase(str) {
  * @param {string} str
  * @returns {Boolean}
  */
-export function validAlphabets(str) {
+export function validAlphabets (str) {
   const reg = /^[A-Za-z]+$/
   return reg.test(str)
 }
-
 
 /**
  * @param {string} str
  * @returns {Boolean}
  */
-export function isString(str) {
+export function isString (str) {
   if (typeof str === 'string' || str instanceof String) {
     return true
   }
@@ -71,15 +70,14 @@ export function isString(str) {
  * @param {Array} arg
  * @returns {Boolean}
  */
-export function isArray(arg) {
+export function isArray (arg) {
   if (typeof Array.isArray === 'undefined') {
     return Object.prototype.toString.call(arg) === '[object Array]'
   }
   return Array.isArray(arg)
 }
 
-
-export function validateEmail(rule, str, callback){
+export function validateEmail (rule, str, callback) {
   let reg = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
   if (!reg.test(str)) {
     callback(new Error(rule.message))
@@ -88,8 +86,7 @@ export function validateEmail(rule, str, callback){
   }
 }
 
-
-export function validateNumber(rule, str, callback){
+export function validateNumber (rule, str, callback) {
   let reg = /^[0-9]\d*$/
   if (!reg.test(str)) {
     callback(new Error(rule.message))

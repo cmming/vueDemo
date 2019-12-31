@@ -4,16 +4,19 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "lint:fix": "vue-cli-service lint --fix",
     "build:company": "vue-cli-service build --mode company",
     "build:home": "vue-cli-service build --mode home",
     "build:travis": "vue-cli-service build --mode travis",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "docer pro": "docker-compose -f ./docker/docker-compose.yml up --build",
     "docs": "docsify serve ./docs/ --port 3999",
     "mock": "nodemon mock/index.js",
+    "pro:dev": "http-server ./dist/ --port 3888",
     "swagger": "http-server ./swagger-ui/dist",
-    "docer pro": "docker-compose -f ./docker/docker-compose.yml up --build",
-    "pro:dev": "http-server ./dist/ --port 3888"
+    "test:unit": "vue-cli-service test:unit",
+    "commit": "npx git-cz"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -23,22 +26,30 @@
     "laravel-echo": "^1.5.4",
     "lodash": "^4.17.11",
     "normalize.css": "^8.0.1",
+    "path-to-regexp": "2.4.0",
     "screenfull": "^4.2.0",
-    "socket.io-client": "^2.2.0",
+    "socket.io-client": "2.2.0",
+    "spark-md5": "^3.0.0",
     "store": "^2.0.12",
     "vue": "^2.6.10",
     "vue-cropper": "^0.4.9",
     "vue-i18n": "^8.14.0",
     "vue-router": "3.0.2",
     "vue-upload-component": "^2.8.20",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "xterm": "^4.3.0",
+    "xterm-addon-fit": "^0.3.0"
   },
   "devDependencies": {
-    "@babel/polyfill": "^7.4.4",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-plugin-unit-jest": "^3.11.0",
     "@vue/cli-service": "^3.8.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "compression-webpack-plugin": "^3.0.0",
     "cors": "^2.8.5",
     "docsify-cli": "^4.3.0",
@@ -51,29 +62,9 @@
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.1",
     "sass-loader": "^7.1.0",
-    "script-ext-html-webpack-plugin": "^2.1.3",
+    "script-ext-html-webpack-plugin": "^2.1.4",
     "svg-sprite-loader": "^4.1.6",
     "vue-template-compiler": "^2.6.10"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "globals": {
-      "_": true,
-      "storage":true
-    },
-    "rules": {
-      "no-console": 1
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
   },
   "postcss": {
     "plugins": {

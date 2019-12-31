@@ -25,34 +25,34 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       sizeOptions: [
-        { label: "Default", value: "default" },
-        { label: "Medium", value: "medium" },
-        { label: "Small", value: "small" },
-        { label: "Mini", value: "mini" }
+        { label: 'Default', value: 'default' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'Small', value: 'small' },
+        { label: 'Mini', value: 'mini' }
       ]
-    };
+    }
   },
   computed: {
-    size() {
-      return this.$store.getters.size;
+    size () {
+      return this.$store.getters.size
     }
   },
   methods: {
-    handleSetSize(size) {
-      this.$ELEMENT.size = size;
-      this.$store.dispatch("setSize", size);
+    handleSetSize (size) {
+      this.$ELEMENT.size = size
+      this.$store.dispatch('setSize', size)
       // this.refreshView()
       this.$router.go({
-        path: _.replace(window.location.hash, "#", ""),
+        path: _.replace(window.location.hash, '#', ''),
         force: true
-      });
+      })
       this.$message({
-        message: "Switch Size Success",
-        type: "success"
-      });
+        message: 'Switch Size Success',
+        type: 'success'
+      })
     }
     // refreshView() {
     //   // In order to make the cached page re-rendered
@@ -67,5 +67,5 @@ export default {
     //   })
     // }
   }
-};
+}
 </script>
