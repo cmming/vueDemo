@@ -12,7 +12,7 @@ before_install:
 install:
 - npm install
 script:
-- npm run build:travis
+- npm run build
 after_success:
 - ssh root@chenming.club -o StrictHostKeyChecking=no 'rm -rf /home/vue-demo/vue-demo/dist/*'
 - scp -o stricthostkeychecking=no -r ./dist root@chenming.club:/home/vue-demo/vue-demo
