@@ -10,9 +10,9 @@ before_install:
 - chmod 600 ~/.ssh/id_rsa_blog
 - echo -e "Host chenming.club\n\tHostName 47.95.209.77\n\tStrictHostKeyChecking no\n\tIdentityFile ~/.ssh/id_rsa_blog" >> ~/.ssh/config
 install:
-- yarn install
+- npm install
 script:
-- yarn build:travis
+- npm build:travis
 after_success:
 - ssh root@chenming.club -o StrictHostKeyChecking=no 'rm -rf /home/vue-demo/vue-demo/dist/*'
 - scp -o stricthostkeychecking=no -r ./dist root@chenming.club:/home/vue-demo/vue-demo
