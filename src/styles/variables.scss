@@ -3,12 +3,12 @@
 $main-min-height: 600px;
 $header-height:50px;
 $default-bg-color :#545c64;
-$default-bg-color-80 :#545c64*0.8;
+$default-bg-color-80 :#545c64;
 $default-header-bg-color :#fff;
 $default-color :#fff;
 // 
 $menu-bg-color:#545c64;
-$menu-bg-color-80 :#545c64*0.8;
+$menu-bg-color-80 :#545c64;
 // the :export directive is the magic sauce for webpack
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
 :export {

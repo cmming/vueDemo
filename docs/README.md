@@ -170,8 +170,8 @@ cnpm i sass-loader node-sass svg-sprite-loader -D
 ## 插件依赖
 
 ```
-cnpm install axios echarts laravel-echo lodash normalize.css path-to-regexp screenfull socket.io-client@2.2.0 spark-md5 store vue-cropper vue-i18n vue-upload-component xterm xterm-addon-fit -S
-cnpm install svg-sprite-loader compression-webpack-plugin -D
+cnpm install axios echarts laravel-echo lodash normalize.css path-to-regexp screenfull element-ui socket.io-client@2.2.0 spark-md5 store vue-cropper vue-i18n vue-upload-component xterm xterm-addon-fit -S
+cnpm install svg-sprite-loader compression-webpack-plugin script-ext-html-webpack-plugin multer nodemon mockjs docsify-cli -D
 ```
 
 
