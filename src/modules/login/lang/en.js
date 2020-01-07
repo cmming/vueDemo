@@ -4,15 +4,15 @@ export default {
     title: '管理系统登录',
     form: {
       name: {
-        placeholder: '请输入账号名称'
+        placeholder: 'please input name'
       },
       password: {
-        placeholder: '请输入密码'
+        placeholder: 'please input password'
       },
       captcha: {
-        placeholder: '请输入验证码'
+        placeholder: 'please input captcha'
       },
-      rember_pwd: '记住密码',
+      rember_pwd: 'remember password',
       login: 'login',
       register: 'register'
     }
