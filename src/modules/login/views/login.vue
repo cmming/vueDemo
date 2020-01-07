@@ -1,5 +1,6 @@
 <template>
   <div class="login-container">
+    <lang-select class="set-language"></lang-select>
     <div class="login-container-title">
       <span>{{$t('login.title')}}</span>
     </div>
@@ -86,6 +87,12 @@
           v-model="login.model.rember_pwd"
           fill="#2BAAB1"
         >{{$t('login.form.rember_pwd')}}</el-checkbox>
+         <br>
+         <el-alert
+          title="测试账号"
+          type="info"
+          description="admin:123456">
+        </el-alert>
       </el-form-item>
 
       <el-form-item>
@@ -109,9 +116,13 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import LangSelect from '@/components/LangSelect'
 export default {
   computed: {
     ...mapGetters(['login'])
+  },
+  components: {
+    LangSelect
   },
   created () {
     // this.$store.dispatch('getCaptcha')
@@ -214,6 +225,12 @@ export default {
   width: 368px;
   max-width: 95vw;
   margin: 0 auto;
+  position: relative;
+  .set-language{
+    position: absolute;
+    right: 0;
+    top: calc(20vh - 40px)
+  }
   .login-container-title {
     text-align: center;
     font-size: 35px;

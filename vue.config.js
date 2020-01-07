@@ -13,7 +13,7 @@ module.exports = {
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
-  productionSourceMap: true,
+  productionSourceMap: false,
 
   devServer: {
     proxy: {
@@ -51,8 +51,6 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
     ? './' : '/',
   chainWebpack (config) {
-    config.plugins.delete('preload') // TODO: need test
-    config.plugins.delete('prefetch') // TODO: need test
     // set svg-sprite-loader
     config.module
       .rule('svg')

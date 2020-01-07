@@ -5,4 +5,7 @@
 </template>
 <script>
 import '@/styles/index.scss'
+export default {
+  name: 'App'
+}
 </script>
