@@ -23,7 +23,9 @@
 
       <tags-view />
       <div class="app-main">
-        <router-view />
+        <transition name="fade-transform" mode="out-in">
+          <router-view />
+        </transition>
       </div>
 
       <right-panel v-if="settings.showSettings">
