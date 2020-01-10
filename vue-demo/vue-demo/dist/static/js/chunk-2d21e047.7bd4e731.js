@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d21e047"],{d489:function(p){p.exports=JSON.parse('{"appName":"user"}')}}]);
