@@ -7,8 +7,8 @@ import routers from './map/index'
 
 Vue.use(Router)
 const createRouter = () => new Router({
-  mode: 'hash',
-  // mode: 'history',
+  // mode: 'hash',
+  mode: 'history',
   routes: routers,
   isLoad: false,
   scrollBehavior: () => ({ y: 0 })

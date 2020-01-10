@@ -47,9 +47,9 @@ module.exports = {
       }
     }
   },
-  // 选项...
-  publicPath: process.env.NODE_ENV === 'production'
-    ? './' : '/',
+  // 选项... 如果使用history模式，就不用修改公共资源的路径
+  // publicPath: process.env.NODE_ENV === 'production'
+  //   ? './' : '/',
   chainWebpack (config) {
     // set svg-sprite-loader
     config.module
