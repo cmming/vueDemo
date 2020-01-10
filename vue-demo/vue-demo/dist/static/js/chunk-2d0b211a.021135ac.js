@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0b211a"],{2314:function(t,n,e){"use strict";e.r(n);var u=function(){var t=this,n=t.$createElement,e=t._self._c||n;return e("div",[t._v(" 当前路径为 "+t._s(t.path)+" ")])},a=[],c={computed:{path:function(){return this.$route.path}}},r=c,o=e("2877"),p=Object(o["a"])(r,u,a,!1,null,null,null);n["default"]=p.exports}}]);

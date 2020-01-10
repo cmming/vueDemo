@@ -1,0 +1,1 @@
+#app .app-header.fixed{width:calc(100% - 220px);position:fixed;z-index:99}#app .app-header.fixed+.app-main{margin-top:50px}#app .app-side.close+.app-right .app-header.fixed{width:calc(100% - 64px)}
